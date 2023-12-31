@@ -1,3 +1,4 @@
+import { Sidebar } from "@repo/ui/src";
 import "./globals.css";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
@@ -16,8 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <html lang="en" className="text-white">
+      <body className={inter.className}>
+        <div className="flex text-white bg-[#121e2c] font-bold">
+          <Sidebar />
+          {children}
+        </div>
+      </body>
+    </html >
   );
 }
