@@ -9,11 +9,11 @@ export function Sidebar() {
       <div className="flex gap-4 items-center">
         <IoWalletOutline size="50" className="bg-purple p-2 rounded-lg" />
         <div>
-          <h1 className="text-3xl font-bold">save-up</h1>
+          <h1 className="text-3xl ">save-up</h1>
           <h4 className="text-purple">tracker</h4>
         </div>
       </div>
-      <Separator className="my-5" />
+      <Separator className="my-5 bg-gray-500" />
       <Slider />
     </nav >
   )

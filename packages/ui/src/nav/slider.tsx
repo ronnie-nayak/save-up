@@ -25,7 +25,7 @@ export function Slider() {
   return (
     <div>
       {links.map((link: linkType, index: number) => (
-        < Link href={link.location} key={index} className={`${pathname === link.location ? '' : 'text-gray-500'} p-2 relative z-20 flex gap-4 my-5 items-center font-bold text-lg transition`}
+        < Link href={link.location} key={index} className={`${pathname === link.location ? '' : 'text-gray-500'} p-2 relative z-20 flex gap-4 my-5 items-center text-lg transition`}
           onClick={() => setActiveTab(link.location)}
         >
 
