@@ -1,6 +1,6 @@
 
+
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { Example } from ".";
 import { motion } from "framer-motion";
 
 function SavingsItem() {

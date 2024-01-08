@@ -1,18 +1,13 @@
-import type { Config } from "tailwindcss"
-import sharedConfig from "@repo/tailwind-config";
+/*
+ * This file is not used for any compilation purpose, it is only used
+ * for Tailwind Intellisense & Autocompletion in the source files
+ */
+import type { Config } from "tailwindcss";
 
-const config = {
+import baseConfig from "@acme/tailwind-config";
 
-  presets: [sharedConfig],
-  darkMode: ["class"],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  prefix: "",
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+export default {
 
-export default config
+  content: ["./src/**/*.tsx"],
+  presets: [baseConfig],
+} satisfies Config;

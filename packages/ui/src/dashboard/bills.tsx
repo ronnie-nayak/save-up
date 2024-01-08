@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { AspectRatio } from "../../components/ui/aspect-ratio";
-import { Separator } from "../../components/ui/separator";
+import { AspectRatio } from "@acme/ui";
+import { Separator } from "@acme/ui";
 
 
 const container = {

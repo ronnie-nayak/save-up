@@ -1,3 +1,4 @@
+
 'use client'
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -16,7 +17,7 @@ type linkType = {
 const links: Array<linkType> = [
   { title: "Dashboard", location: "/", icon: MdDashboard },
   { title: "Analytics", location: "/analytics", icon: IoAnalytics },
-  { title: "Transaction", location: "/transaction", icon: MdOutlineAccountBalanceWallet },
+  { title: "Transactions", location: "/transactions", icon: MdOutlineAccountBalanceWallet },
   { title: "Settings", location: "/settings", icon: MdOutlineSettings }
 ]
 export function Slider() {
