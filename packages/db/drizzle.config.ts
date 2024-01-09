@@ -8,6 +8,6 @@ const connectionString = process.env.DATABASE_URL!;
 export default {
   schema: "./src/schema",
   driver: "pg",
-  dbCredentials: { connectionString },
+  dbCredentials: { connectionString, ssl: true },
   tablesFilter: ["t3turbo_*"],
 } satisfies Config;

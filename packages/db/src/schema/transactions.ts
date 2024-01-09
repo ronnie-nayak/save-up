@@ -9,6 +9,7 @@ export const transactions = pgTable("transactions", {
   userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
   title: varchar("name", { length: 256 }).notNull(),
   category: varchar("content", { length: 256 }).notNull(),
+  type: varchar("type", { length: 7, enum: ["income", "expense"] }).notNull(),
   amount: integer("amount").notNull(),
   bankAccount: varchar("bankAccount", { length: 256 }).notNull(),
   createdAt: timestamp("created_at")

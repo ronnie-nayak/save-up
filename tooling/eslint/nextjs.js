@@ -6,7 +6,8 @@ const config = {
     "@typescript-eslint/require-await": "off",
   },
   ignorePatterns: [
-    "**/"
+
+    "**/",
   ]
 };
 

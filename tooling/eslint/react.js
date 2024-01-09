@@ -20,7 +20,8 @@ const config = {
     browser: true,
   },
   ignorePatterns: [
-    "**/"
+
+    "**/",
   ]
 };
 

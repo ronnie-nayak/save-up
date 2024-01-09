@@ -7,6 +7,7 @@ function cn(...inputs: CxOptions) {
 }
 
 export { cn };
+
 export * from './aspect-ratio'
 export * from './separator'
 export * from './table'
@@ -14,3 +15,9 @@ export * from './dropdown-menu'
 export * from './button'
 export * from './input'
 export * from './checkbox'
+export * from './form'
+export * from './select'
+export * from './drawer'
+export * from './dialog'
+export * from './switch'
+export * from './label'

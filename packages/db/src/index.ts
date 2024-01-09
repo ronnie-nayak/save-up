@@ -12,5 +12,5 @@ export { pgTable as tableCreator } from "./schema/_table";
 export * from "drizzle-orm";
 
 // for query purposes
-const queryClient = postgres(process.env.DATABASE_URL!, { ssl: 'require' })
+const queryClient = postgres(process.env.DATABASE_URL!, { ssl: true });
 export const db = drizzle(queryClient, { schema });
