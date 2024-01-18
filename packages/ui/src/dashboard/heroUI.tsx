@@ -10,7 +10,7 @@ export function HeroUI() {
       <AspectRatio ratio={15 / 16}>
         <div className="p-4 ">
           <div className="flex justify-between items-center">
-            <div className="text-white font-bold text-lg">Account Summary</div>
+            <div className="font-bold text-lg">Account Summary</div>
           </div>
           <div className="mt-3 font-bold text-gray-400">Your total balance</div>
           <h2 className="font-bold text-4xl mt-1">$5240.74</h2>

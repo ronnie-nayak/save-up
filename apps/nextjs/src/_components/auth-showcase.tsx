@@ -16,6 +16,18 @@ export async function AuthShowcase() {
         >
           Sign in with Discord
         </Button>
+
+        <Button
+          size="lg"
+          formAction={async () => {
+            "use server";
+            await signIn("credentials", {
+              redirect: false
+            });
+          }}
+        >
+          Sign in with guest
+        </Button>
       </form>
     );
   }

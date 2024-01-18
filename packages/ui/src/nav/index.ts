@@ -1,3 +1,6 @@
 export * from './slider'
-export * from './moneyButton'
+export * from './moneyFormUI'
+export * from './popupButton'
+export * from './billsButton'
+export * from './savingsButton'
 export * from './sidebar'

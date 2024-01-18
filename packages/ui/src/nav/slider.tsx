@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from "react";
 import { IconType } from "react-icons";
 import { IoAnalytics } from "react-icons/io5";
-import { MdDashboard, MdOutlineAccountBalanceWallet, MdOutlineSettings } from "react-icons/md";
+import { MdDashboard, MdOutlineAccountBalanceWallet, MdOutlineSavings } from "react-icons/md";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 
 type linkType = {
   title: string,
@@ -15,10 +16,10 @@ type linkType = {
 }
 
 const links: Array<linkType> = [
-  { title: "Dashboard", location: "/", icon: MdDashboard },
-  { title: "Analytics", location: "/analytics", icon: IoAnalytics },
-  { title: "Transactions", location: "/transactions", icon: MdOutlineAccountBalanceWallet },
-  { title: "Settings", location: "/settings", icon: MdOutlineSettings }
+  { title: "Dashboard", location: "/homepage", icon: MdDashboard },
+  { title: "Transactions", location: "/homepage/transactions", icon: MdOutlineAccountBalanceWallet },
+  { title: "Savings", location: "/homepage/savings", icon: MdOutlineSavings },
+  { title: "Bills", location: "/homepage/bills", icon: LiaMoneyBillWaveSolid },
 ]
 export function Slider() {
   const pathname = usePathname()

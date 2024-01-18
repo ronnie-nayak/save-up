@@ -17,8 +17,10 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.29.3",
+    "drizzle-zod": "^0.5.1",
     "pg": "^8.11.3",
-    "postgres": "^3.4.3"
+    "postgres": "^3.4.3",
+    "ui": "^0.2.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:^0.2.0",

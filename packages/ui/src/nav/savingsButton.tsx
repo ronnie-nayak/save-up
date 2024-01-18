@@ -1,4 +1,5 @@
 
+
 'use client'
 import { FaPlus } from "react-icons/fa";
 import * as React from "react"
@@ -24,26 +25,22 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@acme/ui"
-import { Input } from "@acme/ui"
-import { Label } from "@acme/ui"
-import { formOpenState } from "@acme/atoms"
-import { useRecoilState } from "recoil";
+import { SetterOrUpdater, useRecoilState } from "recoil";
 
-export function MoneyButton({ children }: { children?: React.ReactNode }) {
-  const [formOpen, setFormOpen] = useRecoilState(formOpenState)
+export function SavingsButton({ children, formOpen, setFormOpen }: { children: JSX.Element, formOpen: boolean, setFormOpen: SetterOrUpdater<boolean> }) {
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
   if (isDesktop) {
     return (
-      <Dialog open={formOpen} onOpenChange={setFormOpen}>
+      <Dialog open={formOpen} onOpenChange={setFormOpen} >
         <DialogTrigger asChild>
-          <Button className="h-12 w-12 mt-4 bg-purple rounded-full ">
+          <Button className="h-12 w-12 mt-4  rounded-full bg-purple">
             <FaPlus className="" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="min-w-[800px] light">
           <DialogHeader>
-            <DialogTitle>Add Transaction</DialogTitle>
+            <DialogTitle>Add Savings</DialogTitle>
             <DialogDescription>
               Add a new transaction to your account.
             </DialogDescription>
@@ -79,19 +76,4 @@ export function MoneyButton({ children }: { children?: React.ReactNode }) {
   )
 }
 
-function ProfileForm({ className }: React.ComponentProps<"form">) {
-  return (
-    <form className={cn("grid items-start gap-4", className)}>
-      <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" defaultValue="shadcn@example.com" />
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" defaultValue="@shadcn" />
-      </div>
-      <Button type="submit">Save changes</Button>
-    </form>
-  )
-}
 

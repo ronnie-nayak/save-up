@@ -1,4 +1,5 @@
 export * from './graphUI'
+export * from './moneyTable'
 export * from './statsUI'
 export * from './billsUI'
 export * from './savingsUI'

@@ -41,9 +41,9 @@ importers:
       '@acme/ui':
         specifier: workspace:^0.1.0
         version: link:../../packages/ui
-      '@acme/validators':
-        specifier: workspace:^0.1.0
-        version: link:../../packages/validators
+      '@formkit/auto-animate':
+        specifier: ^0.8.1
+        version: 0.8.1
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
@@ -68,6 +68,9 @@ importers:
       '@trpc/server':
         specifier: next
         version: 11.0.0-next-alpha.152
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.0
       framer-motion:
         specifier: ^10.17.9
         version: 10.17.9(react-dom@18.2.0)(react@18.2.0)
@@ -86,6 +89,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      react-colorful:
+        specifier: ^5.6.1
+        version: 5.6.1(react-dom@18.2.0)(react@18.2.0)
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
@@ -153,9 +159,6 @@ importers:
       '@acme/db':
         specifier: workspace:^0.1.0
         version: link:../db
-      '@acme/validators':
-        specifier: workspace:^0.1.0
-        version: link:../validators
       '@trpc/client':
         specifier: next
         version: 11.0.0-next-alpha.152(@trpc/server@11.0.0-next-alpha.152)
@@ -236,6 +239,9 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
+      uuid:
+        specifier: ^9.0.1
+        version: 9.0.1
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -249,6 +255,9 @@ importers:
       '@acme/tsconfig':
         specifier: workspace:^0.1.0
         version: link:../../tooling/typescript
+      '@types/uuid':
+        specifier: ^9.0.7
+        version: 9.0.7
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -264,12 +273,18 @@ importers:
       drizzle-orm:
         specifier: ^0.29.3
         version: 0.29.3(pg@8.11.3)(postgres@3.4.3)
+      drizzle-zod:
+        specifier: ^0.5.1
+        version: 0.5.1(drizzle-orm@0.29.3)(zod@3.22.4)
       pg:
         specifier: ^8.11.3
         version: 8.11.3
       postgres:
         specifier: ^3.4.3
         version: 3.4.3
+      ui:
+        specifier: ^0.2.4
+        version: 0.2.4
     devDependencies:
       '@acme/eslint-config':
         specifier: workspace:^0.2.0
@@ -316,9 +331,21 @@ importers:
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.0
+      date-fns:
+        specifier: ^3.2.0
+        version: 3.2.0
+      framer-motion:
+        specifier: ^10.17.9
+        version: 10.17.9(react-dom@18.2.0)(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+      react-day-picker:
+        specifier: ^8.10.0
+        version: 8.10.0(date-fns@3.2.0)(react@18.2.0)
       react-hook-form:
         specifier: ^7.49.2
         version: 7.49.2(react@18.2.0)
@@ -341,6 +368,9 @@ importers:
       '@acme/atoms':
         specifier: workspace:^0.1.0
         version: link:../atoms
+      '@acme/db':
+        specifier: workspace:^0.1.0
+        version: link:../db
       '@acme/eslint-config':
         specifier: workspace:^0.2.0
         version: link:../../tooling/eslint
@@ -353,6 +383,9 @@ importers:
       '@acme/tsconfig':
         specifier: workspace:^0.1.0
         version: link:../../tooling/typescript
+      '@acme/validators':
+        specifier: workspace:^0.1.0
+        version: link:../validators
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -1326,6 +1359,10 @@ packages:
 
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
+    dev: false
+
+  /@formkit/auto-animate@0.8.1:
+    resolution: {integrity: sha512-0/Z2cuNXWVVIG/l0SpcHAWFhGdvLJ8DRvEfRWvmojtmRWfEy+LWNwgDazbZqY0qQYtkHcoEK3jBLkhiZaB/4Ig==}
     dev: false
 
   /@hookform/resolvers@3.3.4(react-hook-form@7.49.2):
@@ -3063,6 +3100,10 @@ packages:
     resolution: {integrity: sha512-Kf1w9NE5HEgGxCRyIcRXR/ZYtDv0V8FVPtYHwLxl0O+maGX0erE77pQlD0gpP+/KByMZ87mOA79SjifhSB3PjQ==}
     dev: true
 
+  /@types/uuid@9.0.7:
+    resolution: {integrity: sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==}
+    dev: true
+
   /@typescript-eslint/eslint-plugin@6.10.0(@typescript-eslint/parser@6.10.0)(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-uoLj4g2OTL8rfUQVx2AFO1hp/zja1wABJq77P6IclQs6I/m9GLrm7jCdgzZkvWdDCQf1uEvoa8s8CupsgWQgVg==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -3691,6 +3732,11 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /clsx@2.1.0:
+    resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
+    engines: {node: '>=6'}
+    dev: false
+
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -3857,6 +3903,10 @@ packages:
     resolution: {integrity: sha512-a9l6T1qqDogvvnw0nKlfZzqsyikEBZBClF39V3TFoKhDtGBqHu2HkuomJc02j5zft8zrUaXEuoicLeW54RkzPg==}
     engines: {node: '>= 14'}
     dev: true
+
+  /date-fns@3.2.0:
+    resolution: {integrity: sha512-E4KWKavANzeuusPi0jUjpuI22SURAznGkx7eZV+4i6x2A+IZxAMcajgkvuDAU1bg40+xuhW1zRdVIIM/4khuIg==}
+    dev: false
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -4129,6 +4179,16 @@ packages:
     dependencies:
       pg: 8.11.3
       postgres: 3.4.3
+    dev: false
+
+  /drizzle-zod@0.5.1(drizzle-orm@0.29.3)(zod@3.22.4):
+    resolution: {integrity: sha512-C/8bvzUH/zSnVfwdSibOgFjLhtDtbKYmkbPbUCq46QZyZCH6kODIMSOgZ8R7rVjoI+tCj3k06MRJMDqsIeoS4A==}
+    peerDependencies:
+      drizzle-orm: '>=0.23.13'
+      zod: '*'
+    dependencies:
+      drizzle-orm: 0.29.3(pg@8.11.3)(postgres@3.4.3)
+      zod: 3.22.4
     dev: false
 
   /electron-to-chromium@1.4.490:
@@ -5472,6 +5532,7 @@ packages:
 
   /json-diff@0.9.0:
     resolution: {integrity: sha512-cVnggDrVkAAA3OvFfHpFEhOnmcsUpleEKq4d4O8sQWWSH40MBrWstKigVB1kGrgLWzuom+7rRdaCsnBD6VyObQ==}
+    hasBin: true
     dependencies:
       cli-color: 2.0.3
       difflib: 0.2.4
@@ -6452,6 +6513,26 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
+  /react-colorful@5.6.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /react-day-picker@8.10.0(date-fns@3.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mz+qeyrOM7++1NCb1ARXmkjMkzWVh2GL9YiPbRjKe0zHccvekk4HE+0MPOZOrosn8r8zTHIIeOUXTmXRqmkRmg==}
+    peerDependencies:
+      date-fns: ^2.28.0 || ^3.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      date-fns: 3.2.0
+      react: 18.2.0
+    dev: false
+
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -6608,7 +6689,7 @@ packages:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      clsx: 2.0.0
+      clsx: 2.1.0
       eventemitter3: 4.0.7
       lodash: 4.17.21
       prop-types: 15.8.1
@@ -6800,6 +6881,7 @@ packages:
   /semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
     engines: {node: '>=10'}
+    hasBin: true
     dependencies:
       lru-cache: 6.0.0
 
@@ -6908,6 +6990,10 @@ packages:
   /split2@4.2.0:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
     engines: {node: '>= 10.x'}
+    dev: false
+
+  /std@0.1.40:
+    resolution: {integrity: sha512-wUf57hkDGCoVShrhPA8Q7lAg2Qosk+FaMlECmAsr1A4/rL2NRXFHQGBcgMUFKVkPEemJFW9gzjCQisRty14ohg==}
     dev: false
 
   /streamsearch@1.1.0:
@@ -7349,6 +7435,12 @@ packages:
     dev: true
     optional: true
 
+  /ui@0.2.4:
+    resolution: {integrity: sha512-se2D+frb/i6JwFc7j72IEa0JADF8lfgc6ivOigaYkXHOuZRBtWe8R7UZ2YiXcbJ1dYNsjq40dn39rlNRxmVdPw==}
+    dependencies:
+      std: 0.1.40
+    dev: false
+
   /unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
     dependencies:
@@ -7461,6 +7553,11 @@ packages:
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  /uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}

@@ -7,8 +7,6 @@ import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "~/app/globals.css";
-import { Sidebar } from "@acme/ui";
-import { MoneyForm } from "~/_components/nav";
 import Provider from "./provider";
 
 export const metadata: Metadata = {
@@ -47,14 +45,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body
         className={inter.className}
       >
-        <div className="flex text-white bg-[#121e2c] font-bold w-full h-screen">
-          <TRPCReactProvider headersPromise={getHeaders()}>
-            <Provider>
-              <Sidebar addMoney={<MoneyForm />} />
-              {props.children}
-            </Provider>
-          </TRPCReactProvider>
-        </div>
+        <TRPCReactProvider headersPromise={getHeaders()}>
+          <Provider>
+            {props.children}
+          </Provider>
+        </TRPCReactProvider>
       </body>
     </html >
   );
