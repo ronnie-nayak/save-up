@@ -15,12 +15,14 @@ export function AppPage() {
 
   const router = useRouter()
 
+  const utils = apiReact.useUtils()
   const { data: statsData, isLoading: statsIsLoading, error: statsError } = apiReact.transactions.get7monthstats.useQuery()
   const { data: savingsData, isLoading: savingsIsLoading, error: savingsError } = apiReact.transactions.getAllSavings.useQuery()
   const { data: billsData, isLoading: billsIsLoading, error: billsError } = apiReact.transactions.getAllBills.useQuery()
   const { data: historyData, isLoading: historyIsLoading, error: historyError } = apiReact.transactions.getAll.useQuery()
   if (statsError || savingsError || billsError || historyError) {
-    router.replace('/login')
+    utils.transactions.sessionExists.invalidate()
+    // router.replace('/login')
   }
 
   const [graphData, setGraphData] = useState([])

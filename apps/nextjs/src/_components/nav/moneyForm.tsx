@@ -23,7 +23,8 @@ export function MoneyForm() {
         utils.transactions.get7monthstats.invalidate()
       },
       onError: (error) => {
-        router.replace("/login")
+        utils.transactions.sessionExists.invalidate()
+        // router.replace("/login")
       }
     }
   )

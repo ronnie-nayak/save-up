@@ -19,7 +19,7 @@ export function GraphUI({ data }: { data: any[] }) {
 
             <div className="flex gap-3 items-center">
               <div className="h-5 w-5 rounded-full bg-[#FC3928]"></div>
-              <span className="text-[1vw]" gap-4>Expense</span>
+              <span className="text-[1vw]">Expense</span>
             </div>
             <div className="flex gap-3 items-center">
               <div className="h-5 w-5 rounded-full bg-[#1168C9]"></div>

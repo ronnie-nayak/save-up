@@ -29,10 +29,11 @@ export function DataTable() {
     [searchParams]
   )
 
-
+  const utils = apiReact.useUtils()
   const { data, isLoading, error } = apiReact.transactions.getAll.useQuery()
   if (error) {
-    router.replace('/login')
+    utils.transactions.sessionExists.invalidate()
+    // router.replace('/login')
   }
 
   useEffect(() => {

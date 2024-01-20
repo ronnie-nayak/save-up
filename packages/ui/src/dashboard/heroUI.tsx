@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 
 
 export function HeroUI({ data }) {
+  let percentage = 0
+  if (data && data.income > 0) {
+    percentage = parseFloat(((data.savings / data.income) * 100).toFixed(2))
+  }
   return (
     <div className="w-[18vw] bg-midnight rounded-3xl p-2">
       <AspectRatio ratio={15 / 16}>
@@ -37,7 +41,7 @@ export function HeroUI({ data }) {
                   id="svgPath"
                   className="svgPath"
                   initial={{ pathLength: 0 }}
-                  animate={{ pathLength: parseFloat(((data.savings / data.income) * 100).toFixed(2) / 100) }}
+                  animate={{ pathLength: parseFloat(percentage / 100) }}
                   transition={{ duration: 0.5 }}
                 />
               }
@@ -61,7 +65,7 @@ export function HeroUI({ data }) {
                   <div
                     className="font-bold text-purple text-[1.5vw]"
                   >
-                    {((data.savings / data.income) * 100).toFixed(2)}%
+                    {percentage}%
                   </div>
                 }
                 <div className="">Monthly Income Saved</div>

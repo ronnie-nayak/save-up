@@ -26,19 +26,21 @@ export function BillsTable() {
     [searchParams]
   )
 
+  const utils = apiReact.useUtils()
   const { data, isLoading, error } = apiReact.transactions.getAllBills.useQuery()
   if (error) {
-    router.replace('/login')
+    utils.transactions.sessionExists.invalidate()
+    // router.replace('/login')
   }
 
-  const utils = apiReact.useUtils()
   const payBill = apiReact.transactions.payBill.useMutation(
     {
       onSuccess: () => {
         utils.transactions.getAllBills.invalidate()
       },
       onError: (error) => {
-        router.replace("/login")
+        utils.transactions.sessionExists.invalidate()
+        // router.replace("/login")
       }
     }
   )

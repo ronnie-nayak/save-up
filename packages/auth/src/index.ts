@@ -35,7 +35,7 @@ export const {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "jsmith" },
+        email: { label: "Email", type: "email", placeholder: "jsmith" }
       },
       async authorize(credentials) {
 

@@ -26,7 +26,7 @@ import { useState } from "react"
 
 export function SavingsForm() {
 
-  const [color, setColor] = useState("#aabbcc");
+  const [color, setColor] = useState("#1168C9");
   const router = useRouter()
   const setFormOpen = useSetRecoilState(SavingsFormOpenState)
 
@@ -37,7 +37,8 @@ export function SavingsForm() {
         utils.transactions.invalidate()
       },
       onError: (error) => {
-        router.replace("/login")
+        utils.transactions.sessionExists.invalidate()
+        // router.replace("/login")
       }
     }
   )
@@ -123,7 +124,7 @@ export function SavingsForm() {
           </div>
           <HexColorPicker color={color} onChange={setColor} />
         </div>
-        <Button type="submit">Submdljit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </Form >
   )

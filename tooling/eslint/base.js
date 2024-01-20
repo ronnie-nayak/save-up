@@ -31,7 +31,7 @@ const config = {
     "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   },
   ignorePatterns: [
-    "**/",
+    // "**/",
     "**/*.config.js",
     "**/*.config.cjs",
     "**/.eslintrc.cjs",
