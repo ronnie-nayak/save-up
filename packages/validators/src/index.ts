@@ -40,7 +40,7 @@ export const AddSavingsSchema = z.object({
   category: z.string().min(1),
   current: z.coerce.number().optional(),
   amount: z.coerce.number(),
-  color: z.string().min(1),
+  color: z.string().min(1).optional(),
 });
 
 export type AddSavingsType = z.infer<typeof AddSavingsSchema>;

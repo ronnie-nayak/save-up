@@ -6,9 +6,10 @@ import * as z from "zod"
 import { apiReact } from "~/trpc/react"
 import { useRouter } from 'next/navigation'
 import { useSetRecoilState } from "recoil"
+import { AddBillsSchema } from "@acme/validators"
 
 import Link from "next/link"
-import { Button, Calendar, DialogClose, Popover, PopoverContent, PopoverTrigger, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Switch, cn } from "@acme/ui"
+import { Button, Calendar, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Switch, cn } from "@acme/ui"
 import {
   Form,
   FormControl,
@@ -20,7 +21,6 @@ import {
 } from "@acme/ui"
 import { Input } from "@acme/ui"
 import { BillsFormOpenState, FormOpenState } from "@acme/atoms"
-import { AddBillsSchema } from "@acme/validators"
 import { CalendarIcon } from "lucide-react"
 
 export function BillsForm() {
@@ -54,8 +54,6 @@ export function BillsForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // apiReact.transactions.addnew.usemutation().mutate(values)
-    console.log("values")
-    console.log(values)
     addNewBills.mutate(values)
     form.reset({ amount: 0 })
     setFormOpen(false)

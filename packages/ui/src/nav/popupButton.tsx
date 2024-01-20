@@ -32,8 +32,9 @@ export function PopupButton({ children, formOpen, setFormOpen }: { children: JSX
     return (
       <Dialog open={formOpen} onOpenChange={setFormOpen} >
         <DialogTrigger asChild>
-          <Button className="h-12 w-20 mt-4  rounded-3xl bg-purple">
+          <Button className="h-12 rounded-3xl bg-purple flex gap-2 font-bold">
             <FaPlus className="" />
+            Add Transaction
           </Button>
         </DialogTrigger>
         <DialogContent className=" light">
@@ -52,8 +53,9 @@ export function PopupButton({ children, formOpen, setFormOpen }: { children: JSX
   return (
     <Drawer open={formOpen} onOpenChange={setFormOpen}>
       <DrawerTrigger asChild>
-        <Button className="h-12 mt-4 bg-purple w-min rounded-full grid place-items-center">
+        <Button className="h-12 rounded-3xl bg-purple flex gap-2 font-bold">
           <FaPlus className="" />
+          Add Transaction
         </Button>
       </DrawerTrigger>
       <DrawerContent>

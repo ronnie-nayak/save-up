@@ -41,7 +41,7 @@ const getHeaders = cache(async () => headers());
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="text-[0.85vw]" suppressHydrationWarning>
       <body
         className={inter.className}
       >

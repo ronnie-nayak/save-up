@@ -27,15 +27,16 @@ import {
 } from "@acme/ui"
 import { SetterOrUpdater, useRecoilState } from "recoil";
 
-export function SavingsButton({ children, formOpen, setFormOpen }: { children: JSX.Element, formOpen: boolean, setFormOpen: SetterOrUpdater<boolean> }) {
+export function SavingsButton({ children, formOpen, setFormOpen, text, height }: { children: JSX.Element, formOpen: boolean, setFormOpen: SetterOrUpdater<boolean>, text: string, height: number }) {
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
   if (isDesktop) {
     return (
       <Dialog open={formOpen} onOpenChange={setFormOpen} >
         <DialogTrigger asChild>
-          <Button className="h-12 w-12 mt-4  rounded-full bg-purple">
+          <Button className={`h-${height} rounded-3xl bg-purple flex gap-2 font-bold`}>
             <FaPlus className="" />
+            {text}
           </Button>
         </DialogTrigger>
         <DialogContent className="min-w-[800px] light">
@@ -47,15 +48,16 @@ export function SavingsButton({ children, formOpen, setFormOpen }: { children: J
           </DialogHeader>
           {children}
         </DialogContent>
-      </Dialog>
+      </Dialog >
     )
   }
 
   return (
     <Drawer open={formOpen} onOpenChange={setFormOpen}>
       <DrawerTrigger asChild>
-        <Button className="h-12 mt-4 bg-purple w-min rounded-full grid place-items-center">
+        <Button className={`h-${height} rounded-3xl bg-purple flex gap-2 font-bold`}>
           <FaPlus className="" />
+          {text}
         </Button>
       </DrawerTrigger>
       <DrawerContent>

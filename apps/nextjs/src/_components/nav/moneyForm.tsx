@@ -20,6 +20,7 @@ export function MoneyForm() {
     {
       onSuccess: (data, variables) => {
         utils.transactions.getAll.invalidate()
+        utils.transactions.get7monthstats.invalidate()
       },
       onError: (error) => {
         router.replace("/login")
@@ -43,7 +44,6 @@ export function MoneyForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // apiReact.transactions.addnew.usemutation().mutate(values)
-    console.log(values)
     addNew.mutate(values)
     form.reset({ amount: 0 })
     setFormOpen(false)

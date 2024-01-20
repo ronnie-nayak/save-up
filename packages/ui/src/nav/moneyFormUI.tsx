@@ -14,7 +14,6 @@ import { Input } from "@acme/ui"
 
 export function MoneyFormUI({ form, onSubmit }: { form: any, onSubmit: any }) {
   return (
-
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 text-center ">
         <FormField

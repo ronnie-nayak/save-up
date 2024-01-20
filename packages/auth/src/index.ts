@@ -1,13 +1,12 @@
 import type { DefaultSession } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
-import Discord from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
-import DiscordProvider from "next-auth/providers/discord";
+import Google from "next-auth/providers/google";
+import Github from "next-auth/providers/github";
 
 import { v4 } from "uuid"
 import { db, tableCreator, schema, eq, and } from "@acme/db";
-import { SessionProvider, useSession } from "next-auth/react";
 
 export type { Session } from "next-auth";
 
@@ -30,11 +29,8 @@ export const {
 } = NextAuth({
   adapter: DrizzleAdapter(db, tableCreator),
   providers: [
-
-    DiscordProvider({
-      clientId: process.env.AUTH_DISCORD_ID,
-      clientSecret: process.env.AUTH_DISCORD_SECRET,
-    }),
+    Google,
+    Github,
 
     CredentialsProvider({
       name: "Credentials",
@@ -57,7 +53,7 @@ export const {
   ],
   callbacks: {
     session: async ({ session }) => {
-
+      console.log(session, "sessionindide")
       const sessionUsers = await db.select().from(schema.users).where(and(eq(schema.users.name, session?.user?.name as string), eq(schema.users.image, session?.user?.image as string), eq(schema.users.email, session?.user?.email as string)));
       const sessionUser = sessionUsers[0]
       return ({
@@ -76,5 +72,6 @@ export const {
   secret: process.env.AUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 4 * 60 * 60 // 4 hours
   },
 });

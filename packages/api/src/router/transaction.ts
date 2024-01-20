@@ -1,5 +1,5 @@
 
-import { eq, insertBillsSchema, insertSavingsSchema, insertSavingsType, schema, sql } from "@acme/db";
+import { desc, eq, insertBillsSchema, insertSavingsSchema, insertSavingsType, schema, sql } from "@acme/db";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { insertTransactionSchema } from "@acme/db";
@@ -12,17 +12,20 @@ export const transactionsRouter = createTRPCRouter({
   //       .insert(schema.transactions)
   //       .values(dataman);
   //   }),
+  sessionExists: publicProcedure.query(({ ctx }) => {
+    return ctx.session
+  }),
 
 
   get7monthstats: protectedProcedure.query(async ({ ctx }) => {
-    let income = await ctx.db.execute(sql`SELECT date_trunc('month', ${schema.transactions.createdAt}) AS txn_month, sum(${schema.transactions.amount}) as monthly_sum FROM ${schema.transactions} where ${schema.transactions.type}=${"income"} GROUP BY txn_month`)
-    income = income.sort((a, b) => b.txn_month - a.txn_month)
+    let income = await ctx.db.execute(sql`SELECT date_trunc('month', ${schema.transactions.createdAt}) AS txn_month, sum(${schema.transactions.amount}) as monthly_sum FROM ${schema.transactions} where ${schema.transactions.type}=${"income"} AND ${schema.transactions.userId}=${ctx.session.user.id} GROUP BY txn_month`)
+    income = income.sort((a, b) => (a.txn_month as number) - (b.txn_month as number))
 
-    let expense = await ctx.db.execute(sql`SELECT date_trunc('month', ${schema.transactions.createdAt}) AS txn_month, sum(${schema.transactions.amount}) as monthly_sum FROM ${schema.transactions} where ${schema.transactions.type}=${"expense"} GROUP BY txn_month`)
-    expense = expense.sort((a, b) => b.txn_month - a.txn_month)
+    let expense = await ctx.db.execute(sql`SELECT date_trunc('month', ${schema.transactions.createdAt}) AS txn_month, sum(${schema.transactions.amount}) as monthly_sum FROM ${schema.transactions} where ${schema.transactions.type}=${"expense"} AND ${schema.transactions.userId}=${ctx.session.user.id} GROUP BY txn_month`)
+    expense = expense.sort((a, b) => (a.txn_month as number) - (b.txn_month as number))
 
-    let savings = await ctx.db.execute(sql`SELECT date_trunc('month', ${schema.transactions.createdAt}) AS txn_month, sum(${schema.transactions.amount}) as monthly_sum FROM ${schema.transactions} where ${schema.transactions.type}=${"savings"} GROUP BY txn_month`)
-    savings = savings.sort((a, b) => b.txn_month - a.txn_month)
+    let savings = await ctx.db.execute(sql`SELECT date_trunc('month', ${schema.transactions.createdAt}) AS txn_month, sum(${schema.transactions.amount}) as monthly_sum FROM ${schema.transactions} where ${schema.transactions.type}=${"savings"} AND ${schema.transactions.userId}=${ctx.session.user.id} GROUP BY txn_month`)
+    savings = savings.sort((a, b) => (a.txn_month as number) - (b.txn_month as number))
     return { income, expense, savings }
   }),
 
@@ -35,9 +38,7 @@ export const transactionsRouter = createTRPCRouter({
     }),
 
   getAll: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.db.query.transactions.findMany({
-      where: eq(schema.transactions.userId, ctx.session.user.id)
-    })
+    return await ctx.db.select().from(schema.transactions).where(eq(schema.transactions.userId, ctx.session.user.id)).orderBy(desc(schema.transactions.createdAt));
   }),
 
   addNewSavings: protectedProcedure
@@ -49,9 +50,10 @@ export const transactionsRouter = createTRPCRouter({
     }),
 
   getAllSavings: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.db.query.savings.findMany({
-      where: eq(schema.savings.userId, ctx.session.user.id)
-    })
+    // return await ctx.db.query.savings.findMany({
+    //   where: eq(schema.savings.userId, ctx.session.user.id)
+    // })
+    return await ctx.db.select().from(schema.savings).where(eq(schema.savings.userId, ctx.session.user.id)).orderBy(desc(sql<number>`(current/amount)*100`));
   }),
 
 
@@ -64,9 +66,10 @@ export const transactionsRouter = createTRPCRouter({
     }),
 
   getAllBills: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.db.query.bills.findMany({
-      where: eq(schema.bills.userId, ctx.session.user.id)
-    })
+    // return await ctx.db.query.bills.findMany({
+    //   where: eq(schema.bills.userId, ctx.session.user.id)
+    // })
+    return await ctx.db.select().from(schema.bills).where(eq(schema.bills.userId, ctx.session.user.id)).orderBy(schema.bills.dueAt);
   }),
 
   contributeToSavings: protectedProcedure

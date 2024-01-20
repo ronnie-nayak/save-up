@@ -1,4 +1,3 @@
-
 'use client'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -30,7 +29,7 @@ export function SavingsForm() {
   const [color, setColor] = useState("#aabbcc");
   const router = useRouter()
   const setFormOpen = useSetRecoilState(SavingsFormOpenState)
-  // const addNew = await apiServer.transactions.addNew()
+
   const utils = apiReact.useUtils()
   const addNewSavings = apiReact.transactions.addNewSavings.useMutation(
     {
@@ -58,15 +57,13 @@ export function SavingsForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // apiReact.transactions.addnew.usemutation().mutate(values)
-    console.log("values")
-    console.log({ ...values, color })
     addNewSavings.mutate({ ...values, color })
     form.reset({ amount: 0 })
     setFormOpen(false)
   }
 
   return (
-    < Form {...form}>
+    <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 text-center ">
         <div className="flex justify-around">
           <div className="flex flex-col gap-6">
@@ -117,7 +114,7 @@ export function SavingsForm() {
                 <FormItem >
                   <FormLabel>Money</FormLabel>
                   <FormControl>
-                    <Input className="" {...field} placeholder="Enter Money" type="number" value={field.value} min={0} />
+                    <Input className="" {...field} placeholder="Enter Money" type="number" min={0} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -126,7 +123,7 @@ export function SavingsForm() {
           </div>
           <HexColorPicker color={color} onChange={setColor} />
         </div>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Submdljit</Button>
       </form>
     </Form >
   )

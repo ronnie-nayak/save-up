@@ -7,11 +7,29 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { apiReact } from "~/trpc/react";
 import { GetBillsType } from "@acme/validators";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 
 export function BillsTable() {
   const [localData, setLocalData] = useState<GetBillsType[]>([])
 
+
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
+
   const { data, isLoading, error } = apiReact.transactions.getAllBills.useQuery()
+  if (error) {
+    router.replace('/login')
+  }
 
   const utils = apiReact.useUtils()
   const payBill = apiReact.transactions.payBill.useMutation(
@@ -53,18 +71,6 @@ export function BillsTable() {
   }
 
 
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams]
-  )
 
   useEffect(() => {
     if (localData) {
@@ -85,10 +91,9 @@ export function BillsTable() {
   const [page, setPage] = useState(1)
 
   if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
 
   return (
-    <div className="h-min  m-10  dark">
+    <div className="h-min dark">
       <form className="bg-midnight p-6 rounded-3xl flex gap-6">
         <Button className="rounded-full" type="reset" onClick={() => {
           router.replace("/bills")
@@ -96,37 +101,38 @@ export function BillsTable() {
         <Input type="text" placeholder="Search" className="w-1/2" onChange={(event) => router.replace(pathname + '?' + createQueryString('title', event.target.value))} />
       </form>
 
-      <Button className="mt-8 ml-20 p-4 bg-midnight rounded-full">
-        <h2 id="title" className="text-lg" onClick={(e) => sortingFunction(e)}>title</h2>
+      <Button className="mt-3 ml-20 p-4 bg-midnight rounded-full">
+        <h2 id="title" className="text-[1vw]" onClick={(e) => sortingFunction(e)}>title</h2>
       </Button>
-      <section className="h-[550px] p-5 ">
+      <section className="my-2 ">
         <AnimatePresence>
-          {(localData.map((row, i) => (
-            <motion.div key={row.id} layoutId={"" + row.id} className="flex items-center gap-6"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 500,
-                damping: 30
-              }}
-            >
-              <BillItemBig data={row} />
-              {/* <h2 className="w-5/12">{row.title}</h2> */}
-              {/* <h2 className="w-3/12">{row.amount}</h2> */}
-              {/* <h2 className="w-4/12">{row.dueAt.toDateString()}</h2> */}
-              <Button onClick={() => {
-                payBill.mutate(row)
-                // console.log(row)
-                // console.log(new Date(row.dueAt.setMonth(row.dueAt.getMonth() + 1)))
-              }}>Pay Bill</Button>
-            </motion.div >
-          ))).slice((page - 1) * 4, page * 4)}
+          {localData.length === 0 ? <div>No items bills</div> :
+            (localData.map((row) => (
+              <motion.div key={row.id} layoutId={"" + row.id} className="flex items-center gap-6"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 500,
+                  damping: 30
+                }}
+              >
+                <BillItemBig data={row} />
+                <Button className="bg-green-500 h-16 text-[1vw] font-bold" onClick={() => {
+                  payBill.mutate(row)
+                }}><div className="flex gap-4 items-center">
+                    <LiaMoneyBillWaveSolid />
+                    <h3>Pay Bill</h3>
+                  </div>
+                </Button>
+
+              </motion.div >
+            ))).slice((page - 1) * 4, page * 4)}
         </AnimatePresence>
       </section>
 
-      <div className="flex gap-6 items-center p-10">
+      <div className="flex gap-6 items-center p-1 px-10">
         <Button disabled={page === 1 ? true : false} onClick={() => setPage(old => old - 1)}>Previous</Button>
         <Button disabled={endPage === page || !endPage ? true : false} onClick={() => setPage(old => old + 1)}>Next</Button>
         <p>Page {!endPage ? 0 : page} of {endPage}</p>

@@ -4,17 +4,19 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { motion } from "framer-motion";
 
 
-export function HeroUI() {
+export function HeroUI({ data }) {
   return (
-    <div className="w-[300px] bg-midnight rounded-3xl m-8 p-2">
+    <div className="w-[18vw] bg-midnight rounded-3xl p-2">
       <AspectRatio ratio={15 / 16}>
         <div className="p-4 ">
           <div className="flex justify-between items-center">
-            <div className="font-bold text-lg">Account Summary</div>
+            <div className="font-bold text-[1.5vw]">Account Summary</div>
           </div>
-          <div className="mt-3 font-bold text-gray-400">Your total balance</div>
-          <h2 className="font-bold text-4xl mt-1">$5240.74</h2>
-          <div className="flex justify-center">
+          <div className="mt-3 font-bold text-gray-400">Your total Income this month</div>
+          {!data ? <div>No items transactions</div> :
+            <h2 className="font-bold text-[2vw] mt-1">${data.income * 10}</h2>
+          }
+          <div className="flex justify-center -mt-5">
             <svg
               viewBox="0 0 700 380"
               fill="none"
@@ -25,17 +27,20 @@ export function HeroUI() {
                 strokeWidth="50"
                 strokeLinecap="round"
               />
-              <motion.path
-                d="M100 350C100 283.696 126.339 220.107 173.223 173.223C220.107 126.339 283.696 100 350 100C416.304 100 479.893 126.339 526.777 173.223C573.661 220.107 600 283.696 600 350"
-                stroke="#7f56d9"
-                strokeWidth="60"
-                strokeLinecap="round"
-                id="svgPath"
-                className="svgPath"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 0.5 }}
-                transition={{ duration: 0.5 }}
-              />
+
+              {!data ? <div>No items transactions</div> :
+                <motion.path
+                  d="M100 350C100 283.696 126.339 220.107 173.223 173.223C220.107 126.339 283.696 100 350 100C416.304 100 479.893 126.339 526.777 173.223C573.661 220.107 600 283.696 600 350"
+                  stroke="#7f56d9"
+                  strokeWidth="60"
+                  strokeLinecap="round"
+                  id="svgPath"
+                  className="svgPath"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: parseFloat(((data.savings / data.income) * 100).toFixed(2) / 100) }}
+                  transition={{ duration: 0.5 }}
+                />
+              }
 
             </svg>
           </div>
@@ -51,13 +56,15 @@ export function HeroUI() {
                   textAlign: 'center',
                 }}
               >
-                <div
-                  className="font-bold text-purple"
-                  style={{ fontSize: '28px' }}
-                >
-                  97.78%
-                </div>
-                <div className="">Based on Likes</div>
+
+                {!data ? <div>No items transactions</div> :
+                  <div
+                    className="font-bold text-purple text-[1.5vw]"
+                  >
+                    {((data.savings / data.income) * 100).toFixed(2)}%
+                  </div>
+                }
+                <div className="">Monthly Income Saved</div>
               </div>
               <div className="" style={{ width: '50px' }}>
               </div>
