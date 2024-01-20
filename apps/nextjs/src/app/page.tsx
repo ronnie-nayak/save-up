@@ -9,7 +9,6 @@ export default function Homepage() {
   const router = useRouter()
   const { data: sessionExists, isLoading } = apiReact.transactions.sessionExists.useQuery()
   if (isLoading) return <div>Loading...</div>
-  console.log(sessionExists)
 
   if (sessionExists) {
     router.replace("/homepage")

@@ -10,12 +10,12 @@ import { FaPlus } from "react-icons/fa";
 
 
 
-export function SavingsItem({ dataItem }) {
+export function SavingsItem({ dataItem }: { dataItem: GetSavingsType }) {
   return (
     <div className="mb-5">
       <div className="flex justify-between items-center font-normal mb-1" >
         <h2 >{dataItem.title}</h2>
-        <h3 className="text-sm" style={{ color: dataItem.color }}>{dataItem.amount - dataItem.current} left</h3>
+        <h3 className="text-sm" style={{ color: dataItem.color }}>{dataItem.amount - dataItem.current!} left</h3>
       </div>
       <div className="h-3 rounded-full overflow-hidden w-full">
         <motion.div className="h-full"
@@ -24,7 +24,7 @@ export function SavingsItem({ dataItem }) {
             color: dataItem.color
           }}
           initial={{ width: 0 }}
-          animate={{ width: `${(dataItem.current / dataItem.amount) * 100}%` }}
+          animate={{ width: `${(dataItem.current! / dataItem.amount) * 100}%` }}
           transition={{ duration: 1 }}
         ></motion.div>
       </div>
@@ -51,7 +51,7 @@ export function SavingsItemBig({ data }: { data: GetSavingsType }) {
             color: data.color
           }}
           initial={{ width: 0 }}
-          animate={{ width: `${(data.current / data.amount) * 100}%` }}
+          animate={{ width: `${(data.current! / data.amount) * 100}%` }}
           transition={{ duration: 1 }}
         ></motion.div>
       </div>
@@ -59,7 +59,7 @@ export function SavingsItemBig({ data }: { data: GetSavingsType }) {
   )
 }
 
-export function SavingsUI({ data, buttonComp, buttonWorkable }) {
+export function SavingsUI({ data, buttonComp, buttonWorkable }: { data: GetSavingsType[] | undefined, buttonComp: JSX.Element, buttonWorkable: boolean }) {
 
   const [formOpen, setFormOpen] = useRecoilState(SavingsFormOpenState)
   return (
@@ -87,18 +87,3 @@ export function SavingsUI({ data, buttonComp, buttonWorkable }) {
 }
 
 
-export function SavingsUITemp({ data }) {
-
-  const [formOpen, setFormOpen] = useRecoilState(SavingsFormOpenState)
-  return (
-    <div className="w-[18vw] bg-midnight rounded-3xl p-6">
-      <AspectRatio ratio={10 / 9} className="">
-        <div className=" font-bold text-[1vw] mb-4">My Savings</div>
-
-        {
-          data.map((item) => <SavingsItem key={item.id} dataItem={item} />).splice(0, 4)
-        }
-      </AspectRatio>
-    </div>
-  )
-} 

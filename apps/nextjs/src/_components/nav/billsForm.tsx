@@ -24,7 +24,6 @@ import { BillsFormOpenState, FormOpenState } from "@acme/atoms"
 import { CalendarIcon } from "lucide-react"
 
 export function BillsForm() {
-  const router = useRouter()
   const setFormOpen = useSetRecoilState(BillsFormOpenState)
   // const addNew = await apiServer.transactions.addNew()
   const utils = apiReact.useUtils()
@@ -35,7 +34,6 @@ export function BillsForm() {
       },
       onError: (error) => {
         utils.transactions.sessionExists.invalidate()
-        // router.replace("/login")
       }
     }
   )

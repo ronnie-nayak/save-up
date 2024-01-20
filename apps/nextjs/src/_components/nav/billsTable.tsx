@@ -2,12 +2,13 @@
 
 "use client"
 import { BillItem, BillItemBig, Button, Calendar, FormControl, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Separator, cn } from "@acme/ui";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { apiReact } from "~/trpc/react";
 import { GetBillsType } from "@acme/validators";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
+import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa6";
 
 export function BillsTable() {
   const [localData, setLocalData] = useState<GetBillsType[]>([])
@@ -30,7 +31,6 @@ export function BillsTable() {
   const { data, isLoading, error } = apiReact.transactions.getAllBills.useQuery()
   if (error) {
     utils.transactions.sessionExists.invalidate()
-    // router.replace('/login')
   }
 
   const payBill = apiReact.transactions.payBill.useMutation(
@@ -40,7 +40,6 @@ export function BillsTable() {
       },
       onError: (error) => {
         utils.transactions.sessionExists.invalidate()
-        // router.replace("/login")
       }
     }
   )
@@ -53,18 +52,13 @@ export function BillsTable() {
   const [sorted, setSorted] = useState(null)
   const [dir, setDir] = useState(1)
 
-  const sortingFunction = (event) => {
-    let direction = 1
-    let column = event.target.id
-    if (sorted === column) {
-      direction = -dir
-      setDir(old => -old)
-    } else {
-      setSorted(old => column)
-      setDir(old => 1)
-    }
+  const sortingFunction = () => {
+    let direction = dir
+    setDir(old => -old)
+
     const sortedData = localData.sort((a, b) => {
-      if (a[column] >= b[column]) {
+      // @ts-ignore
+      if (a.title >= b.title) {
         return direction
       }
       return -direction
@@ -80,7 +74,7 @@ export function BillsTable() {
       const timeout = setTimeout(() => {
         const search = searchParams.has("title") ? searchParams.get("title") : ""
         let filteredData = localData
-        if (data) filteredData = data.filter((row) => row.title.toLowerCase().includes(search.toLowerCase()))
+        if (data) filteredData = data.filter((row) => row.title?.toLowerCase().includes(search?.toLowerCase()!))
         setLocalData(() => [...filteredData])
         setPage(1)
         // setLocalData(() => [...dataTable.filter((row) => row.title.toLowerCase().includes(search.toLowerCase()))])
@@ -104,7 +98,7 @@ export function BillsTable() {
       </form>
 
       <Button className="mt-3 ml-20 p-4 bg-midnight rounded-full">
-        <h2 id="title" className="text-[1vw]" onClick={(e) => sortingFunction(e)}>title</h2>
+        <h2 id="title" className="text-[1vw]" onClick={sortingFunction}>title{sorted === "title" ? (dir === 1 ? <FaSortDown /> : <FaSortUp />) : <FaSort />}</h2>
       </Button>
       <section className="my-2 ">
         <AnimatePresence>

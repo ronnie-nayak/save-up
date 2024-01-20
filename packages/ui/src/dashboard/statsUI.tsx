@@ -3,8 +3,7 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import clsx from "clsx";
 import { Bar, BarChart, ResponsiveContainer } from "recharts";
 
-export function StatsUI({ data, dataKey }) {
-  console.log(data, "datastats")
+export function StatsUI({ data, dataKey }: { data: any[], dataKey: string }) {
   return (
     <div className="w-[18vw] bg-midnight rounded-3xl px-2">
       <AspectRatio ratio={3 / 1} className="grid grid-cols-2 place-items-center">

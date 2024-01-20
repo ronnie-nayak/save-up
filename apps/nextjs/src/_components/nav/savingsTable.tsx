@@ -30,7 +30,6 @@ export function SavingsTable() {
   const { data, isLoading, error } = apiReact.transactions.getAllSavings.useQuery()
   if (error) {
     utils.transactions.sessionExists.invalidate()
-    // router.replace('/login')
   }
 
   const contributeToSavings = apiReact.transactions.contributeToSavings.useMutation(
@@ -40,7 +39,6 @@ export function SavingsTable() {
       },
       onError: (error) => {
         utils.transactions.sessionExists.invalidate()
-        // router.replace("/login")
       }
     }
   )
@@ -51,12 +49,11 @@ export function SavingsTable() {
       },
       onError: (error) => {
         utils.transactions.sessionExists.invalidate()
-        // router.replace("/login")
       }
     }
   )
   useEffect(() => {
-    if (data) setLocalData(() => data)
+    if (data) setLocalData(() => [...data])
   }, [data])
 
 
@@ -70,7 +67,7 @@ export function SavingsTable() {
       const timeout = setTimeout(() => {
         const search = searchParams.has("title") ? searchParams.get("title") : ""
         let filteredData = localData
-        if (data) filteredData = data.filter((row) => row.title.toLowerCase().includes(search?.toLowerCase()!))
+        if (data) filteredData = data.filter((row) => row.title!.toLowerCase().includes(search?.toLowerCase()!))
         setLocalData(() => [...filteredData])
         setPage(1)
       }, 300)
@@ -82,10 +79,11 @@ export function SavingsTable() {
   const [page, setPage] = useState(1)
 
 
-  const contributeToSavingsHandler = (row: GetSavingsType, e) => {
+  const contributeToSavingsHandler = (row: GetSavingsType, e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // contributeToSavings.mutate
-    contributeToSavings.mutate({ title: row.title, category: row.category, current: row.current, amount: row.amount, additional: parseInt(e.target[0].value), savingsId: row.id })
+    // @ts-ignore
+    contributeToSavings.mutate({ title: row.title, category: row.category, current: row.current!, amount: row.amount!, additional: parseInt(e.target[0].value), savingsId: row.id })
   }
 
   if (isLoading) return <div>Loading...</div>
@@ -106,7 +104,7 @@ export function SavingsTable() {
             ((localData.map((row) => (
               <motion.div key={row.id} layoutId={"" + row.id} className="flex items-center gap-6"
                 style={{
-                  color: row.color
+                  color: row.color!
                 }}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -131,7 +129,7 @@ export function SavingsTable() {
                   <PopoverContent>
                     <form onSubmit={(e) => contributeToSavingsHandler(row, e)}>
                       <h1>Add to savings</h1>
-                      <Input type="number" placeholder="Amount" max={row.amount - row.current} min={0} />
+                      <Input type="number" placeholder="Amount" max={row.amount! - row.current!} min={0} />
                       <Button  >Submit</Button>
                     </form>
 

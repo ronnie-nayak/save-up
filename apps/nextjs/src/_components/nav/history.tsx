@@ -4,8 +4,10 @@ import { useRecoilState } from "recoil";
 import { FormOpenState } from '@acme/atoms'
 import { MoneyForm } from ".";
 import { motion } from "framer-motion";
+import { GetMoneyType } from "@acme/validators";
+import { selectTransactionType } from "@acme/db";
 
-export function History({ localData }) {
+export function History({ localData }: { localData: GetMoneyType[] | undefined }) {
 
   const [formOpen, setFormOpen] = useRecoilState(FormOpenState)
 

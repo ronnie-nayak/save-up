@@ -51,7 +51,7 @@ export const GetSavingsSchema = z.object({
   userId: z.string().or(z.null()),
   title: z.string().min(1),
   category: z.string().min(1),
-  current: z.coerce.number(),
+  current: z.coerce.number().nullable(),
   amount: z.coerce.number(),
   color: z.string().min(1),
 });

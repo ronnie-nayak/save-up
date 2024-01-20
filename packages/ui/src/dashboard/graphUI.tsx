@@ -1,5 +1,6 @@
 'use client'
 
+import { GetMoneyType } from "@acme/validators";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 

@@ -12,19 +12,16 @@ import { FormOpenState } from "@acme/atoms"
 
 
 export function MoneyForm() {
-  const router = useRouter()
   const setFormOpen = useSetRecoilState(FormOpenState)
   // const addNew = await apiServer.transactions.addNew()
   const utils = apiReact.useUtils()
   const addNew = apiReact.transactions.addNew.useMutation(
     {
       onSuccess: (data, variables) => {
-        utils.transactions.getAll.invalidate()
-        utils.transactions.get7monthstats.invalidate()
+        utils.transactions.invalidate()
       },
       onError: (error) => {
         utils.transactions.sessionExists.invalidate()
-        // router.replace("/login")
       }
     }
   )

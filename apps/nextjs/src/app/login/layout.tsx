@@ -7,7 +7,6 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
   const router = useRouter()
 
   if (isLoading) return <div>Loading...</div>
-  console.log(sessionExists)
   if (sessionExists) {
     router.replace("/homepage")
   }

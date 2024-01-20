@@ -4,7 +4,7 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { motion } from "framer-motion";
 
 
-export function HeroUI({ data }) {
+export function HeroUI({ data }: { data: any }) {
   let percentage = 0
   if (data && data.income > 0) {
     percentage = parseFloat(((data.savings / data.income) * 100).toFixed(2))
@@ -18,7 +18,7 @@ export function HeroUI({ data }) {
           </div>
           <div className="mt-3 font-bold text-gray-400">Your total Income this month</div>
           {!data ? <div>No items transactions</div> :
-            <h2 className="font-bold text-[2vw] mt-1">${data.income * 10}</h2>
+            <h2 className="font-bold text-[2vw] mt-1">${data.income}</h2>
           }
           <div className="flex justify-center -mt-5">
             <svg
@@ -41,7 +41,7 @@ export function HeroUI({ data }) {
                   id="svgPath"
                   className="svgPath"
                   initial={{ pathLength: 0 }}
-                  animate={{ pathLength: parseFloat(percentage / 100) }}
+                  animate={{ pathLength: percentage / 100 }}
                   transition={{ duration: 0.5 }}
                 />
               }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { DefaultSession } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
@@ -33,9 +34,8 @@ export const {
     Github,
 
     CredentialsProvider({
-      name: "Credentials",
+      name: "Guest User",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "jsmith" }
       },
       async authorize(credentials) {
 
@@ -53,7 +53,6 @@ export const {
   ],
   callbacks: {
     session: async ({ session }) => {
-      console.log(session, "sessionindide")
       const sessionUsers = await db.select().from(schema.users).where(and(eq(schema.users.name, session?.user?.name as string), eq(schema.users.image, session?.user?.image as string), eq(schema.users.email, session?.user?.email as string)));
       const sessionUser = sessionUsers[0]
       return ({

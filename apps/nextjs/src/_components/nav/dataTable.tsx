@@ -1,12 +1,13 @@
 "use client"
 import { Button, Calendar, FormControl, Input, Popover, PopoverContent, PopoverTrigger, PopupButton, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Separator, cn } from "@acme/ui";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { ChangeEvent, MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { CalendarIcon } from "lucide-react";
 import { apiReact } from "~/trpc/react";
 import { GetMoneyType } from "@acme/validators";
 import { FormOpenState } from '@acme/atoms'
+import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa6";
 
 import { useRecoilState } from "recoil";
 import { MoneyForm } from ".";
@@ -46,8 +47,9 @@ export function DataTable() {
   const [sorted, setSorted] = useState("createdAt")
   const [dir, setDir] = useState(1)
 
-  const sortingFunction = (event) => {
+  const sortingFunction = (event: MouseEvent<HTMLHeadingElement, globalThis.MouseEvent>) => {
     let direction = 1
+    // @ts-ignore
     let column = event.target.id
     if (sorted === column) {
       direction = -dir
@@ -57,6 +59,7 @@ export function DataTable() {
       setDir(old => 1)
     }
     const sortedData = localData.sort((a, b) => {
+      // @ts-ignore
       if (a[column] >= b[column]) {
         return direction
       }
@@ -98,7 +101,7 @@ export function DataTable() {
 
 
   const [search, setSearch] = useState("")
-  const handleSearchChange = (event) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
     router.replace(pathname + '?' + createQueryString('title', event.target.value))
   }
@@ -200,44 +203,43 @@ export function DataTable() {
         </Popover>
       </div>
       <header className="text-gray-500 flex m-9 my-4 text-[1.25vw]">
-        <h2 id="title" className="w-4/12" onClick={(e) => sortingFunction(e)}>title</h2>
-        <h2 id="type" className="w-3/12" onClick={(e) => sortingFunction(e)}>type</h2>
-        <h2 id="amount" className="w-2/12" onClick={(e) => sortingFunction(e)}>amount</h2>
-        <h2 id="createdAt" className="w-3/12" onClick={(e) => sortingFunction(e)}>createdAt</h2>
+        <h2 id="title" className="w-4/12 flex gap-1 items-center" onClick={(e) => sortingFunction(e)}>title{sorted === "title" ? (dir === 1 ? <FaSortDown /> : <FaSortUp />) : <FaSort />}</h2>
+        <h2 id="type" className="w-3/12 flex gap-1 items-center" onClick={(e) => sortingFunction(e)}>type{sorted === "type" ? (dir === 1 ? <FaSortDown /> : <FaSortUp />) : <FaSort />}</h2>
+        <h2 id="amount" className="w-2/12 flex gap-1 items-center" onClick={(e) => sortingFunction(e)}>amount{sorted === "amount" ? (dir === 1 ? <FaSortDown /> : <FaSortUp />) : <FaSort />}</h2>
+        <h2 id="createdAt" className="w-3/12 flex gap-1 items-center" onClick={(e) => sortingFunction(e)}>createdAt{sorted === "createdAt" ? (dir === 1 ? <FaSortDown /> : <FaSortUp />) : <FaSort />}</h2>
       </header>
       <Separator className="w-full" />
-      <AnimatePresence>
-        {localData.length === 0 ? <div>No items transations</div> :
-          (localData.map((row) => (
-            <div key={row.id} className="h-auto">
-              <motion.div layoutId={"" + row.id} className="flex text-[1vw] m-3"
+      <div className="h-[25vw]">
+        <AnimatePresence>
+          {localData.length === 0 ? <div>No items transations</div> :
+            (localData.map((row) => (
+              <motion.div key={row.id} className="h-auto" layoutId={`${row.id}`}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 30,
-                }}
+                exit={{ opacity: 0, height: 0, display: "absolute" }}
+                transition={{ duration: 0.2 }}
               >
-                <div className="w-4/12">
-                  <h2 className="pb-1">{row.title}</h2>
-                  <h3 className="text-sm text-gray-500">{row.category}</h3>
-                </div>
-                <div className="w-3/12">
-                  <div className="relative p-2 bg-bermuda rounded-full w-min flex gap-1 justify-center items-center text-base pl-8">
-                    <button className={`absolute left-4 top-4 w-2 h-2 rounded-full animate-ping ${row.type === "income" ? "bg-green-500" : row.type === "expense" ? "bg-red-500" : "bg-blue-500"}`} />
-                    <button className={`absolute left-4 top-4 w-2 h-2 rounded-full ${row.type === "income" ? "bg-green-500" : row.type === "expense" ? "bg-red-500" : "bg-blue-500"}`} />
-                    {row.type}
+                <div className="flex text-[1vw] m-3"
+                >
+                  <div className="w-4/12">
+                    <h2 className="pb-1">{row.title}</h2>
+                    <h3 className="text-sm text-gray-500">{row.category}</h3>
                   </div>
+                  <div className="w-3/12">
+                    <div className="relative p-2 bg-bermuda rounded-full w-min flex gap-1 justify-center items-center text-base pl-8">
+                      <button className={`absolute left-4 top-4 w-2 h-2 rounded-full animate-ping ${row.type === "income" ? "bg-green-500" : row.type === "expense" ? "bg-red-500" : "bg-blue-500"}`} />
+                      <button className={`absolute left-4 top-4 w-2 h-2 rounded-full ${row.type === "income" ? "bg-green-500" : row.type === "expense" ? "bg-red-500" : "bg-blue-500"}`} />
+                      {row.type}
+                    </div>
+                  </div >
+                  <h2 className="w-2/12">{row.type === "expense" && "-"}${row.amount}</h2>
+                  <h2 className="w-3/12">{row.createdAt.toDateString()}</h2>
                 </div >
-                <h2 className="w-2/12">{row.type === "expense" && "-"}${row.amount}</h2>
-                <h2 className="w-3/12">{row.createdAt.toDateString()}</h2>
-              </motion.div >
-              <Separator className="w-full" />
-            </div>
-          ))).slice((page - 1) * 6, page * 6)}
-      </AnimatePresence >
+                <Separator className="w-full" />
+              </motion.div>
+            ))).slice((page - 1) * 6, page * 6)}
+        </AnimatePresence >
+      </div>
       <div className="flex gap-6 items-center mt-7 ml-10">
         <Button disabled={page === 1 ? true : false} onClick={() => setPage(old => old - 1)}>Previous</Button>
         <Button disabled={endPage === page || !endPage ? true : false} onClick={() => setPage(old => old + 1)}>Next</Button>

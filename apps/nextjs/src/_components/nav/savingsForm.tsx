@@ -27,7 +27,6 @@ import { useState } from "react"
 export function SavingsForm() {
 
   const [color, setColor] = useState("#1168C9");
-  const router = useRouter()
   const setFormOpen = useSetRecoilState(SavingsFormOpenState)
 
   const utils = apiReact.useUtils()
@@ -38,7 +37,6 @@ export function SavingsForm() {
       },
       onError: (error) => {
         utils.transactions.sessionExists.invalidate()
-        // router.replace("/login")
       }
     }
   )

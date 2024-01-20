@@ -26,7 +26,7 @@ const item = {
 }
 
 
-export function BillItem({ dataItem }) {
+export function BillItem({ dataItem }: { dataItem: GetBillsType }) {
   return (
     <motion.div className={`flex items-center gap-4 ${new Date(dataItem.dueAt) < new Date() ? "bg-red-500 p-1 rounded-xl " : ""} `}
       variants={item}
@@ -55,7 +55,7 @@ export function BillItemBig({ data }: { data: GetBillsType }) {
   )
 }
 
-export function BillsUI({ data, buttonComp, buttonWorkable }) {
+export function BillsUI({ data, buttonComp, buttonWorkable }: { data: GetBillsType[] | undefined, buttonComp: JSX.Element, buttonWorkable: boolean }) {
 
   const [formOpen, setFormOpen] = useRecoilState(BillsFormOpenState)
   return (

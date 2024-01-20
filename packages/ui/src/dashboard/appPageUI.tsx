@@ -1,4 +1,4 @@
-import { BillsUI, BillsUITemp, Button, GraphUI, HeroUI, HistoryUI, SavingsUI, SavingsUITemp, StatsUI } from "@acme/ui";
+import { BillsUI, Button, GraphUI, HeroUI, HistoryUI, SavingsUI, StatsUI } from "@acme/ui";
 
 export function AppPageUI() {
   return (
@@ -15,11 +15,15 @@ export function AppPageUI() {
               </div>
             </div>
             <div className="flex justify-around">
+              {/* @ts-ignore */}
               <BillsUI data={billsGraph} buttonComp={<br />} buttonWorkable={false} />
+              {/* @ts-ignore */}
               <SavingsUI data={savingsGraph} buttonComp={<br />} buttonWorkable={false} />
             </div>
+            {/* @ts-ignore */}
             <GraphUI data={dataGraph} />
           </div>
+          {/* @ts-ignore */}
           <HistoryUI localData={historyGraph} />
         </div>
       </div>

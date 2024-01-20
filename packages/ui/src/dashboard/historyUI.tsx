@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { Button } from "..";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
+import { GetMoneyType } from "@acme/validators";
 
-export function HistoryUI({ localData }) {
+export function HistoryUI({ localData }: { localData: GetMoneyType[] }) {
   const container = {
     hidden: { opacity: 0 },
     show: {
