@@ -218,8 +218,8 @@ export function DataTable() {
                 setStartDate(date!);
                 router.replace(
                   pathname +
-                    "?" +
-                    createQueryString("startDate", date?.toDateString()!),
+                  "?" +
+                  createQueryString("startDate", date?.toDateString()!),
                 );
               }}
               disabled={(date) =>
@@ -252,8 +252,8 @@ export function DataTable() {
                 setEndDate(date!);
                 router.replace(
                   pathname +
-                    "?" +
-                    createQueryString("endDate", date?.toDateString()!),
+                  "?" +
+                  createQueryString("endDate", date?.toDateString()!),
                 );
               }}
               disabled={(date) =>
@@ -357,22 +357,20 @@ export function DataTable() {
                     <div className="hidden w-3/12 sm:block">
                       <div className="relative flex w-min items-center justify-center gap-1 rounded-full bg-bermuda p-2 pl-8 text-base">
                         <button
-                          className={`absolute left-4 top-4 h-2 w-2 animate-ping rounded-full ${
-                            row.type === "income"
-                              ? "bg-green-500"
-                              : row.type === "expense"
-                                ? "bg-red-500"
-                                : "bg-blue-500"
-                          }`}
+                          className={`absolute left-4 top-4 h-2 w-2 animate-ping rounded-full ${row.type === "income"
+                            ? "bg-green-500"
+                            : row.type === "expense"
+                              ? "bg-red-500"
+                              : "bg-blue-500"
+                            }`}
                         />
                         <button
-                          className={`absolute left-4 top-4 h-2 w-2 rounded-full ${
-                            row.type === "income"
-                              ? "bg-green-500"
-                              : row.type === "expense"
-                                ? "bg-red-500"
-                                : "bg-blue-500"
-                          }`}
+                          className={`absolute left-4 top-4 h-2 w-2 rounded-full ${row.type === "income"
+                            ? "bg-green-500"
+                            : row.type === "expense"
+                              ? "bg-red-500"
+                              : "bg-blue-500"
+                            }`}
                         />
                         {row.type}
                       </div>

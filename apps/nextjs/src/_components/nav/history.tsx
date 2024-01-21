@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 
 import { FormOpenState } from "@acme/atoms";
-import { selectTransactionType } from "@acme/db";
 import { PopupButton } from "@acme/ui";
 import { GetMoneyType } from "@acme/validators";
 

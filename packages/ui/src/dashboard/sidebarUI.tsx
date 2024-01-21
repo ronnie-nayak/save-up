@@ -24,7 +24,7 @@ const links: linkType[] = [
 
 export function SidebarUI() {
   return (
-    <nav className="fixed flex h-screen flex-col bg-midnight p-8 text-white ">
+    <nav className="flex h-screen flex-col bg-midnight p-8 text-white">
       <div className="mb-4 flex items-center gap-4">
         <div>
           <h1 className="sm:text-[1.75vw] ">save-up</h1>
@@ -43,9 +43,8 @@ export function SidebarUI() {
         <Link
           href="/login"
           key={index}
-          className={`${
-            "Dashboard" === link.title ? "" : "text-gray-500"
-          } relative z-20 my-5 flex items-center gap-4 p-2 font-normal transition sm:text-[1.75vw]`}
+          className={`${"Dashboard" === link.title ? "" : "text-gray-500"
+            } relative z-20 my-5 flex items-center gap-4 p-2 font-normal transition sm:text-[1.75vw]`}
         >
           {"Dashboard" === link.title && (
             <span className="absolute inset-0 -z-10 h-full rounded-xl bg-purple" />

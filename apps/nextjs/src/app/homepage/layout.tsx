@@ -16,9 +16,11 @@ export default function HomepageLayout(props: { children: React.ReactNode }) {
 
         <div className="dark w-full overflow-scroll">
           <div className="m-8 flex items-center gap-4">
-            <SlidingSidebar>
-              <MoneyForm />
-            </SlidingSidebar>
+            <div className="sm:hidden">
+              <SlidingSidebar>
+                <MoneyForm />
+              </SlidingSidebar>
+            </div>
             <AuthSignout />
           </div>
           {props.children}

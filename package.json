@@ -19,7 +19,7 @@
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo typecheck",
-    "start": "pnpm -F nextjsrun start"
+    "start": "pnpm -F nextjs run start"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:^0.1.0",
