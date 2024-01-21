@@ -19,6 +19,7 @@
     "@acme/auth": "workspace:^0.1.0",
     "@acme/db": "workspace:^0.1.0",
     "@acme/ui": "workspace:^0.1.0",
+    "@acme/validators": "workspace:^0.1.0",
     "@formkit/auto-animate": "^0.8.1",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tanstack/react-query": "^5.17.7",

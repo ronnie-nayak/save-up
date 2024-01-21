@@ -77,8 +77,9 @@ export function AppPage() {
               item.txn_month.getFullYear() === currentYear,
           )?.monthly_sum ?? 0;
         finalStats.push({
-          date: `${months[new Date(currentYear, currentMonth).getMonth()]
-            } ${currentYear.toString().slice(2)}`,
+          date: `${
+            months[new Date(currentYear, currentMonth).getMonth()]
+          } ${currentYear.toString().slice(2)}`,
           income: currIncome,
           expense: currExpense,
           savings: currSavings,

@@ -6,7 +6,7 @@ import { z } from "zod";
 export const AddMoneySchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
-  title: z.string().min(1),
+  title: z.string().min(1).max(10),
   category: z.string().min(1),
   type: z.enum(["income", "expense"]),
   amount: z.coerce.number(),
@@ -35,7 +35,7 @@ export type GetMoneyType = z.infer<typeof GetMoneySchema>;
 export const AddSavingsSchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
-  title: z.string().min(1),
+  title: z.string().min(1).max(10),
   category: z.string().min(1),
   current: z.coerce.number().optional(),
   amount: z.coerce.number(),
@@ -65,7 +65,7 @@ export type GetSavingsType = z.infer<typeof GetSavingsSchema>;
 export const AddBillsSchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
-  title: z.string().min(1),
+  title: z.string().min(1).max(10),
   category: z.string().min(1),
   amount: z.coerce.number(),
   dueAt: z.date(),
