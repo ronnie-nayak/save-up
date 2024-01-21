@@ -7,7 +7,7 @@ const config = {
   },
   ignorePatterns: [
     // "**/",
-  ]
+  ],
 };
 
 module.exports = config;

@@ -1,12 +1,20 @@
-import { BillsUI, Button, GraphUI, HeroUI, HistoryUI, SavingsUI, StatsUI } from "@acme/ui";
+// @ts-nocheck
+import {
+  BillsUI,
+  GraphUI,
+  HeroUI,
+  HistoryUI,
+  SavingsUI,
+  StatsUI,
+} from "@acme/ui";
 
 export function AppPageUI() {
   return (
     <div className="dark ">
       <div className="mx-10">
-        <div className="flex gap-10">
+        <div className="flex flex-col gap-10 sm:flex-row">
           <div className="w-full">
-            <div className="flex justify-around mb-4">
+            <div className="mb-4 flex flex-col justify-around sm:flex-row">
               <HeroUI data={dataGraph[dataGraph.length - 1]} />
               <div className="flex flex-col justify-between">
                 <StatsUI data={dataGraph} dataKey="income" />
@@ -14,23 +22,26 @@ export function AppPageUI() {
                 <StatsUI data={dataGraph} dataKey="savings" />
               </div>
             </div>
-            <div className="flex justify-around">
-              {/* @ts-ignore */}
-              <BillsUI data={billsGraph} buttonComp={<br />} buttonWorkable={false} />
-              {/* @ts-ignore */}
-              <SavingsUI data={savingsGraph} buttonComp={<br />} buttonWorkable={false} />
+            <div className="flex flex-col justify-around sm:flex-row">
+              <BillsUI
+                data={billsGraph}
+                buttonComp={<br />}
+                buttonWorkable={false}
+              />
+              <SavingsUI
+                data={savingsGraph}
+                buttonComp={<br />}
+                buttonWorkable={false}
+              />
             </div>
-            {/* @ts-ignore */}
             <GraphUI data={dataGraph} />
           </div>
-          {/* @ts-ignore */}
           <HistoryUI localData={historyGraph} />
         </div>
       </div>
     </div>
   );
 }
-
 
 const savingsGraph = [
   {
@@ -57,8 +68,7 @@ const savingsGraph = [
     current: 3000,
     color: "yellow",
   },
-]
-
+];
 
 const billsGraph = [
   {
@@ -75,8 +85,8 @@ const billsGraph = [
     title: "Water",
     amount: 2000,
     dueAt: new Date("2029-01-01"),
-  }
-]
+  },
+];
 
 const dataGraph = [
   {
@@ -123,86 +133,85 @@ const dataGraph = [
   },
 ];
 
-
 const historyGraph = [
   {
-    "id": 1,
-    "title": "Freelance Mark",
-    "category": "Salary",
-    "type": "income",
-    "amount": 9180,
-    "createdAt": new Date("Mar 31, 2022")
+    id: 1,
+    title: "Freelance Mark",
+    category: "Salary",
+    type: "income",
+    amount: 9180,
+    createdAt: new Date("Mar 31, 2022"),
   },
   {
-    "id": 2,
-    "title": "Car savings",
-    "category": "Car",
-    "type": "savings",
-    "amount": 1926,
-    "createdAt": new Date("Dec 9, 2022")
+    id: 2,
+    title: "Car savings",
+    category: "Car",
+    type: "savings",
+    amount: 1926,
+    createdAt: new Date("Dec 9, 2022"),
   },
   {
-    "id": 3,
-    "title": "Phone savings",
-    "category": "Phone",
-    "type": "savings",
-    "amount": 3405,
-    "createdAt": new Date("Dec 20, 2019")
+    id: 3,
+    title: "Phone savings",
+    category: "Phone",
+    type: "savings",
+    amount: 3405,
+    createdAt: new Date("Dec 20, 2019"),
   },
   {
-    "id": 4,
-    "title": "Sent to Mom",
-    "category": "Miscellaneous",
-    "type": "expense",
-    "amount": 8355,
-    "createdAt": new Date("Jan 26, 2023")
+    id: 4,
+    title: "Sent to Mom",
+    category: "Miscellaneous",
+    type: "expense",
+    amount: 8355,
+    createdAt: new Date("Jan 26, 2023"),
   },
   {
-    "id": 5,
-    "title": "Nov Rent",
-    "category": "Rent",
-    "type": "expense",
-    "amount": 8979,
-    "createdAt": new Date("Nov 16, 2020")
+    id: 5,
+    title: "Nov Rent",
+    category: "Rent",
+    type: "expense",
+    amount: 8979,
+    createdAt: new Date("Nov 16, 2020"),
   },
   {
-    "id": 6,
-    "title": "Jan Salary",
-    "category": "Salary",
-    "type": "income",
-    "amount": 8266,
-    "createdAt": new Date("Jan 13, 2020")
+    id: 6,
+    title: "Jan Salary",
+    category: "Salary",
+    type: "income",
+    amount: 8266,
+    createdAt: new Date("Jan 13, 2020"),
   },
   {
-    "id": 7,
-    "title": "Electricity Bill",
-    "category": "Miscellaneous",
-    "type": "expense",
-    "amount": 9480,
-    "createdAt": new Date("Apr 9, 2020")
+    id: 7,
+    title: "Electricity Bill",
+    category: "Miscellaneous",
+    type: "expense",
+    amount: 9480,
+    createdAt: new Date("Apr 9, 2020"),
   },
   {
-    "id": 8,
-    "title": "Feb Rent",
-    "category": "Rent",
-    "type": "expense",
-    "amount": 1644,
-    "createdAt": new Date("Feb 27, 2022")
+    id: 8,
+    title: "Feb Rent",
+    category: "Rent",
+    type: "expense",
+    amount: 1644,
+    createdAt: new Date("Feb 27, 2022"),
   },
   {
-    "id": 9,
-    "title": "Groceries",
-    "category": "Food",
-    "type": "income",
-    "amount": 2083,
-    "createdAt": new Date("Jan 10, 2023")
+    id: 9,
+    title: "Groceries",
+    category: "Food",
+    type: "income",
+    amount: 2083,
+    createdAt: new Date("Jan 10, 2023"),
   },
   {
-    "id": 10,
-    "title": "Stock Earnings",
-    "category": "Salary",
-    "type": "income",
-    "amount": 5271,
-    "createdAt": new Date("Sep 19, 2021")
+    id: 10,
+    title: "Stock Earnings",
+    category: "Salary",
+    type: "income",
+    amount: 5271,
+    createdAt: new Date("Sep 19, 2021"),
   },
-]
+];

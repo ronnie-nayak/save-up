@@ -1,13 +1,12 @@
-
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
 import * as auth from "./schema/auth";
-import * as transactions from "./schema/transactions";
-import * as savings from "./schema/savings";
 import * as bills from "./schema/bills";
+import * as savings from "./schema/savings";
+import * as transactions from "./schema/transactions";
 
-export * from './schema/types'
+export * from "./schema/types";
 
 export const schema = { ...auth, ...transactions, ...savings, ...bills };
 

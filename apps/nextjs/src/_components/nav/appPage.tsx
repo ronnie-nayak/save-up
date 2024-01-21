@@ -1,55 +1,92 @@
-'use client'
-import { BillsUI, Button, GraphUI, HeroUI, SavingsUI, StatsUI } from "@acme/ui";
-import { BillsForm, History, SavingsForm } from "."
-import { apiReact } from "~/trpc/react";
+"use client";
+
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
+import { BillsUI, Button, GraphUI, HeroUI, SavingsUI, StatsUI } from "@acme/ui";
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', "Oct", "Nov", "Dec"]
+import { apiReact } from "~/trpc/react";
+import { BillsForm, History, SavingsForm } from ".";
+
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 export function AppPage() {
-
-
-  const utils = apiReact.useUtils()
-  const { data: statsData, error: statsError } = apiReact.transactions.get7monthstats.useQuery()
-  const { data: savingsData, error: savingsError } = apiReact.transactions.getAllSavings.useQuery()
-  const { data: billsData, error: billsError } = apiReact.transactions.getAllBills.useQuery()
-  const { data: historyData, error: historyError } = apiReact.transactions.getAll.useQuery()
-  if (statsError || savingsError || billsError || historyError) {
-    utils.transactions.sessionExists.invalidate()
+  const router = useRouter();
+  const utils = apiReact.useUtils();
+  const { data: statsData, isError: isStatsError } =
+    apiReact.transactions.get7monthstats.useQuery();
+  const { data: savingsData, isError: isSavingsError } =
+    apiReact.transactions.getAllSavings.useQuery();
+  const { data: billsData, isError: isBillsError } =
+    apiReact.transactions.getAllBills.useQuery();
+  const { data: historyData, isError: isHistoryError } =
+    apiReact.transactions.getAll.useQuery();
+  if (isStatsError || isSavingsError || isBillsError || isHistoryError) {
+    utils.transactions.sessionExists.invalidate();
+    router.replace("/login");
   }
 
-  const [graphData, setGraphData] = useState<(typeof statsData)[]>([])
-  // const [rawData, setRawData] = useState([])
+  const [graphData, setGraphData] = useState<(typeof statsData)[]>([]);
 
-
-  const incomeList = statsData?.income ?? []
-  const expenseList = statsData?.expense ?? []
-  const savingsList = statsData?.savings ?? []
+  const incomeList = statsData?.income ?? [];
+  const expenseList = statsData?.expense ?? [];
+  const savingsList = statsData?.savings ?? [];
 
   useEffect(() => {
-
     if (statsData) {
-      console.log(statsData, "statsdata")
-      const finalStats = []
-      let currentMonth = new Date().getMonth()
-      let currentYear = new Date().getFullYear()
+      const finalStats = [];
+      let currentMonth = new Date().getMonth();
+      let currentYear = new Date().getFullYear();
       for (let i = 0; i < 7; i++) {
         // @ts-ignore
-        let currIncome = incomeList.find((item) => item.txn_month.getMonth() === currentMonth && item.txn_month.getFullYear() === currentYear)?.monthly_sum ?? 0
+        let currIncome =
+          incomeList.find(
+            (item) =>
+              // @ts-ignore
+              item.txn_month.getMonth() === currentMonth &&
+              // @ts-ignore
+              item.txn_month.getFullYear() === currentYear,
+          )?.monthly_sum ?? 0;
         // @ts-ignore
-        let currExpense = expenseList.find((item) => item.txn_month.getMonth() === currentMonth && item.txn_month.getFullYear() === currentYear)?.monthly_sum ?? 0
-        // @ts-ignore
-        let currSavings = savingsList.find((item) => item.txn_month.getMonth() === currentMonth && item.txn_month.getFullYear() === currentYear)?.monthly_sum ?? 0
+        let currExpense =
+          expenseList.find(
+            (item) =>
+              // @ts-ignore
+              item.txn_month.getMonth() === currentMonth &&
+              // @ts-ignore
+              item.txn_month.getFullYear() === currentYear,
+          )?.monthly_sum ?? 0;
+        let currSavings =
+          savingsList.find(
+            (item) =>
+              // @ts-ignore
+              item.txn_month.getMonth() === currentMonth &&
+              // @ts-ignore
+              item.txn_month.getFullYear() === currentYear,
+          )?.monthly_sum ?? 0;
         finalStats.push({
-          date: `${months[(new Date(currentYear, currentMonth)).getMonth()]} ${currentYear.toString().slice(2)}`,
+          date: `${months[new Date(currentYear, currentMonth).getMonth()]
+            } ${currentYear.toString().slice(2)}`,
           income: currIncome,
           expense: currExpense,
-          savings: currSavings
-        })
-        currentMonth = currentMonth - 1
+          savings: currSavings,
+        });
+        currentMonth = currentMonth - 1;
         if (currentMonth === -1) {
-          currentMonth = 11
-          currentYear = currentYear - 1
+          currentMonth = 11;
+          currentYear = currentYear - 1;
         }
       }
       // const tempArray = JSON.parse(JSON.stringify(finalStats))
@@ -63,18 +100,17 @@ export function AppPage() {
       //   item.expense = Math.round(item.expense / (maxValue / 10000))
       //   item.savings = Math.round(item.savings / (maxValue / 10000))
       // })
-      console.log(finalStats, "finalstatse2")
       // @ts-ignore
-      setGraphData(finalStats.reverse())
+      setGraphData(finalStats.reverse());
     }
-  }, [statsData])
+  }, [statsData]);
 
   return (
     <div className="dark">
       <div className="mx-10">
-        <div className="flex gap-10">
+        <div className="flex flex-col gap-10 sm:flex-row">
           <div className="w-full">
-            <div className="flex justify-around mb-4">
+            <div className="mb-4 flex flex-col justify-around sm:flex-row">
               <HeroUI data={graphData[graphData.length - 1]} />
               <div className="flex flex-col justify-between">
                 <StatsUI data={graphData} dataKey="income" />
@@ -82,9 +118,17 @@ export function AppPage() {
                 <StatsUI data={graphData} dataKey="savings" />
               </div>
             </div>
-            <div className="flex justify-around">
-              <BillsUI data={billsData} buttonComp={<BillsForm />} buttonWorkable />
-              <SavingsUI data={savingsData} buttonComp={<SavingsForm />} buttonWorkable />
+            <div className="flex flex-col justify-around sm:flex-row">
+              <BillsUI
+                data={billsData}
+                buttonComp={<BillsForm />}
+                buttonWorkable
+              />
+              <SavingsUI
+                data={savingsData}
+                buttonComp={<SavingsForm />}
+                buttonWorkable
+              />
             </div>
             <GraphUI data={graphData} />
           </div>

@@ -1,18 +1,33 @@
-'use client'
-import { useRouter } from "next/navigation";
+"use client";
+
+import { notFound, useRouter } from "next/navigation";
+
+import { Loading } from "@acme/ui";
+
 import { apiReact } from "~/trpc/react";
 
-export default function LoginLayout({ children }: { children: React.ReactNode }) {
-  const { data: sessionExists, isLoading } = apiReact.transactions.sessionExists.useQuery()
-  const router = useRouter()
-
-  if (isLoading) return <div>Loading...</div>
-  if (sessionExists) {
-    router.replace("/homepage")
+export default function LoginLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const router = useRouter();
+  const {
+    data: sessionExists,
+    isLoading,
+    isError,
+  } = apiReact.transactions.sessionExists.useQuery();
+  if (isError) {
+    return notFound();
   }
-  return (
-    <div>
-      {children}
-    </div>
-  )
+  if (!isLoading && sessionExists) {
+    router.replace("/homepage");
+  }
+  if (isLoading || sessionExists)
+    return (
+      <div className="h-screen w-screen">
+        <Loading />
+      </div>
+    );
+  return <div>{children}</div>;
 }

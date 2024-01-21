@@ -26,7 +26,7 @@ export const env = createEnv({
     // AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     // AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
     AUTH_SECRET: process.env.AUTH_SECRET,
-    AUTH_URL: process.env.AUTH_URL
+    AUTH_URL: process.env.AUTH_URL,
   },
   skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION,
 });

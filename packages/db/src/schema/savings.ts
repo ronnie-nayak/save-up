@@ -1,10 +1,14 @@
-
-
-
 import { relations } from "drizzle-orm";
+import {
+  date,
+  integer,
+  serial,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
 import { pgTable } from "./_table";
-import { date, integer, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { users } from "./auth";
 
 export const savings = pgTable("savings", {
@@ -17,10 +21,9 @@ export const savings = pgTable("savings", {
   color: varchar("color", { length: 256 }).notNull(),
 });
 
-
 export const savingsRelations = relations(savings, ({ one }) => ({
   users: one(users, {
     fields: [savings.userId],
     references: [users.id],
-  })
-}))
+  }),
+}));

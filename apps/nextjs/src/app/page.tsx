@@ -1,34 +1,53 @@
-'use client'
-import { AppPageUI, Sidebar, SidebarUI } from "@acme/ui";
+"use client";
+
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { MoneyForm } from "~/_components/nav";
+import { notFound, useRouter } from "next/navigation";
+import { FaBars } from "react-icons/fa6";
+
+import { AppPageUI, Loading, SidebarUI } from "@acme/ui";
+
 import { apiReact } from "~/trpc/react";
 
 export default function Homepage() {
-  const router = useRouter()
-  const { data: sessionExists, isLoading } = apiReact.transactions.sessionExists.useQuery()
-  if (isLoading) return <div>Loading...</div>
-
-  if (sessionExists) {
-    router.replace("/homepage")
+  const router = useRouter();
+  const {
+    data: sessionExists,
+    isLoading,
+    isError,
+  } = apiReact.transactions.sessionExists.useQuery();
+  if (isError) {
+    return notFound();
   }
-  return (
-    <div className="flex text-white bg-[#121e2c] font-bold w-full h-screen relative">
-      <SidebarUI />
-      <div className="w-4/12">
+  if (!isLoading && sessionExists) {
+    router.replace("/homepage");
+  }
+  if (isLoading || sessionExists)
+    return (
+      <div className="h-screen w-screen">
+        <Loading />
       </div>
-      <main className="overflow-scroll w-full dark">
+    );
 
-        <div className="flex m-8 gap-4 items-center">
+  return (
+    <div className="relative flex h-screen w-full bg-[#121e2c] font-bold text-white">
+      <div className="hidden w-3/12 sm:block">
+        <SidebarUI />
+      </div>
+      {/* <div className="w-4/12 hidden sm:block"> */}
+      {/* </div> */}
+      <main className="dark w-full overflow-scroll">
+        <div className="m-8 flex items-center gap-4">
+          <Link href="/login" className="sm:hidden">
+            <FaBars size={29} />
+          </Link>
           <div className="flex items-center gap-4">
-            <Link href="/login" className="p-4 rounded-3xl bg-white text-black">SignIn</Link>
+            <Link href="/login" className="rounded-3xl bg-white p-4 text-black">
+              SignIn
+            </Link>
           </div>
-
-          <h1 className="text-[1.25vw] font-bold">Hello Rony!</h1>
         </div>
         <AppPageUI />
-      </main >
+      </main>
     </div>
   );
 }

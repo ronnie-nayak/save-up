@@ -1,138 +1,223 @@
+"use client";
 
-
-"use client"
-import { BillItem, BillItemBig, Button, Calendar, FormControl, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Separator, cn } from "@acme/ui";
 import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { apiReact } from "~/trpc/react";
-import { GetBillsType } from "@acme/validators";
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
-import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa6";
+
+import {
+  BillItem,
+  BillItemBig,
+  Button,
+  Calendar,
+  cn,
+  FormControl,
+  Input,
+  Loading,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Separator,
+} from "@acme/ui";
+import { GetBillsType } from "@acme/validators";
+
+import { apiReact } from "~/trpc/react";
 
 export function BillsTable() {
-  const [localData, setLocalData] = useState<GetBillsType[]>([])
+  const [localData, setLocalData] = useState<GetBillsType[]>([]);
 
+  const [loader, setLoader] = useState<number | null>(null);
 
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
 
-      return params.toString()
+      return params.toString();
     },
-    [searchParams]
-  )
+    [searchParams],
+  );
 
-  const utils = apiReact.useUtils()
-  const { data, isLoading, error } = apiReact.transactions.getAllBills.useQuery()
-  if (error) {
-    utils.transactions.sessionExists.invalidate()
+  const utils = apiReact.useUtils();
+  const { data, isLoading, isError } =
+    apiReact.transactions.getAllBills.useQuery();
+  if (isError) {
+    utils.transactions.sessionExists.invalidate();
+    router.replace("/login");
   }
 
-  const payBill = apiReact.transactions.payBill.useMutation(
-    {
-      onSuccess: () => {
-        utils.transactions.getAllBills.invalidate()
-      },
-      onError: (error) => {
-        utils.transactions.sessionExists.invalidate()
-      }
-    }
-  )
+  const payBill = apiReact.transactions.payBill.useMutation({
+    onSuccess: () => {
+      utils.transactions.getAllBills.invalidate();
+    },
+    onError: (error) => {
+      utils.transactions.sessionExists.invalidate();
+    },
+  });
   useEffect(() => {
-    if (data) setLocalData(() => [...data])
-  }, [data])
+    if (data) setLocalData(() => [...data]);
+  }, [data]);
 
-  const endPage = Math.ceil(localData.length / 4)
+  const endPage = Math.ceil(localData.length / 4);
 
-  const [sorted, setSorted] = useState(null)
-  const [dir, setDir] = useState(1)
+  const [sorted, setSorted] = useState("");
+  const [dir, setDir] = useState(1);
 
   const sortingFunction = () => {
-    let direction = dir
-    setDir(old => -old)
+    let direction = dir;
+    setDir((old) => -old);
+    setSorted("title");
 
     const sortedData = localData.sort((a, b) => {
       // @ts-ignore
       if (a.title >= b.title) {
-        return direction
+        return direction;
       }
-      return -direction
-    })
-    setLocalData(old => [...sortedData])
-  }
-
-
+      return -direction;
+    });
+    setLocalData((old) => [...sortedData]);
+  };
 
   useEffect(() => {
     if (localData) {
-
       const timeout = setTimeout(() => {
-        const search = searchParams.has("title") ? searchParams.get("title") : ""
-        let filteredData = localData
-        if (data) filteredData = data.filter((row) => row.title?.toLowerCase().includes(search?.toLowerCase()!))
-        setLocalData(() => [...filteredData])
-        setPage(1)
+        const search = searchParams.has("title")
+          ? searchParams.get("title")
+          : "";
+        let filteredData = localData;
+        if (data)
+          filteredData = data.filter(
+            (row) => row.title?.toLowerCase().includes(search?.toLowerCase()!),
+          );
+        setLocalData(() => [...filteredData]);
+        setPage(1);
         // setLocalData(() => [...dataTable.filter((row) => row.title.toLowerCase().includes(search.toLowerCase()))])
-      }, 300)
-      return () => clearTimeout(timeout)
+      }, 300);
+      return () => clearTimeout(timeout);
     }
-  }, [searchParams])
+  }, [searchParams]);
 
+  const [page, setPage] = useState(1);
 
-  const [page, setPage] = useState(1)
-
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loading />;
 
   return (
-    <div className="h-min dark">
-      <form className="bg-midnight p-6 rounded-3xl flex gap-6">
-        <Button className="rounded-full" type="reset" onClick={() => {
-          router.replace("/bills")
-        }}>Clear</Button>
-        <Input type="text" placeholder="Search" className="w-1/2" onChange={(event) => router.replace(pathname + '?' + createQueryString('title', event.target.value))} />
+    <div className="dark h-min">
+      <form className="flex gap-6 rounded-3xl bg-midnight p-6">
+        <Button
+          className="rounded-full"
+          type="reset"
+          onClick={() => {
+            router.replace("/bills");
+          }}
+        >
+          Clear
+        </Button>
+        <Input
+          type="text"
+          placeholder="Search"
+          className="w-1/2"
+          onChange={(event) =>
+            router.replace(
+              pathname + "?" + createQueryString("title", event.target.value),
+            )
+          }
+        />
       </form>
 
-      <Button className="mt-3 ml-20 p-4 bg-midnight rounded-full">
-        <h2 id="title" className="text-[1vw]" onClick={sortingFunction}>title{sorted === "title" ? (dir === 1 ? <FaSortDown /> : <FaSortUp />) : <FaSort />}</h2>
+      <Button className="ml-20 mt-3 rounded-full bg-midnight p-4">
+        <h2
+          id="title"
+          className="flex items-center gap-1 sm:text-[1vw]"
+          onClick={sortingFunction}
+        >
+          title
+          {sorted === "title" ? (
+            dir === 1 ? (
+              <FaSortDown />
+            ) : (
+              <FaSortUp />
+            )
+          ) : (
+            <FaSort />
+          )}
+        </h2>
       </Button>
-      <section className="my-2 ">
+      <div className="h-[55vh] overflow-hidden sm:h-[26vw]">
         <AnimatePresence>
-          {localData.length === 0 ? <div>No items bills</div> :
-            (localData.map((row) => (
-              <motion.div key={row.id} layoutId={"" + row.id} className="flex items-center gap-6"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 30
-                }}
-              >
-                <BillItemBig data={row} />
-                <Button className="bg-green-500 h-16 text-[1vw] font-bold" onClick={() => {
-                  payBill.mutate(row)
-                }}><div className="flex gap-4 items-center">
-                    <LiaMoneyBillWaveSolid />
-                    <h3>Pay Bill</h3>
-                  </div>
-                </Button>
-
-              </motion.div >
-            ))).slice((page - 1) * 4, page * 4)}
+          {localData.length === 0 ? (
+            <div className="p-4 text-center font-bold sm:text-[1vw]">
+              No Bills Yet
+            </div>
+          ) : (
+            localData
+              .map((row) => (
+                <motion.div
+                  key={row.id}
+                  layoutId={"" + row.id}
+                  className="flex items-center gap-6"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{
+                    duration: 0.2,
+                  }}
+                >
+                  <BillItemBig data={row} />
+                  <Button
+                    className="h-16 bg-green-500 font-bold sm:text-[1vw]"
+                    onClick={() => {
+                      payBill.mutate(row);
+                      setTimeout(() => {
+                        setLoader(null);
+                      }, 1000);
+                      setLoader(row.id);
+                    }}
+                  >
+                    <div className="flex items-center gap-4">
+                      {loader === row.id ? (
+                        <div className="loader"></div>
+                      ) : (
+                        <>
+                          <LiaMoneyBillWaveSolid />
+                          <h3>Pay Bill</h3>
+                        </>
+                      )}
+                    </div>
+                  </Button>
+                </motion.div>
+              ))
+              .slice((page - 1) * 4, page * 4)
+          )}
         </AnimatePresence>
-      </section>
-
-      <div className="flex gap-6 items-center p-1 px-10">
-        <Button disabled={page === 1 ? true : false} onClick={() => setPage(old => old - 1)}>Previous</Button>
-        <Button disabled={endPage === page || !endPage ? true : false} onClick={() => setPage(old => old + 1)}>Next</Button>
-        <p>Page {!endPage ? 0 : page} of {endPage}</p>
       </div>
-    </div >
-  )
+
+      <div className="flex items-center gap-6 p-1 px-10">
+        <Button
+          disabled={page === 1 ? true : false}
+          onClick={() => setPage((old) => old - 1)}
+        >
+          Previous
+        </Button>
+        <Button
+          disabled={endPage === page || !endPage ? true : false}
+          onClick={() => setPage((old) => old + 1)}
+        >
+          Next
+        </Button>
+        <p>
+          Page {!endPage ? 0 : page} of {endPage}
+        </p>
+      </div>
+    </div>
+  );
 }

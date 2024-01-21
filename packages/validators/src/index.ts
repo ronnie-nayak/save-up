@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 // import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 // import { schema } from "@acme/db"
 
@@ -13,7 +14,6 @@ export const AddMoneySchema = z.object({
 });
 
 export type AddMoneyType = z.infer<typeof AddMoneySchema>;
-
 
 export const GetMoneySchema = z.object({
   id: z.number(),
@@ -32,7 +32,6 @@ export type GetMoneyType = z.infer<typeof GetMoneySchema>;
 // Schema for selecting a user - can be used to validate API responses
 // export const selectTransactionsSchema = createSelectSchema(schema.transactions);
 
-
 export const AddSavingsSchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
@@ -44,7 +43,6 @@ export const AddSavingsSchema = z.object({
 });
 
 export type AddSavingsType = z.infer<typeof AddSavingsSchema>;
-
 
 export const GetSavingsSchema = z.object({
   id: z.number(),
@@ -64,7 +62,6 @@ export type GetSavingsType = z.infer<typeof GetSavingsSchema>;
 // export const selectTransactionsSchema = createSelectSchema(schema.transactions);
 //
 
-
 export const AddBillsSchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
@@ -75,7 +72,6 @@ export const AddBillsSchema = z.object({
 });
 
 export type AddBillsType = z.infer<typeof AddBillsSchema>;
-
 
 export const GetBillsSchema = z.object({
   id: z.number(),

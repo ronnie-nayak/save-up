@@ -1,9 +1,14 @@
-
-
 import { relations } from "drizzle-orm";
+import {
+  date,
+  integer,
+  serial,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
 import { pgTable } from "./_table";
-import { date, integer, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { users } from "./auth";
 
 export const bills = pgTable("bills", {
@@ -15,10 +20,9 @@ export const bills = pgTable("bills", {
   dueAt: date("dueAt", { mode: "date" }).notNull(),
 });
 
-
 export const billsRelations = relations(bills, ({ one }) => ({
   users: one(users, {
     fields: [bills.userId],
     references: [users.id],
-  })
-}))
+  }),
+}));

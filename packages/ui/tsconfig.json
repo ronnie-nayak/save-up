@@ -3,6 +3,10 @@
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
-  "include": ["*.ts", "src", "../../apps/nextjs/src/app/_components/dashboard/graphdatta.tsx"],
+  "include": [
+    "*.ts",
+    "src",
+    "../../apps/nextjs/src/app/_components/dashboard/graphdatta.tsx"
+  ],
   "exclude": ["node_modules"]
 }

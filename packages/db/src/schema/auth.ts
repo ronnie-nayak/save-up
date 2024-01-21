@@ -1,11 +1,7 @@
-import {
-  timestamp,
-  text,
-  primaryKey,
-  integer
-} from "drizzle-orm/pg-core"
-import type { AdapterAccount } from '@auth/core/adapters'
-import { pgTable } from "./_table"
+import type { AdapterAccount } from "@auth/core/adapters";
+import { integer, primaryKey, text, timestamp } from "drizzle-orm/pg-core";
+
+import { pgTable } from "./_table";
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -13,7 +9,7 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-})
+});
 
 export const accounts = pgTable(
   "account",
@@ -33,9 +29,11 @@ export const accounts = pgTable(
     session_state: text("session_state"),
   },
   (account) => ({
-    compoundKey: primaryKey({ columns: [account.provider, account.providerAccountId] }),
-  })
-)
+    compoundKey: primaryKey({
+      columns: [account.provider, account.providerAccountId],
+    }),
+  }),
+);
 
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").notNull().primaryKey(),
@@ -43,7 +41,7 @@ export const sessions = pgTable("session", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
-})
+});
 
 export const verificationTokens = pgTable(
   "verificationToken",
@@ -54,5 +52,5 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
-)
+  }),
+);

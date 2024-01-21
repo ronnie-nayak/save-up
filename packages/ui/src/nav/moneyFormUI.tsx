@@ -1,7 +1,10 @@
-'use client'
-import Link from "next/link"
-import { Button, DialogClose, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Switch } from "@acme/ui"
+"use client";
+
+import Link from "next/link";
+
 import {
+  Button,
+  DialogClose,
   Form,
   FormControl,
   FormDescription,
@@ -9,13 +12,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@acme/ui"
-import { Input } from "@acme/ui"
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Switch,
+} from "@acme/ui";
 
-export function MoneyFormUI({ form, onSubmit }: { form: any, onSubmit: any }) {
+export function MoneyFormUI({ form, onSubmit }: { form: any; onSubmit: any }) {
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 text-center ">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 text-center "
+      >
         <FormField
           control={form.control}
           name="title"
@@ -34,7 +46,7 @@ export function MoneyFormUI({ form, onSubmit }: { form: any, onSubmit: any }) {
           name="category"
           render={({ field }) => (
             <FormItem className="">
-              <FormLabel >Category</FormLabel>
+              <FormLabel>Category</FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -61,17 +73,23 @@ export function MoneyFormUI({ form, onSubmit }: { form: any, onSubmit: any }) {
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
-                <FormLabel className="text-base flex items-center gap-2">
-                  Income <div className="h-4 w-4 rounded-full bg-green-500"></div>
+                <FormLabel className="flex items-center gap-2 text-base">
+                  Income{" "}
+                  <div className="h-4 w-4 rounded-full bg-green-500"></div>
                 </FormLabel>
-                <FormLabel className="text-base flex items-center gap-2">
-                  Expense <div className="h-4 w-4 rounded-full bg-red-500"></div>
+                <FormLabel className="flex items-center gap-2 text-base">
+                  Expense{" "}
+                  <div className="h-4 w-4 rounded-full bg-red-500"></div>
                 </FormLabel>
               </div>
               <FormControl>
                 <Switch
                   checked={field.value === "income"}
-                  onCheckedChange={() => { field.onChange(field.value === "income" ? "expense" : "income") }}
+                  onCheckedChange={() => {
+                    field.onChange(
+                      field.value === "income" ? "expense" : "income",
+                    );
+                  }}
                 />
               </FormControl>
             </FormItem>
@@ -81,10 +99,17 @@ export function MoneyFormUI({ form, onSubmit }: { form: any, onSubmit: any }) {
           control={form.control}
           name="amount"
           render={({ field }) => (
-            <FormItem >
+            <FormItem>
               <FormLabel>Money</FormLabel>
               <FormControl>
-                <Input className="" {...field} placeholder="Enter Money" type="number" value={field.value} min={0} />
+                <Input
+                  className=""
+                  {...field}
+                  placeholder="Enter Money"
+                  type="number"
+                  value={field.value}
+                  min={0}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -92,6 +117,6 @@ export function MoneyFormUI({ form, onSubmit }: { form: any, onSubmit: any }) {
         />
         <Button type="submit">Submit</Button>
       </form>
-    </Form >
-  )
+    </Form>
+  );
 }

@@ -1,19 +1,21 @@
-'use client'
+"use client";
+
+import type { SetterOrUpdater } from "recoil";
+import * as React from "react";
+import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
-import * as React from "react"
-import Link from 'next/link'
-import { cn } from "@acme/ui"
-import { useMediaQuery } from 'usehooks-ts'
-import { Button } from "@acme/ui"
+import { useRecoilState } from "recoil";
+import { useMediaQuery } from "usehooks-ts";
+
 import {
+  Button,
+  cn,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@acme/ui"
-import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -22,17 +24,24 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@acme/ui"
-import { SetterOrUpdater, useRecoilState } from "recoil";
+} from "@acme/ui";
 
-export function PopupButton({ children, formOpen, setFormOpen }: { children: JSX.Element, formOpen: boolean, setFormOpen: SetterOrUpdater<boolean> }) {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+export function PopupButton({
+  children,
+  formOpen,
+  setFormOpen,
+}: {
+  children: JSX.Element;
+  formOpen: boolean;
+  setFormOpen: SetterOrUpdater<boolean>;
+}) {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
     return (
-      <Dialog open={formOpen} onOpenChange={setFormOpen} >
+      <Dialog open={formOpen} onOpenChange={setFormOpen}>
         <DialogTrigger asChild>
-          <Button className="h-12 rounded-3xl bg-purple flex gap-2 font-bold">
+          <Button className="flex h-12 gap-2 rounded-3xl bg-purple font-bold">
             <FaPlus className="" />
             Add Transaction
           </Button>
@@ -47,13 +56,13 @@ export function PopupButton({ children, formOpen, setFormOpen }: { children: JSX
           {children}
         </DialogContent>
       </Dialog>
-    )
+    );
   }
 
   return (
     <Drawer open={formOpen} onOpenChange={setFormOpen}>
       <DrawerTrigger asChild>
-        <Button className="h-12 rounded-3xl bg-purple flex gap-2 font-bold">
+        <Button className="flex h-12 gap-2 rounded-3xl bg-purple font-bold">
           <FaPlus className="" />
           Add Transaction
         </Button>
@@ -73,7 +82,5 @@ export function PopupButton({ children, formOpen, setFormOpen }: { children: JSX
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  )
+  );
 }
-
-

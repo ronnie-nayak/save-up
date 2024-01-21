@@ -1,15 +1,24 @@
+import SlidingSidebar from "node_modules/@acme/ui/src/nav/slidingSidebar";
+
 import { Sidebar } from "@acme/ui";
+
 import { AuthSignout } from "~/_components/auth-signOut";
 import { MoneyForm } from "~/_components/nav";
 import Checker from "./checker";
 
 export default function HomepageLayout(props: { children: React.ReactNode }) {
   return (
-    <div className="flex text-white bg-[#121e2c] font-bold w-full h-screen">
+    <div className="flex h-screen w-full bg-[#121e2c] font-bold text-white">
       <Checker>
-        <Sidebar addMoney={<MoneyForm />} />
-        <div className="overflow-scroll w-full dark">
-          <div className="flex m-8 gap-4 items-center">
+        <div className="hidden w-3/12 sm:block">
+          <Sidebar addMoney={<MoneyForm />} />
+        </div>
+
+        <div className="dark w-full overflow-scroll">
+          <div className="m-8 flex items-center gap-4">
+            <SlidingSidebar>
+              <MoneyForm />
+            </SlidingSidebar>
             <AuthSignout />
           </div>
           {props.children}
@@ -18,4 +27,3 @@ export default function HomepageLayout(props: { children: React.ReactNode }) {
     </div>
   );
 }
-

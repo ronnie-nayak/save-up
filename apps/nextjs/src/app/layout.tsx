@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { cache } from "react";
-import { headers } from "next/headers";
 import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+import { headers } from "next/headers";
+
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "~/app/globals.css";
+
 import Provider from "./provider";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -41,16 +44,12 @@ const getHeaders = cache(async () => headers());
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="text-[0.85vw]" suppressHydrationWarning>
-      <body
-        className={inter.className}
-      >
+    <html lang="en" className="sm:text-[0.85vw]" suppressHydrationWarning>
+      <body className={inter.className}>
         <TRPCReactProvider headersPromise={getHeaders()}>
-          <Provider>
-            {props.children}
-          </Provider>
+          <Provider>{props.children}</Provider>
         </TRPCReactProvider>
       </body>
-    </html >
+    </html>
   );
 }
