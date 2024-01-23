@@ -24,18 +24,6 @@ export async function AuthShowcase() {
         >
           <div className="flex items-center justify-center gap-2">
             <button
-              key="Google"
-              className="loginbutton"
-              formAction={async () => {
-                "use server";
-                await signIn("google");
-              }}
-            >
-              <img src="/login/google.svg" className="h-16" />
-              <h2>Google</h2>
-            </button>
-
-            <button
               key="Github"
               className="loginbutton"
               formAction={async () => {
@@ -46,6 +34,19 @@ export async function AuthShowcase() {
               <img src="/login/github.svg" className="h-16" />
               <h2>Github</h2>
             </button>
+
+            <button
+              key="Discord"
+              className="loginbutton"
+              formAction={async () => {
+                "use server";
+                await signIn("discord");
+              }}
+            >
+              <img src="/login/discord.png" className="h-16" />
+              <h2>Discord</h2>
+            </button>
+
           </div>
           <Button
             className="m-auto h-20 w-2/3 text-[7vw] font-bold sm:text-[1.75vw]"
