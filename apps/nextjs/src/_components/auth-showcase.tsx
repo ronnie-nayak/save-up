@@ -28,7 +28,9 @@ export async function AuthShowcase() {
               className="loginbutton"
               formAction={async () => {
                 "use server";
-                await signIn("github");
+                await signIn("github", {
+                  callbackUrl: "/homepage"
+                });
               }}
             >
               <img src="/login/github.svg" className="h-16" />
@@ -40,7 +42,9 @@ export async function AuthShowcase() {
               className="loginbutton"
               formAction={async () => {
                 "use server";
-                await signIn("discord");
+                await signIn("discord", {
+                  callbackUrl: "/homepage"
+                });
               }}
             >
               <img src="/login/discord.png" className="h-16" />
@@ -51,7 +55,9 @@ export async function AuthShowcase() {
             className="m-auto h-20 w-2/3 text-[7vw] font-bold sm:text-[1.75vw]"
             formAction={async () => {
               "use server";
-              await signIn("credentials");
+              await signIn("credentials", {
+                callbackUrl: "/homepage"
+              });
             }}
           >
             Guest User
