@@ -28,20 +28,22 @@ const item = {
 export function BillItem({ dataItem }: { dataItem: GetBillsType }) {
   return (
     <motion.div
-      className={`flex items-center gap-4 ${new Date(dataItem.dueAt) < new Date()
-        ? "rounded-xl bg-red-500 p-1 "
-        : ""
-        } `}
+      className={`flex items-center gap-4 ${
+        new Date(dataItem.dueAt) < new Date()
+          ? "rounded-xl bg-red-500 p-1 "
+          : ""
+      } `}
       variants={item}
     >
       <div className="self-stretch rounded-full border-2 border-purple"></div>
       <div className="overflow-hidden">
         <h5 className="text-sm font-normal">{dataItem.title}</h5>
         <h5
-          className={`text-sm font-normal ${new Date(dataItem.dueAt) < new Date()
-            ? "text-white"
-            : "text-gray-400"
-            } `}
+          className={`text-sm font-normal ${
+            new Date(dataItem.dueAt) < new Date()
+              ? "text-white"
+              : "text-gray-400"
+          } `}
         >
           {dataItem.dueAt.toDateString()}
         </h5>
@@ -54,15 +56,17 @@ export function BillItem({ dataItem }: { dataItem: GetBillsType }) {
 export function BillItemBig({ data }: { data: GetBillsType }) {
   return (
     <motion.div
-      className={`my-2 flex w-3/5 items-center gap-4 rounded-3xl bg-midnight p-5 ${new Date(data.dueAt) < new Date() ? "bg-red-500" : ""
-        } `}
+      className={`my-2 flex w-3/5 items-center gap-4 rounded-3xl bg-midnight p-5 ${
+        new Date(data.dueAt) < new Date() ? "bg-red-500" : ""
+      } `}
     >
       <div className="self-stretch rounded-full border-2 border-purple"></div>
       <div className="overflow-hidden">
         <h5 className="font-normal sm:text-[1.25vw]">{data.title}</h5>
         <h5
-          className={`text-[3.2vw] font-normal sm:text-[1vw] ${new Date(data.dueAt) < new Date() ? "text-white" : "text-gray-400"
-            } `}
+          className={`text-[3.2vw] font-normal sm:text-[1vw] ${
+            new Date(data.dueAt) < new Date() ? "text-white" : "text-gray-400"
+          } `}
         >
           {data.dueAt.toDateString()}
         </h5>

@@ -2,6 +2,7 @@ import type { IconType } from "react-icons";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
+import { LuWallet } from "react-icons/lu";
 import {
   MdDashboard,
   MdOutlineAccountBalanceWallet,
@@ -9,8 +10,6 @@ import {
 } from "react-icons/md";
 
 import { Button, Separator, Slider } from "@acme/ui";
-
-import { LuWallet } from "react-icons/lu";
 
 interface linkType {
   title: string;
@@ -28,8 +27,8 @@ export function SidebarUI() {
   return (
     <nav className="flex h-screen flex-col bg-midnight p-8 text-white">
       <div className="mb-4 flex items-center gap-4">
-        <div className="flex gap-5 items-end mb-4">
-          <div className="text-white bg-purple p-2 rounded-xl">
+        <div className="mb-4 flex items-end gap-5">
+          <div className="rounded-xl bg-purple p-2 text-white">
             <LuWallet size={50} />
           </div>
           <div>
@@ -50,8 +49,9 @@ export function SidebarUI() {
         <Link
           href="/login"
           key={index}
-          className={`${"Dashboard" === link.title ? "" : "text-gray-500"
-            } relative z-20 my-5 flex items-center gap-4 p-2 font-normal transition sm:text-[1.75vw]`}
+          className={`${
+            "Dashboard" === link.title ? "" : "text-gray-500"
+          } relative z-20 my-5 flex items-center gap-4 p-2 font-normal transition sm:text-[1.75vw]`}
         >
           {"Dashboard" === link.title && (
             <span className="absolute inset-0 -z-10 h-full rounded-xl bg-purple" />

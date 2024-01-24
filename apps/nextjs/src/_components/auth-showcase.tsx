@@ -46,7 +46,6 @@ export async function AuthShowcase() {
               <img src="/login/discord.png" className="h-16" />
               <h2>Discord</h2>
             </button>
-
           </div>
           <Button
             className="m-auto h-20 w-2/3 text-[7vw] font-bold sm:text-[1.75vw]"

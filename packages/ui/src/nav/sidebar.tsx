@@ -1,18 +1,18 @@
 "use client";
 
+import { LuWallet } from "react-icons/lu";
 import { useRecoilState } from "recoil";
 
 import { FormOpenState } from "@acme/atoms";
 import { PopupButton, Separator, SheetClose, Slider } from "@acme/ui";
-import { LuWallet } from "react-icons/lu";
 
 export function Sidebar({ addMoney }: { addMoney: JSX.Element }) {
   const [formOpen, setFormOpen] = useRecoilState(FormOpenState);
   return (
     <nav className="flex  h-screen flex-col bg-midnight p-8 text-white ">
       <div className="mb-4 flex items-center gap-4">
-        <div className="flex gap-5 items-end mb-4">
-          <div className="text-white bg-purple p-2 rounded-xl">
+        <div className="mb-4 flex items-end gap-5">
+          <div className="rounded-xl bg-purple p-2 text-white">
             <LuWallet size={50} />
           </div>
           <div>

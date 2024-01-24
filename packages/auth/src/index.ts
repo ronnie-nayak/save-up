@@ -3,9 +3,9 @@ import type { DefaultSession } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import DiscordProvider from "next-auth/providers/discord";
 import GithubProvider from "next-auth/providers/github";
 import { v4 } from "uuid";
-import DiscordProvider from "next-auth/providers/discord";
 
 import { and, db, eq, schema, tableCreator } from "@acme/db";
 
