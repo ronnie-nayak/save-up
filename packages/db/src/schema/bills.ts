@@ -14,8 +14,8 @@ import { users } from "./auth";
 export const bills = pgTable("bills", {
   id: serial("id").primaryKey(),
   userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
-  title: varchar("name", { length: 256 }).notNull(),
-  category: varchar("content", { length: 256 }).notNull(),
+  title: varchar("title", { length: 256 }).notNull(),
+  category: varchar("category", { length: 256 }).notNull(),
   amount: integer("amount").notNull(),
   dueAt: date("dueAt", { mode: "date" }).notNull(),
 });
