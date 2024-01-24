@@ -114,15 +114,13 @@ export const transactionsRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.db
-        .insert(schema.transactions)
-        .values({
-          title: input.title,
-          category: input.category,
-          amount: input.additional,
-          type: "savings",
-          userId: ctx.session.user.id,
-        });
+      await ctx.db.insert(schema.transactions).values({
+        title: input.title,
+        category: input.category,
+        amount: input.additional,
+        type: "savings",
+        userId: ctx.session.user.id,
+      });
       return await ctx.db
         .update(schema.savings)
         .set({ current: input.current + input.additional })
@@ -145,25 +143,21 @@ export const transactionsRouter = createTRPCRouter({
   payBill: protectedProcedure
     .input(insertBillsSchema)
     .mutation(async ({ ctx, input }) => {
-      await ctx.db
-        .insert(schema.transactions)
-        .values({
-          title: input.title,
-          category: input.category,
-          amount: input.amount,
-          type: "expense",
-          userId: ctx.session.user.id,
-        });
+      await ctx.db.insert(schema.transactions).values({
+        title: input.title,
+        category: input.category,
+        amount: input.amount,
+        type: "expense",
+        userId: ctx.session.user.id,
+      });
       await ctx.db.delete(schema.bills).where(eq(schema.bills.id, input.id!));
-      await ctx.db
-        .insert(schema.bills)
-        .values({
-          title: input.title,
-          category: input.category,
-          amount: input.amount,
-          dueAt: new Date(input.dueAt.setMonth(input.dueAt.getMonth() + 1)),
-          userId: ctx.session.user.id,
-        });
+      await ctx.db.insert(schema.bills).values({
+        title: input.title,
+        category: input.category,
+        amount: input.amount,
+        dueAt: new Date(input.dueAt.setMonth(input.dueAt.getMonth() + 1)),
+        userId: ctx.session.user.id,
+      });
     }),
 
   // all: publicProcedure.query(({ ctx }) => {
