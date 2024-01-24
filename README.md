@@ -70,7 +70,7 @@ Run Build Files
 
 ## Acknowledgements
 
- - [Design Reference](https://www.behance.net/gallery/183508829/Budget-tacker-UIUX-design?tracking_source=search_projects&l=4)
+ - [Design Reference](https://www.behance.net/gallery/183508829/Budget-tacker-UIUX-design)
 
 
 ## Feedback
