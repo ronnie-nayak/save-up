@@ -6,7 +6,7 @@ import { z } from "zod";
 export const AddMoneySchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
-  title: z.string().min(1).max(10),
+  title: z.string().min(1).max(50),
   category: z.string().min(1),
   type: z.enum(["income", "expense"]),
   amount: z.coerce.number(),
@@ -18,7 +18,7 @@ export type AddMoneyType = z.infer<typeof AddMoneySchema>;
 export const GetMoneySchema = z.object({
   id: z.number(),
   userId: z.string().or(z.null()),
-  title: z.string().min(1),
+  title: z.string().min(1).max(50),
   category: z.string().min(1),
   type: z.enum(["income", "expense", "savings"]),
   amount: z.coerce.number(),
@@ -35,7 +35,7 @@ export type GetMoneyType = z.infer<typeof GetMoneySchema>;
 export const AddSavingsSchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
-  title: z.string().min(1).max(10),
+  title: z.string().min(1).max(50),
   category: z.string().min(1),
   current: z.coerce.number().optional(),
   amount: z.coerce.number(),
@@ -47,7 +47,7 @@ export type AddSavingsType = z.infer<typeof AddSavingsSchema>;
 export const GetSavingsSchema = z.object({
   id: z.number(),
   userId: z.string().or(z.null()),
-  title: z.string().min(1),
+  title: z.string().min(1).max(50),
   category: z.string().min(1),
   current: z.coerce.number().nullable(),
   amount: z.coerce.number(),
@@ -65,7 +65,7 @@ export type GetSavingsType = z.infer<typeof GetSavingsSchema>;
 export const AddBillsSchema = z.object({
   id: z.number().optional(),
   userId: z.string().optional(),
-  title: z.string().min(1).max(10),
+  title: z.string().min(1).max(50),
   category: z.string().min(1),
   amount: z.coerce.number(),
   dueAt: z.date(),
@@ -76,7 +76,7 @@ export type AddBillsType = z.infer<typeof AddBillsSchema>;
 export const GetBillsSchema = z.object({
   id: z.number(),
   userId: z.string().or(z.null()),
-  title: z.string().min(1),
+  title: z.string().min(1).max(50),
   category: z.string().min(1),
   amount: z.coerce.number(),
   dueAt: z.date(),

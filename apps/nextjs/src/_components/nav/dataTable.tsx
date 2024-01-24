@@ -218,8 +218,8 @@ export function DataTable() {
                 setStartDate(date!);
                 router.replace(
                   pathname +
-                    "?" +
-                    createQueryString("startDate", date?.toDateString()!),
+                  "?" +
+                  createQueryString("startDate", date?.toDateString()!),
                 );
               }}
               disabled={(date) =>
@@ -252,8 +252,8 @@ export function DataTable() {
                 setEndDate(date!);
                 router.replace(
                   pathname +
-                    "?" +
-                    createQueryString("endDate", date?.toDateString()!),
+                  "?" +
+                  createQueryString("endDate", date?.toDateString()!),
                 );
               }}
               disabled={(date) =>
@@ -267,7 +267,7 @@ export function DataTable() {
       <header className="m-9 my-4 flex text-gray-500 sm:text-[1.25vw]">
         <h2
           id="title"
-          className="flex w-4/12 items-center gap-1"
+          className="flex w-4/12 items-center gap-1 cursor-pointer"
           onClick={(e) => sortingFunction(e)}
         >
           title
@@ -283,7 +283,7 @@ export function DataTable() {
         </h2>
         <h2
           id="type"
-          className="hidden w-3/12 items-center gap-1 sm:flex"
+          className="hidden w-3/12 items-center gap-1 sm:flex cursor-pointer"
           onClick={(e) => sortingFunction(e)}
         >
           type
@@ -299,7 +299,7 @@ export function DataTable() {
         </h2>
         <h2
           id="amount"
-          className="flex w-2/12 items-center gap-1"
+          className="flex w-2/12 items-center gap-1 cursor-pointer"
           onClick={(e) => sortingFunction(e)}
         >
           amount
@@ -315,7 +315,7 @@ export function DataTable() {
         </h2>
         <h2
           id="createdAt"
-          className="ml-auto flex w-3/12 items-center gap-1 sm:m-0"
+          className="ml-auto flex w-3/12 items-center gap-1 sm:m-0 cursor-pointer"
           onClick={(e) => sortingFunction(e)}
         >
           createdAt
@@ -350,29 +350,27 @@ export function DataTable() {
                   transition={{ duration: 0.2 }}
                 >
                   <div className="m-3 flex sm:text-[1vw]">
-                    <div className="w-4/12">
+                    <div className="w-4/12 overflow-hidden">
                       <h2 className="pb-1">{row.title}</h2>
                       <h3 className="text-sm text-gray-500">{row.category}</h3>
                     </div>
                     <div className="hidden w-3/12 sm:block">
                       <div className="relative flex w-min items-center justify-center gap-1 rounded-full bg-bermuda p-2 pl-8 text-base">
                         <button
-                          className={`absolute left-4 top-4 h-2 w-2 animate-ping rounded-full ${
-                            row.type === "income"
-                              ? "bg-green-500"
-                              : row.type === "expense"
-                                ? "bg-red-500"
-                                : "bg-blue-500"
-                          }`}
+                          className={`absolute left-4 top-4 h-2 w-2 animate-ping rounded-full ${row.type === "income"
+                            ? "bg-green-500"
+                            : row.type === "expense"
+                              ? "bg-red-500"
+                              : "bg-blue-500"
+                            }`}
                         />
                         <button
-                          className={`absolute left-4 top-4 h-2 w-2 rounded-full ${
-                            row.type === "income"
-                              ? "bg-green-500"
-                              : row.type === "expense"
-                                ? "bg-red-500"
-                                : "bg-blue-500"
-                          }`}
+                          className={`absolute left-4 top-4 h-2 w-2 rounded-full ${row.type === "income"
+                            ? "bg-green-500"
+                            : row.type === "expense"
+                              ? "bg-red-500"
+                              : "bg-blue-500"
+                            }`}
                         />
                         {row.type}
                       </div>

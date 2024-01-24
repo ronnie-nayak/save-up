@@ -134,11 +134,12 @@ export function BillsTable() {
         />
       </form>
 
-      <Button className="ml-20 mt-3 rounded-full bg-midnight p-4">
+      <Button className="ml-20 mt-3 rounded-full bg-midnight p-4"
+        onClick={sortingFunction}
+      >
         <h2
           id="title"
           className="flex items-center gap-1 sm:text-[1vw]"
-          onClick={sortingFunction}
         >
           title
           {sorted === "title" ? (
@@ -218,6 +219,6 @@ export function BillsTable() {
           Page {!endPage ? 0 : page} of {endPage}
         </p>
       </div>
-    </div>
+    </div >
   );
 }

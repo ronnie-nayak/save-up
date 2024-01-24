@@ -102,7 +102,9 @@ export function History({
                   )}
                 </div>
                 <div className="w-4/12">
-                  <h2 className="pb-1 sm:text-[1.25vw]">{row.title}</h2>
+                  <div className="w-[9vw] overflow-hidden">
+                    <h2 className="pb-1 sm:text-[1.25vw]">{row.title}</h2>
+                  </div>
                   <h3 className="text-gray-500 sm:text-[1vw]">
                     {row.category}
                   </h3>

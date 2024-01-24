@@ -15,8 +15,10 @@ export function SavingsItem({ dataItem }: { dataItem: GetSavingsType }) {
   return (
     <div className="mb-4">
       <div className="mb-5 flex items-center justify-between font-normal sm:mb-1">
-        <h2>{dataItem.title}</h2>
-        <h3 className="text-sm" style={{ color: dataItem.color }}>
+        <div className="w-full overflow-hidden">
+          <h2>{dataItem.title}</h2>
+        </div>
+        <h3 className="text-sm w-full text-right" style={{ color: dataItem.color }}>
           {dataItem.amount - dataItem.current!} left
         </h3>
       </div>
@@ -40,7 +42,7 @@ export function SavingsItemBig({ data }: { data: GetSavingsType }) {
   return (
     <div className="my-2 w-3/5 rounded-3xl bg-midnight p-5">
       <div className="mb-4 flex items-center font-bold">
-        <div className="w-8/12 sm:text-[1.5vw]">
+        <div className="w-8/12 sm:text-[1.5vw] overflow-hidden">
           <h2>{data.title}</h2>
           <h3 className="sm:text-[1vw]">{data.category}</h3>
         </div>
