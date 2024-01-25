@@ -35,7 +35,7 @@ Save-Up is a money management tracker that allows users to track their expenses 
 Clone the project
 
 ```bash
-  git clone https://github.com/ronnie-nayak/save-up
+  git clone https://github.com/ronnie-nayak/save-up.git
 ```
 
 Go to the project directory
