@@ -16,7 +16,7 @@ export default function Checker(props: { children: React.ReactNode }) {
   if (isError) {
     return notFound();
   }
-  if (!sessionExists) {
+  if (!isLoading && !sessionExists) {
     router.replace("/login");
   }
   if (isLoading || !sessionExists)

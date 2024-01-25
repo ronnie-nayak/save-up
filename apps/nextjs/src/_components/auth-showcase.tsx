@@ -1,9 +1,7 @@
-import { auth, signIn, signOut } from "@acme/auth";
+import { signIn } from "@acme/auth";
 import { Button, Loading } from "@acme/ui";
 
 export async function AuthShowcase() {
-  const session = await auth();
-
   return (
     <div className="relative">
       <div
