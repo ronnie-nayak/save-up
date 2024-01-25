@@ -18,7 +18,7 @@ export default function Homepage() {
   if (isError) {
     return notFound();
   }
-  if (!isLoading && sessionExists) {
+  if (sessionExists) {
     router.replace("/homepage");
   }
   if (isLoading || sessionExists)

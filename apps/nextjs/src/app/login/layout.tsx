@@ -20,7 +20,7 @@ export default function LoginLayout({
   if (isError) {
     return notFound();
   }
-  if (!isLoading && sessionExists) {
+  if (sessionExists) {
     router.replace("/homepage");
   }
   if (isLoading || sessionExists)
