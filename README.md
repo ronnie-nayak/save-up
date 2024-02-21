@@ -30,47 +30,9 @@ Save-Up is a money management tracker that allows users to track their expenses 
 **Link:** https://save-up-web.vercel.app/
 
 
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/ronnie-nayak/save-up.git
-```
-
-Go to the project directory
-
-```bash
-  cd save-up
-```
-
-Install dependencies
-
-```bash
-  pnpm install
-```
-
-Build the Project
-
-```bash
-  pnpm run build
-```
-
-Run Build Files
-
-```bash
-  pnpm run start
-```
-
-
 ## Authors
 
 - [@ronnie-nayak](https://github.com/ronnie-nayak)
-
-
-## Acknowledgements
-
- - [Design Reference](https://www.behance.net/gallery/183508829/Budget-tacker-UIUX-design)
 
 
 ## Feedback
