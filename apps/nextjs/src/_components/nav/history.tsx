@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 
+import type { GetMoneyType } from "@acme/validators";
 import { FormOpenState } from "@acme/atoms";
 import { PopupButton } from "@acme/ui";
-import { GetMoneyType } from "@acme/validators";
 
 import { MoneyForm } from ".";
 
@@ -101,7 +101,7 @@ export function History({
                     </svg>
                   )}
                 </div>
-                <div className="w-4/12">
+                <div className="w-6/12">
                   <div className="w-[9vw] overflow-hidden">
                     <h2 className="pb-1 sm:text-[1.25vw]">{row.title}</h2>
                   </div>
@@ -112,7 +112,7 @@ export function History({
                 <h2 className="w-4/12 text-base">
                   {row.createdAt.toDateString()}
                 </h2>
-                <h2 className="w-2/12 sm:text-[1.25vw]">
+                <h2 className="w-3/12 text-right sm:text-[1.25vw]">
                   {row.type === "expense" && "-"}${row.amount}
                 </h2>
               </motion.div>

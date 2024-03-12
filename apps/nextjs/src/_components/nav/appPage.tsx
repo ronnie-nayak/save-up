@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { BillsUI, Button, GraphUI, HeroUI, SavingsUI, StatsUI } from "@acme/ui";
+import { BillsUI, GraphUI, HeroUI, SavingsUI, StatsUI } from "@acme/ui";
 
 import { apiReact } from "~/trpc/react";
 import { BillsForm, History, SavingsForm } from ".";
@@ -51,7 +51,7 @@ export function AppPage() {
       let currentYear = new Date().getFullYear();
       for (let i = 0; i < 7; i++) {
         // @ts-ignore
-        let currIncome =
+        const currIncome =
           incomeList.find(
             (item) =>
               // @ts-ignore
@@ -60,7 +60,7 @@ export function AppPage() {
               item.txn_month.getFullYear() === currentYear,
           )?.monthly_sum ?? 0;
         // @ts-ignore
-        let currExpense =
+        const currExpense =
           expenseList.find(
             (item) =>
               // @ts-ignore
@@ -68,7 +68,7 @@ export function AppPage() {
               // @ts-ignore
               item.txn_month.getFullYear() === currentYear,
           )?.monthly_sum ?? 0;
-        let currSavings =
+        const currSavings =
           savingsList.find(
             (item) =>
               // @ts-ignore

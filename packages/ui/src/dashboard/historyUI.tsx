@@ -6,8 +6,6 @@ import { FaPlus } from "react-icons/fa";
 
 import type { GetMoneyType } from "@acme/validators";
 
-import { Button } from "..";
-
 export function HistoryUI({ localData }: { localData: GetMoneyType[] }) {
   const container = {
     hidden: { opacity: 0 },
@@ -93,14 +91,14 @@ export function HistoryUI({ localData }: { localData: GetMoneyType[] }) {
                   </svg>
                 )}
               </div>
-              <div className="w-4/12">
+              <div className="w-6/12">
                 <h2 className="pb-1 sm:text-[1.25vw]">{row.title}</h2>
                 <h3 className="text-gray-500 sm:text-[1vw]">{row.category}</h3>
               </div>
               <h2 className="w-4/12 text-base">
                 {row.createdAt.toDateString()}
               </h2>
-              <h2 className="w-2/12 sm:text-[1.25vw]">
+              <h2 className="w-3/12 text-right sm:text-[1.25vw]">
                 {row.type === "expense" && "-"}${row.amount}
               </h2>
             </motion.div>
