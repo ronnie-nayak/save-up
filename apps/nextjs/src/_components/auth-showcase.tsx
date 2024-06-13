@@ -57,7 +57,7 @@ export async function AuthShowcase() {
             </div>
             <div className="flex h-full flex-col items-center justify-around">
               <Button
-                className=" h-[16vw] w-3/4 bg-purple p-0 font-bold hover:bg-black sm:h-[5vw] sm:text-[1.75vw]"
+                className="h-[16vw] w-3/4 bg-purple p-0 font-bold hover:bg-black sm:h-[5vw] sm:text-[1.75vw]"
                 formAction={async () => {
                   "use server";
                   await signIn("credentials", {
