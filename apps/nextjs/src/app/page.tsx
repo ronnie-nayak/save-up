@@ -41,7 +41,10 @@ export default function Homepage() {
             <FaBars size={29} />
           </Link>
           <div className="flex items-center gap-4">
-            <Link href="/login" className="rounded-3xl bg-white p-4 text-black">
+            <Link
+              href="/login"
+              className="rounded-3xl bg-white p-4 text-black transition hover:bg-purple hover:text-white"
+            >
               SignIn
             </Link>
           </div>

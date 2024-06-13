@@ -1,5 +1,5 @@
 import { signIn } from "@acme/auth";
-import { Button, Loading } from "@acme/ui";
+import { Button, Loading, LoginAnimate } from "@acme/ui";
 
 export async function AuthShowcase() {
   return (
@@ -57,7 +57,7 @@ export async function AuthShowcase() {
             </div>
             <div className="flex h-full flex-col items-center justify-around">
               <Button
-                className="h-[16vw] w-3/4 font-bold sm:h-[5vw] sm:text-[1.75vw]"
+                className=" h-[16vw] w-3/4 bg-purple p-0 font-bold hover:bg-black sm:h-[5vw] sm:text-[1.75vw]"
                 formAction={async () => {
                   "use server";
                   await signIn("credentials", {
@@ -65,7 +65,7 @@ export async function AuthShowcase() {
                   });
                 }}
               >
-                Guest User
+                <LoginAnimate />
               </Button>
 
               <h2 className=" mx-auto my-5 w-max text-[4vw] font-bold sm:text-[1.5vw]">

@@ -9,17 +9,17 @@ export async function AuthSignout() {
       <>
         <form>
           <button
-            className="flex items-center gap-2 rounded-3xl bg-white p-1 pr-2 font-bold "
+            className="flex items-center gap-2 rounded-3xl bg-white p-1 pr-2 font-bold text-black transition hover:bg-purple hover:text-white"
             formAction={async () => {
               "use server";
               await signOut();
             }}
           >
             <img
-              src={session?.user?.image ?? "/login/user.svg"}
-              className="h-10 w-10 rounded-full"
+              src={session?.user?.image ?? "/login/user.jpg"}
+              className="h-10 w-10 rounded-full bg-white"
             />
-            <h2 className="text-black">Sign Out</h2>
+            <h2 className="">Sign Out</h2>
           </button>
         </form>
 
