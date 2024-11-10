@@ -1,19 +1,14 @@
 "use client";
 
-import {
-  ChangeEvent,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import type { ChangeEvent, MouseEvent } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { CalendarIcon } from "lucide-react";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
 import { useRecoilState } from "recoil";
 
+import type { GetMoneyType } from "@acme/validators";
 import { FormOpenState } from "@acme/atoms";
 import {
   Button,
@@ -32,8 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
+  UploadButton,
 } from "@acme/ui";
-import { GetMoneyType } from "@acme/validators";
 
 import { apiReact } from "~/trpc/react";
 import { MoneyForm } from ".";
@@ -77,7 +72,7 @@ export function DataTable() {
   ) => {
     let direction = 1;
     // @ts-ignore
-    let column = event.target.id;
+    const column = event.target.id;
     if (sorted === column) {
       direction = -dir;
       setDir((old) => -old);
@@ -156,6 +151,7 @@ export function DataTable() {
         <PopupButton formOpen={formOpen} setFormOpen={setFormOpen}>
           <MoneyForm />
         </PopupButton>
+        <UploadButton data={localData.slice(0, 10)} />
       </div>
       <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row">
         <div className="flex w-full items-center gap-2 sm:w-1/3 ">

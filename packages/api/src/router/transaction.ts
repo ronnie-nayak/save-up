@@ -190,4 +190,10 @@ export const transactionsRouter = createTRPCRouter({
   // delete: protectedProcedure.input(z.number()).mutation(({ ctx, input }) => {
   //   return ctx.db.delete(schema.post).where(eq(schema.post.id, input));
   // }),
+
+  uploadFileS3: protectedProcedure
+    .input(z.object({ file: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.s3.upload(input.file);
+    }),
 });

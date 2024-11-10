@@ -5,9 +5,7 @@ const config = {
     "@next/next/no-html-link-for-pages": "off",
     "@typescript-eslint/require-await": "off",
   },
-  ignorePatterns: [
-    // "**/",
-  ],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "apps", "packages"],
 };
 
 module.exports = config;
