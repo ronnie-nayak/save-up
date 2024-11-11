@@ -43,6 +43,7 @@ export const testMail = async (userEmail: string) => {
   </body>
 </html>`,
     });
+    console.log("did get it api", response?.messageId);
     return response?.messageId
       ? { ok: true }
       : { ok: false, msg: "Failed to send email" };
@@ -57,7 +58,7 @@ export async function GET(request: NextRequest) {
   try {
     const session = await auth();
     console.log("userEmail", session?.user?.email);
-    const result = await testMail(session?.user?.email!);
+    const result = await testMail("kirtida.bobal@gmail.com");
     return NextResponse.json({ result });
   } catch (error: any) {
     console.log("ERROR", error.message);
