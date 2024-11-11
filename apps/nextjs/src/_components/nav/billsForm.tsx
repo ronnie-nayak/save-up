@@ -61,6 +61,20 @@ export function BillsForm() {
     // apiReact.transactions.addnew.usemutation().mutate(values)
     addNewBills.mutate(values);
     form.reset({ amount: 0 });
+    try {
+      fetch("/api/ses")
+        .then((res) => res.json())
+        .then((body) => {
+          if (body.ok) {
+            console.log("mail sent");
+          } else {
+            console.log("not sent ???");
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
     setFormOpen(false);
   }
   return (
