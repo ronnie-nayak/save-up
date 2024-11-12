@@ -9,5 +9,5 @@ export default {
   schema: "./src/schema",
   driver: "pg",
   dbCredentials: { connectionString, ssl: true },
-  tablesFilter: ["t3turbo_*"],
+  tablesFilter: ["saveup_*"],
 } satisfies Config;
