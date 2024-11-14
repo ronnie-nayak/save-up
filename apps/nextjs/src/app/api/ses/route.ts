@@ -16,6 +16,41 @@ AWS.config.getCredentials(function (error) {
   }
 });
 const ses = new AWS.SES({ apiVersion: "2010-12-01" });
+
+const checkVerificationStatus = async (email: string) => {
+  const params = {
+    Identities: [email],
+  };
+
+  ses.getIdentityVerificationAttributes(params, function (err, data) {
+    const verificationAttributes = data.VerificationAttributes;
+    if (err) {
+      console.log(err, err.stack);
+      return false;
+    } else if (
+      verificationAttributes &&
+      verificationAttributes[email] &&
+      verificationAttributes[email].VerificationStatus === "Success"
+    )
+      return true;
+    else return false;
+  });
+
+  console.log("checkVerificationStatus", email);
+  return false;
+};
+const verifyEmail = async (email: string) => {
+  const params = {
+    EmailAddress: email,
+  };
+
+  ses.verifyEmailIdentity(params, function (err, data) {
+    if (err) {
+      console.log(err, err.stack, "err verify");
+      return err;
+    } else return "Verification email sent";
+  });
+};
 // change this to the "to" email that you want
 const adminMail = "kirtida.bobal@gmail.com";
 // Create a transporter of nodemailer
@@ -58,7 +93,13 @@ export async function GET(request: NextRequest) {
   try {
     const session = await auth();
     console.log("userEmail", session?.user?.email);
-    const result = await testMail("kirtida.bobal@gmail.com");
+    // const result = await testMail("kirtida.bobal@gmail.com");
+    const verified = await checkVerificationStatus(session?.user?.email!);
+    if (verified) {
+      const result = await testMail(session?.user?.email!);
+      return NextResponse.json({ result });
+    }
+    const result = await verifyEmail(session?.user?.email!);
     return NextResponse.json({ result });
   } catch (error: any) {
     console.log("ERROR", error.message);

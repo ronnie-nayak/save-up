@@ -2,6 +2,7 @@ import type { z } from "zod";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 import { bills } from "./bills";
+import { records } from "./records";
 import { savings } from "./savings";
 import { transactions } from "./transactions";
 
@@ -22,3 +23,9 @@ export const selectBillsSchema = createSelectSchema(bills);
 
 export type insertBillsType = z.infer<typeof insertBillsSchema>;
 export type selectBillsType = z.infer<typeof selectBillsSchema>;
+
+export const insertRecordsSchema = createInsertSchema(records);
+export const selectRecordsSchema = createSelectSchema(records);
+
+export type insertRecordsType = z.infer<typeof insertRecordsSchema>;
+export type selectRecordsType = z.infer<typeof selectRecordsSchema>;

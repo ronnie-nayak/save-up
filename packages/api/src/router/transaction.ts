@@ -4,6 +4,7 @@ import {
   desc,
   eq,
   insertBillsSchema,
+  insertRecordsSchema,
   insertSavingsSchema,
   insertSavingsType,
   insertTransactionSchema,
@@ -100,6 +101,22 @@ export const transactionsRouter = createTRPCRouter({
       .from(schema.bills)
       .where(eq(schema.bills.userId, ctx.session.user.id))
       .orderBy(schema.bills.dueAt);
+  }),
+
+  addNewRecords: protectedProcedure
+    .input(insertRecordsSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db
+        .insert(schema.records)
+        .values({ ...input, userId: ctx.session.user.id });
+    }),
+
+  getAllRecords: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.db
+      .select()
+      .from(schema.records)
+      .where(eq(schema.records.userId, ctx.session.user.id))
+      .orderBy(schema.records.createdAt);
   }),
 
   contributeToSavings: protectedProcedure

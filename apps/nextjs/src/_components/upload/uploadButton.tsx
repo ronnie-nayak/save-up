@@ -2,10 +2,20 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 import type { insertTransactionType } from "@acme/db";
+import { Button } from "@acme/ui";
 
-import { Button } from "../shadcn";
+import { apiReact } from "~/trpc/react";
 
 export function UploadButton({ data }: { data: insertTransactionType[] }) {
+  const utils = apiReact.useUtils();
+  const addNewRecords = apiReact.transactions.addNewRecords.useMutation({
+    onSuccess: (data, variables) => {
+      utils.transactions.invalidate();
+    },
+    onError: (error) => {
+      utils.transactions.sessionExists.invalidate();
+    },
+  });
   function handleUpload() {
     console.log("Uploading...");
     console.log(data);
@@ -40,13 +50,7 @@ export function UploadButton({ data }: { data: insertTransactionType[] }) {
             }).then(() => {
               console.log("Uploaded");
               console.log(res.signedUrl.split("?")[0]);
-              // fetch("/api/user/image", {
-              //   method: "POST",
-              //   headers: { "Content-Type": "application/json" },
-              //   body: JSON.stringify({
-              //     objectUrl: res.signedUrl.split("?")[0],
-              //   }),
-              // });
+              addNewRecords.mutate({ link: res.signedUrl.split("?")[0] });
             });
           });
       }

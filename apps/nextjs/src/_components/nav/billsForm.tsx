@@ -116,10 +116,6 @@ export function BillsForm() {
                       <SelectItem value="Salary">Salary</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormDescription>
-                    You can manage categories in your{" "}
-                    <Link href="./categories">categories</Link>.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

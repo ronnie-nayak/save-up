@@ -3,12 +3,19 @@ import postgres from "postgres";
 
 import * as auth from "./schema/auth";
 import * as bills from "./schema/bills";
+import * as records from "./schema/records";
 import * as savings from "./schema/savings";
 import * as transactions from "./schema/transactions";
 
 export * from "./schema/types";
 
-export const schema = { ...auth, ...transactions, ...savings, ...bills };
+export const schema = {
+  ...auth,
+  ...transactions,
+  ...savings,
+  ...bills,
+  ...records,
+};
 
 export { pgTable as tableCreator } from "./schema/_table";
 

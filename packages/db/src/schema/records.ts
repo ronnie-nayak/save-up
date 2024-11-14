@@ -14,7 +14,6 @@ import { users } from "./auth";
 export const records = pgTable("records", {
   id: serial("id").primaryKey(),
   userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
-  title: varchar("title", { length: 256 }).notNull(),
   createdAt: date("createdAt", { mode: "date" }).defaultNow().notNull(),
   link: text("link").notNull(),
 });

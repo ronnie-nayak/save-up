@@ -27,11 +27,11 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
-  UploadButton,
 } from "@acme/ui";
 
 import { apiReact } from "~/trpc/react";
 import { MoneyForm } from ".";
+import { UploadButton } from "../upload";
 
 export function DataTable() {
   const [localData, setLocalData] = useState<GetMoneyType[]>([]);
