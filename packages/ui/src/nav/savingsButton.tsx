@@ -77,10 +77,10 @@ export function SavingsButton({
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DialogTitle>Add Transaction</DialogTitle>
-          <DialogDescription>
+          <DrawerTitle>Add Transaction</DrawerTitle>
+          <DrawerDescription>
             Add a new transaction to your account.
-          </DialogDescription>
+          </DrawerDescription>
         </DrawerHeader>
         {children}
         <DrawerFooter className="pt-2">
