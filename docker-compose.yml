@@ -14,8 +14,11 @@ services:
     depends_on:
       - postgres
   postgres:
+    container_name: postgres
     image: postgres
     restart: always
+    ports:
+      - 5432:5432
     env_file:
       - .env
     networks:

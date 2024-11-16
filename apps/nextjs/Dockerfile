@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:21-alpine AS base
 
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
@@ -13,10 +13,9 @@ RUN apk update
 RUN apk add --no-cache libc6-compat
 # Set working directory
 WORKDIR /app
-RUN pnpm add -g turbo
+RUN pnpm add -g turbo@1.11.3
 COPY . .
-RUN turbo --version
-RUN turbo prune nextjs --docker
+RUN turbo prune @acme/nextjs --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -40,6 +39,8 @@ COPY --from=builder /app/out/full/ .
 
 RUN pnpm turbo build --filter=nextjs...
 
+#RUN pnpm run db:push
+
 FROM base AS runner
 WORKDIR /app
 
@@ -48,10 +49,6 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/nextjs/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/nextjs/.next/static ./apps/nextjs/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/nextjs/public ./apps/nextjs/public
+COPY --from=installer /app .
 
-CMD node apps/nextjs/server.js
+CMD pnpm db:push; pnpm start
