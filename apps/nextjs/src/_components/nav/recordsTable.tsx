@@ -27,7 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
-  UploadButton,
 } from "@acme/ui";
 
 import { apiReact } from "~/trpc/react";
@@ -42,7 +41,6 @@ export function RecordsTable() {
   const [localData, setLocalData] = useState<recordType[]>([]);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const utils = apiReact.useUtils();
   const { data, isLoading, isError } =
@@ -96,7 +94,7 @@ export function RecordsTable() {
       <header className="m-9 my-4 flex text-gray-500 sm:text-[1.25vw]">
         <h2
           id="createdAt"
-          className="flex w-4/12 cursor-pointer items-center gap-1"
+          className="flex w-9/12 cursor-pointer items-center gap-1"
           onClick={(e) => sortingFunction(e)}
         >
           Created Date
@@ -133,18 +131,18 @@ export function RecordsTable() {
                   exit={{ opacity: 0, height: 0, display: "absolute" }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="m-3 flex sm:text-[1vw]">
-                    <div className="w-9/12 overflow-hidden">
+                  <div className="m-9 my-4 flex items-center sm:text-[1vw]">
+                    <div className="flex w-9/12 items-center gap-1 overflow-hidden">
                       <h2 className="pb-1">
                         {row.createdAt.toLocaleDateString()}
                       </h2>
                     </div>
-                    <h2 className="w-3/12">
+                    <h2 className="flex w-3/12 items-center gap-1">
                       <Link
                         href={row.link}
                         className="rounded-3xl bg-purple p-4 text-white transition hover:bg-white hover:text-black"
                       >
-                        SignIn
+                        Link
                       </Link>
                     </h2>
                   </div>

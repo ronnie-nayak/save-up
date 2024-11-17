@@ -57,6 +57,23 @@ export const transactionsRouter = createTRPCRouter({
         .values({ ...input, userId: ctx.session.user.id });
     }),
 
+  addMultiple: protectedProcedure
+    .input(z.array(insertTransactionSchema.extend({ date: z.string() })))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.insert(schema.transactions).values(
+        input.map((i) => {
+          let dateArr = i.date.split("/");
+          return {
+            ...i,
+            userId: ctx.session.user.id,
+            createdAt: new Date(
+              dateArr[1] + "-" + dateArr[0] + "-" + dateArr[2],
+            ),
+          };
+        }),
+      );
+    }),
+
   getAll: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db
       .select()

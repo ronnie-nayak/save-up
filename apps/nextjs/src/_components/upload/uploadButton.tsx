@@ -17,8 +17,6 @@ export function UploadButton({ data }: { data: insertTransactionType[] }) {
     },
   });
   function handleUpload() {
-    console.log("Uploading...");
-    console.log(data);
     const doc = new jsPDF();
     const arr = data.map((d) => [
       d.title,
@@ -48,8 +46,6 @@ export function UploadButton({ data }: { data: insertTransactionType[] }) {
               body,
               method: "PUT",
             }).then(() => {
-              console.log("Uploaded");
-              console.log(res.signedUrl.split("?")[0]);
               addNewRecords.mutate({ link: res.signedUrl.split("?")[0] });
             });
           });
@@ -58,8 +54,8 @@ export function UploadButton({ data }: { data: insertTransactionType[] }) {
     reader.readAsArrayBuffer(file);
   }
   return (
-    <div>
-      <Button onClick={handleUpload}>Upload</Button>
-    </div>
+    <Button className="p-2 px-4 text-lg font-bold" onClick={handleUpload}>
+      Upload
+    </Button>
   );
 }

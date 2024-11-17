@@ -176,6 +176,30 @@ export function BillsTable() {
                     className="h-16 bg-green-500 font-bold sm:text-[1vw]"
                     onClick={() => {
                       payBill.mutate(row);
+                      try {
+                        fetch("/api/ses", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            title: row.title,
+                            category: row.category,
+                            amount: row.amount,
+                            dueAt: row.dueAt,
+                          }),
+                        })
+                          .then((res) => res.json())
+                          .then((body) => {
+                            if (body.ok) {
+                              console.log("mail sent");
+                            } else {
+                              console.log("not sent ???");
+                            }
+                          });
+                      } catch (error) {
+                        console.error(error);
+                      }
                       setTimeout(() => {
                         setLoader(null);
                       }, 1000);

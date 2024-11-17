@@ -5,9 +5,9 @@ import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
-import { BillsFormOpenState } from "@acme/atoms";
+import { BillsFormOpenState, CategoriesListState } from "@acme/atoms";
 import {
   Button,
   Calendar,
@@ -33,6 +33,8 @@ import { apiReact } from "~/trpc/react";
 
 export function BillsForm() {
   const setFormOpen = useSetRecoilState(BillsFormOpenState);
+
+  const [categories, setCategories] = useRecoilState(CategoriesListState);
   // const addNew = await apiServer.transactions.addNew()
   const utils = apiReact.useUtils();
   const addNewBills = apiReact.transactions.addNewBills.useMutation({
@@ -62,7 +64,18 @@ export function BillsForm() {
     addNewBills.mutate(values);
     form.reset({ amount: 0 });
     try {
-      fetch("/api/ses")
+      fetch("/api/ses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: values.title,
+          category: values.category,
+          amount: values.amount,
+          dueAt: values.dueAt,
+        }),
+      })
         .then((res) => res.json())
         .then((body) => {
           if (body.ok) {
@@ -72,7 +85,7 @@ export function BillsForm() {
           }
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
     setFormOpen(false);
@@ -111,9 +124,11 @@ export function BillsForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Food">Food</SelectItem>
-                      <SelectItem value="Rent">Rent</SelectItem>
-                      <SelectItem value="Salary">Salary</SelectItem>
+                      {categories.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />

@@ -26,3 +26,6 @@ export * from "./popover";
 export * from "./sheet";
 export * from "./tabs";
 export * from "./colorPicker";
+export * from "./badge";
+export * from "./card";
+export * from "./sonner";

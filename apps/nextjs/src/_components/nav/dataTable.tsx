@@ -2,6 +2,7 @@
 
 import type { ChangeEvent, MouseEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { CalendarIcon } from "lucide-react";
@@ -152,6 +153,19 @@ export function DataTable() {
           <MoneyForm />
         </PopupButton>
         <UploadButton data={localData.slice(0, 10)} />
+
+        <Link
+          href="/homepage/transactions/records"
+          className="ml-10 rounded-md border-2 border-white bg-midnight p-2 px-4 text-lg font-bold text-white transition hover:bg-white hover:text-black"
+        >
+          Records
+        </Link>
+        <Link
+          href="/homepage/transactions/extract"
+          className="ml-10  rounded-md border-2 border-white bg-midnight p-2 px-4 text-lg font-bold text-white transition hover:bg-white hover:text-black"
+        >
+          Extract Data from Docs
+        </Link>
       </div>
       <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row">
         <div className="flex w-full items-center gap-2 sm:w-1/3 ">

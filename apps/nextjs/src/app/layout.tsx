@@ -8,6 +8,8 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import "~/app/globals.css";
 
+import { Toaster } from "@acme/ui";
+
 import Provider from "./provider";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -43,6 +45,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <TRPCReactProvider headersPromise={getHeaders()}>
           <Provider>{props.children}</Provider>
         </TRPCReactProvider>
+        <Toaster />
       </body>
     </html>
   );
