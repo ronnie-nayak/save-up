@@ -68,12 +68,8 @@ export function DataTable() {
   const [sorted, setSorted] = useState("createdAt");
   const [dir, setDir] = useState(1);
 
-  const sortingFunction = (
-    event: MouseEvent<HTMLHeadingElement, globalThis.MouseEvent>,
-  ) => {
+  const sortingFunction = (column: string) => {
     let direction = 1;
-    // @ts-ignore
-    const column = event.target.id;
     if (sorted === column) {
       direction = -dir;
       setDir((old) => -old);
@@ -276,67 +272,63 @@ export function DataTable() {
       </div>
       <header className="m-9 my-4 flex text-gray-500 sm:text-[1.25vw]">
         <h2
-          id="title"
           className="flex w-4/12 cursor-pointer items-center gap-1"
-          onClick={(e) => sortingFunction(e)}
+          onClick={() => sortingFunction("title")}
         >
           title
           {sorted === "title" ? (
             dir === 1 ? (
-              <FaSortDown id="title" />
+              <FaSortDown />
             ) : (
-              <FaSortUp id="title" />
+              <FaSortUp />
             )
           ) : (
-            <FaSort id="title" />
+            <FaSort />
           )}
         </h2>
         <h2
-          id="type"
           className="hidden w-3/12 cursor-pointer items-center gap-1 sm:flex"
-          onClick={(e) => sortingFunction(e)}
+          onClick={() => sortingFunction("type")}
         >
           type
           {sorted === "type" ? (
             dir === 1 ? (
-              <FaSortDown id="type" />
+              <FaSortDown />
             ) : (
-              <FaSortUp id="type" />
+              <FaSortUp />
             )
           ) : (
-            <FaSort id="type" />
+            <FaSort />
           )}
         </h2>
         <h2
-          id="amount"
           className="flex w-2/12 cursor-pointer items-center gap-1"
-          onClick={(e) => sortingFunction(e)}
+          onClick={() => sortingFunction("amount")}
         >
           amount
           {sorted === "amount" ? (
             dir === 1 ? (
-              <FaSortDown id="amount" />
+              <FaSortDown />
             ) : (
-              <FaSortUp id="amount" />
+              <FaSortUp />
             )
           ) : (
-            <FaSort id="amount" />
+            <FaSort />
           )}
         </h2>
         <h2
-          id="createdAt"
           className="ml-auto flex w-3/12 cursor-pointer items-center gap-1 sm:m-0"
-          onClick={(e) => sortingFunction(e)}
+          onClick={() => sortingFunction("createdAt")}
         >
           createdAt
           {sorted === "createdAt" ? (
             dir === 1 ? (
-              <FaSortDown id="createdAt" />
+              <FaSortDown />
             ) : (
-              <FaSortUp id="createdAt" />
+              <FaSortUp />
             )
           ) : (
-            <FaSort id="createdAt" />
+            <FaSort />
           )}
         </h2>
       </header>

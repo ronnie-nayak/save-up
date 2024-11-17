@@ -72,14 +72,18 @@ export function BillsTable() {
   const [sorted, setSorted] = useState("");
   const [dir, setDir] = useState(1);
 
-  const sortingFunction = () => {
-    let direction = dir;
-    setDir((old) => -old);
-    setSorted("title");
-
+  const sortingFunction = (column: string) => {
+    let direction = 1;
+    if (sorted === column) {
+      direction = -dir;
+      setDir((old) => -old);
+    } else {
+      setSorted((old) => column);
+      setDir((old) => 1);
+    }
     const sortedData = localData.sort((a, b) => {
       // @ts-ignore
-      if (a.title >= b.title) {
+      if (a[column] >= b[column]) {
         return direction;
       }
       return -direction;
@@ -136,18 +140,35 @@ export function BillsTable() {
 
       <Button
         className="ml-20 mt-3 rounded-full bg-midnight p-4"
-        onClick={sortingFunction}
+        onClick={() => sortingFunction("title")}
       >
-        <h2 id="title" className="flex items-center gap-1 sm:text-[1vw]">
+        <h2 className="flex items-center gap-1 sm:text-[1vw]">
           title
           {sorted === "title" ? (
             dir === 1 ? (
-              <FaSortDown id="title" />
+              <FaSortDown />
             ) : (
-              <FaSortUp id="title" />
+              <FaSortUp />
             )
           ) : (
-            <FaSort id="title" />
+            <FaSort />
+          )}
+        </h2>
+      </Button>
+      <Button
+        className="ml-6 mt-3 rounded-full bg-midnight p-4"
+        onClick={() => sortingFunction("dueAt")}
+      >
+        <h2 className="flex items-center gap-1 sm:text-[1vw]">
+          Due Date
+          {sorted === "dueAt" ? (
+            dir === 1 ? (
+              <FaSortDown />
+            ) : (
+              <FaSortUp />
+            )
+          ) : (
+            <FaSort />
           )}
         </h2>
       </Button>
