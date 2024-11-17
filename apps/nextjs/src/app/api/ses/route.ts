@@ -124,7 +124,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   } catch (error: any) {
     console.error("ERROR", error.message);
     const url = request.nextUrl.clone();
-    url.pathname = "/errorin";
+    url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 }
