@@ -142,12 +142,12 @@ export function BillsTable() {
           title
           {sorted === "title" ? (
             dir === 1 ? (
-              <FaSortDown />
+              <FaSortDown id="title" />
             ) : (
-              <FaSortUp />
+              <FaSortUp id="title" />
             )
           ) : (
-            <FaSort />
+            <FaSort id="title" />
           )}
         </h2>
       </Button>
