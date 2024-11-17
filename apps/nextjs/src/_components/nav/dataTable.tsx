@@ -273,12 +273,12 @@ export function DataTable() {
           title
           {sorted === "title" ? (
             dir === 1 ? (
-              <FaSortDown />
+              <FaSortDown id="title" />
             ) : (
-              <FaSortUp />
+              <FaSortUp id="title" />
             )
           ) : (
-            <FaSort />
+            <FaSort id="title" />
           )}
         </h2>
         <h2
@@ -289,12 +289,12 @@ export function DataTable() {
           type
           {sorted === "type" ? (
             dir === 1 ? (
-              <FaSortDown />
+              <FaSortDown id="type" />
             ) : (
-              <FaSortUp />
+              <FaSortUp id="type" />
             )
           ) : (
-            <FaSort />
+            <FaSort id="type" />
           )}
         </h2>
         <h2
@@ -305,12 +305,12 @@ export function DataTable() {
           amount
           {sorted === "amount" ? (
             dir === 1 ? (
-              <FaSortDown />
+              <FaSortDown id="amount" />
             ) : (
-              <FaSortUp />
+              <FaSortUp id="amount" />
             )
           ) : (
-            <FaSort />
+            <FaSort id="amount" />
           )}
         </h2>
         <h2
@@ -321,12 +321,12 @@ export function DataTable() {
           createdAt
           {sorted === "createdAt" ? (
             dir === 1 ? (
-              <FaSortDown />
+              <FaSortDown id="createdAt" />
             ) : (
-              <FaSortUp />
+              <FaSortUp id="createdAt" />
             )
           ) : (
-            <FaSort />
+            <FaSort id="createdAt" />
           )}
         </h2>
       </header>
