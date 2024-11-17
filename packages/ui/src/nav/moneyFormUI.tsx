@@ -64,10 +64,6 @@ export function MoneyFormUI({ form, onSubmit }: { form: any; onSubmit: any }) {
                   ))}
                 </SelectContent>
               </Select>
-              <FormDescription>
-                You can manage categories in your{" "}
-                <Link href="./categories">categories</Link>.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
