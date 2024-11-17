@@ -5,9 +5,9 @@ import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
-import { BillsFormOpenState } from "@acme/atoms";
+import { BillsFormOpenState, CategoriesListState } from "@acme/atoms";
 import {
   Button,
   Calendar,
@@ -33,6 +33,8 @@ import { apiReact } from "~/trpc/react";
 
 export function BillsForm() {
   const setFormOpen = useSetRecoilState(BillsFormOpenState);
+
+  const [categories, setCategories] = useRecoilState(CategoriesListState);
   // const addNew = await apiServer.transactions.addNew()
   const utils = apiReact.useUtils();
   const addNewBills = apiReact.transactions.addNewBills.useMutation({
@@ -97,15 +99,13 @@ export function BillsForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Food">Food</SelectItem>
-                      <SelectItem value="Rent">Rent</SelectItem>
-                      <SelectItem value="Salary">Salary</SelectItem>
+                      {categories.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
-                  <FormDescription>
-                    You can manage categories in your{" "}
-                    <Link href="./categories">categories</Link>.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

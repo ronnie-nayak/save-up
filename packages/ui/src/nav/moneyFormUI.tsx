@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRecoilState } from "recoil";
 
+import { CategoriesListState } from "@acme/atoms";
 import {
   Button,
   DialogClose,
@@ -22,6 +24,7 @@ import {
 } from "@acme/ui";
 
 export function MoneyFormUI({ form, onSubmit }: { form: any; onSubmit: any }) {
+  const [categories, setCategories] = useRecoilState(CategoriesListState);
   return (
     <Form {...form}>
       <form
@@ -54,15 +57,13 @@ export function MoneyFormUI({ form, onSubmit }: { form: any; onSubmit: any }) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="Food">Food</SelectItem>
-                  <SelectItem value="Rent">Rent</SelectItem>
-                  <SelectItem value="Salary">Salary</SelectItem>
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category}>
+                      {category}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
-              <FormDescription>
-                You can manage categories in your{" "}
-                <Link href="./categories">categories</Link>.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

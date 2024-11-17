@@ -6,10 +6,14 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HexColorPicker } from "react-colorful";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import * as z from "zod";
 
-import { FormOpenState, SavingsFormOpenState } from "@acme/atoms";
+import {
+  CategoriesListState,
+  FormOpenState,
+  SavingsFormOpenState,
+} from "@acme/atoms";
 import {
   Button,
   DialogClose,
@@ -34,6 +38,7 @@ import { apiReact } from "~/trpc/react";
 
 export function SavingsForm() {
   const [color, setColor] = useState("#1168C9");
+  const [categories, setCategories] = useRecoilState(CategoriesListState);
   const setFormOpen = useSetRecoilState(SavingsFormOpenState);
 
   const utils = apiReact.useUtils();
@@ -100,15 +105,13 @@ export function SavingsForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Food">Food</SelectItem>
-                      <SelectItem value="Rent">Rent</SelectItem>
-                      <SelectItem value="Salary">Salary</SelectItem>
+                      {categories.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
-                  <FormDescription>
-                    You can manage categories in your{" "}
-                    <Link href="./categories">categories</Link>.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
