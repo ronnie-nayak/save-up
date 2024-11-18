@@ -222,9 +222,6 @@ export function BillsTable() {
                       } catch (error) {
                         console.error(error);
                       }
-                      setTimeout(() => {
-                        setLoader(null);
-                      }, 1000);
                       setLoader(row.id);
                     }}
                   >
