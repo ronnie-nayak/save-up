@@ -7,7 +7,8 @@ const connectionString = process.env.DATABASE_URL!;
 
 export default {
   schema: "./src/schema",
-  driver: "pg",
-  dbCredentials: { connectionString, ssl: true },
+  dialect: "postgresql",
+
+  dbCredentials: { url: connectionString },
   tablesFilter: ["saveup_*"],
 } satisfies Config;

@@ -55,26 +55,26 @@ export function AppPage() {
           incomeList.find(
             (item) =>
               // @ts-ignore
-              item.txn_month.getMonth() === currentMonth &&
+              new Date(item.txn_month).getMonth() === currentMonth &&
               // @ts-ignore
-              item.txn_month.getFullYear() === currentYear,
+              new Date(item.txn_month).getFullYear() === currentYear,
           )?.monthly_sum ?? 0;
         // @ts-ignore
         const currExpense =
           expenseList.find(
             (item) =>
               // @ts-ignore
-              item.txn_month.getMonth() === currentMonth &&
+              new Date(item.txn_month).getMonth() === currentMonth &&
               // @ts-ignore
-              item.txn_month.getFullYear() === currentYear,
+              new Date(item.txn_month).getFullYear() === currentYear,
           )?.monthly_sum ?? 0;
         const currSavings =
           savingsList.find(
             (item) =>
               // @ts-ignore
-              item.txn_month.getMonth() === currentMonth &&
+              new Date(item.txn_month).getMonth() === currentMonth &&
               // @ts-ignore
-              item.txn_month.getFullYear() === currentYear,
+              new Date(item.txn_month).getFullYear() === currentYear,
           )?.monthly_sum ?? 0;
         finalStats.push({
           date: `${
