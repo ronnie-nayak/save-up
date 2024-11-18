@@ -58,9 +58,11 @@ export function BillsTable() {
   const payBill = apiReact.transactions.payBill.useMutation({
     onSuccess: () => {
       utils.transactions.getAllBills.invalidate();
+      setLoader(null);
     },
     onError: (error) => {
       utils.transactions.sessionExists.invalidate();
+      setLoader(null);
     },
   });
   useEffect(() => {
@@ -195,6 +197,7 @@ export function BillsTable() {
                   <BillItemBig data={row} />
                   <Button
                     className="h-16 bg-green-500 font-bold sm:text-[1vw]"
+                    disabled={loader === row.id}
                     onClick={() => {
                       payBill.mutate(row);
                       try {
