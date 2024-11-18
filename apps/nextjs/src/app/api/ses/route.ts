@@ -22,28 +22,23 @@ const checkVerificationStatus = async (email: string) => {
     Identities: [email],
   };
 
-  let data = await ses
-    .getIdentityVerificationAttributes(params, function (err, data) {
-      const verificationAttributes = data.VerificationAttributes;
-      if (err) {
-        console.error(err, err.stack, "err");
-        return false;
-      } else if (
-        verificationAttributes &&
-        verificationAttributes[email] &&
-        verificationAttributes[email].VerificationStatus === "Success"
-      )
-        return true;
-      else return false;
-    })
-    .promise();
+  try {
+    let data = await ses.getIdentityVerificationAttributes(params).promise();
 
-  if (data) {
-    return true;
+    const verificationAttributes = data.VerificationAttributes;
+    if (
+      verificationAttributes &&
+      verificationAttributes[email] &&
+      verificationAttributes[email].VerificationStatus === "Success"
+    )
+      return true;
+    else return false;
+  } catch (error) {
+    console.error(error, "error");
+    return false;
   }
-
-  return false;
 };
+
 const verifyEmail = async (email: string) => {
   const params = {
     EmailAddress: email,
@@ -55,6 +50,8 @@ const verifyEmail = async (email: string) => {
       return err;
     } else return "Verification email sent";
   });
+
+  return { ok: false, msg: "Verification email sent" };
 };
 // change this to the "to" email that you want
 const adminMail = "kirtida.bobal@gmail.com";
@@ -73,7 +70,9 @@ export const testMail = async (
     const response = await transporter.sendMail({
       from: adminMail,
       to: userEmail,
-      subject: "Bill Reminder",
+      subject: `Bill Reminder: ${data.title} due on ${new Date(
+        data.dueAt,
+      ).toLocaleDateString()}`,
       html: `
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
@@ -117,10 +116,10 @@ export async function POST(request: NextRequest, response: NextResponse) {
     if (verified) {
       let data = await request.json();
       const result = await testMail(session?.user?.email!, data);
-      return NextResponse.json({ result });
+      return NextResponse.json(result);
     }
     const result = await verifyEmail(session?.user?.email!);
-    return NextResponse.json({ result });
+    return NextResponse.json(result);
   } catch (error: any) {
     console.error("ERROR", error.message);
     const url = request.nextUrl.clone();
