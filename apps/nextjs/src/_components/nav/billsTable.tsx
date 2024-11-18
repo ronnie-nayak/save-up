@@ -58,11 +58,9 @@ export function BillsTable() {
   const payBill = apiReact.transactions.payBill.useMutation({
     onSuccess: () => {
       utils.transactions.getAllBills.invalidate();
-      setLoader(null);
     },
     onError: (error) => {
       utils.transactions.sessionExists.invalidate();
-      setLoader(null);
     },
   });
   useEffect(() => {
