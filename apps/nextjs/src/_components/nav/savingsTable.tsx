@@ -61,17 +61,21 @@ export function SavingsTable() {
     apiReact.transactions.contributeToSavings.useMutation({
       onSuccess: (data) => {
         utils.transactions.getAllSavings.invalidate();
+        setLoader(null);
       },
       onError: (error) => {
         utils.transactions.sessionExists.invalidate();
+        setLoader(null);
       },
     });
   const deleteSavings = apiReact.transactions.deleteSavings.useMutation({
     onSuccess: (data) => {
       utils.transactions.getAllSavings.invalidate();
+      setLoader(null);
     },
     onError: (error) => {
       utils.transactions.sessionExists.invalidate();
+      setLoader(null);
     },
   });
   useEffect(() => {
@@ -114,9 +118,6 @@ export function SavingsTable() {
       additional: parseInt(e.target[0].value),
       savingsId: row.id,
     });
-    setTimeout(() => {
-      setLoader(null);
-    }, 1000);
     setLoader(row.id);
   };
 
@@ -174,7 +175,9 @@ export function SavingsTable() {
                     <PopoverTrigger>
                       <Button
                         className="h-16 bg-orange-500 font-bold sm:text-[1vw]"
-                        disabled={row.amount === row.current}
+                        disabled={
+                          row.amount === row.current || loader === row.id
+                        }
                       >
                         <div className="flex items-center gap-4">
                           {loader === row.id ? (
@@ -211,12 +214,9 @@ export function SavingsTable() {
                   </Popover>
                   <Button
                     className="h-16 bg-green-500 font-bold sm:text-[1vw]"
-                    disabled={row.amount !== row.current}
+                    disabled={row.amount !== row.current || loader2 === row.id}
                     onClick={() => {
                       deleteSavings.mutate({ savingsId: row.id });
-                      setTimeout(() => {
-                        setLoader2(null);
-                      }, 1000);
                       setLoader2(row.id);
                     }}
                   >
