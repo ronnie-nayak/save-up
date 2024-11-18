@@ -52,7 +52,7 @@ export const {
           .where(
             and(
               eq(schema.users.name, "Guest User"),
-              eq(schema.users.image, "/login/user.svg"),
+              eq(schema.users.image, "/login/user.jpg"),
               eq(schema.users.email, "guest@user.again"),
             ),
           );
@@ -63,7 +63,7 @@ export const {
             .values({
               id: `${v4()}`,
               name: "Guest User",
-              image: "/login/user.svg",
+              image: "/login/user.jpg",
               email: "guest@user.again",
             })
             .returning();
