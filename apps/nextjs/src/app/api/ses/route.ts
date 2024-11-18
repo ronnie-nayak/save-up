@@ -56,7 +56,11 @@ const verifyEmail = async (email: string) => {
 // change this to the "to" email that you want
 const adminMail = "kirtida.bobal@gmail.com";
 // Create a transporter of nodemailer
-const transporter = nodemailer.createTransport({ SES: ses });
+const transporter = nodemailer.createTransport({
+  SES: ses,
+  sendingRate: 2,
+  maxConnections: 5,
+});
 export const testMail = async (
   userEmail: string,
   data: {
