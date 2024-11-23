@@ -9,5 +9,5 @@ export default {
   schema: "./src/schema",
   driver: "pg",
   dbCredentials: { connectionString, ssl: true },
-  tablesFilter: ["saveup_*"],
+  tablesFilter: ["fit_*"],
 } satisfies Config;

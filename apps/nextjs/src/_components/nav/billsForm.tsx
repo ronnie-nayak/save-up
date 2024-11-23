@@ -116,12 +116,12 @@ export function BillsForm() {
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Money</FormLabel>
+                  <FormLabel>Amount</FormLabel>
                   <FormControl>
                     <Input
                       className=""
                       {...field}
-                      placeholder="Enter Money"
+                      placeholder="Enter Amount"
                       type="number"
                       value={field.value}
                       min={0}

@@ -54,10 +54,8 @@ export function BillsButton({
         </DialogTrigger>
         <DialogContent className="light min-w-[800px]">
           <DialogHeader>
-            <DialogTitle>Add Bill</DialogTitle>
-            <DialogDescription>
-              Add a new transaction to your account.
-            </DialogDescription>
+            <DialogTitle>Add Schedule</DialogTitle>
+            <DialogDescription>Add a new schedule.</DialogDescription>
           </DialogHeader>
           {children}
         </DialogContent>
@@ -77,10 +75,8 @@ export function BillsButton({
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add Transaction</DrawerTitle>
-          <DrawerDescription>
-            Add a new transaction to your account.
-          </DrawerDescription>
+          <DrawerTitle>Add Schedule</DrawerTitle>
+          <DrawerDescription>Add a new schedule.</DrawerDescription>
         </DrawerHeader>
         {children}
         <DrawerFooter className="pt-2">

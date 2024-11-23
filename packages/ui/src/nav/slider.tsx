@@ -5,13 +5,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { CiBoxList } from "react-icons/ci";
+import { FaPlus } from "react-icons/fa";
+import { GoGoal } from "react-icons/go";
+import { GrSchedule } from "react-icons/gr";
+import { IoIosVideocam } from "react-icons/io";
 import { IoAnalytics } from "react-icons/io5";
-import { LiaMoneyBillWaveSolid } from "react-icons/lia";
-import {
-  MdDashboard,
-  MdOutlineAccountBalanceWallet,
-  MdOutlineSavings,
-} from "react-icons/md";
+import { MdDashboard } from "react-icons/md";
 import { useSetRecoilState } from "recoil";
 
 import { SidebarOpenState } from "@acme/atoms";
@@ -29,10 +29,16 @@ const links: linkType[] = [
   {
     title: "Transactions",
     location: "/homepage/transactions",
-    icon: MdOutlineAccountBalanceWallet,
+    icon: CiBoxList,
   },
-  { title: "Savings", location: "/homepage/savings", icon: MdOutlineSavings },
-  { title: "Bills", location: "/homepage/bills", icon: LiaMoneyBillWaveSolid },
+  { title: "Savings", location: "/homepage/savings", icon: GoGoal },
+  { title: "Bills", location: "/homepage/bills", icon: GrSchedule },
+  { title: "Calorie Calc", location: "/homepage/calorie", icon: IoAnalytics },
+  {
+    title: "Exercise",
+    location: "/homepage/exercise/bicepCurl",
+    icon: IoIosVideocam,
+  },
 ];
 
 export function Slider() {
@@ -45,16 +51,21 @@ export function Slider() {
       {links.map((link: linkType, index: number) => (
         <Link
           href={link.location}
-          key={index}
+          key={link.location}
           className={`${
-            pathname === link.location ? "" : "sm:text-gray-500"
+            (
+              link.location === "/homepage"
+                ? pathname === link.location
+                : pathname.search(link.location) != -1
+            )
+              ? ""
+              : "sm:text-gray-500"
           } relative z-20 my-5 flex items-center gap-4 p-2 font-normal transition sm:text-[1.75vw]`}
-          onClick={() => {
-            setActiveTab(link.location);
-            setSidebarOpen(false);
-          }}
+          onClick={() => setSidebarOpen(false)}
         >
-          {activeTab === link.location && (
+          {(link.location === "/homepage"
+            ? pathname === link.location
+            : pathname.search(link.location) != -1) && (
             <motion.span
               layoutId="bubble"
               className="absolute inset-0 -z-10 h-full rounded-xl bg-purple"
@@ -64,7 +75,12 @@ export function Slider() {
 
           {link.icon({
             size: 35,
-            color: `${pathname === link.location ? "" : "grey"} `,
+            color: `${
+              link.location === "/homepage" ||
+              pathname.search(link.location) != -1
+                ? ""
+                : "grey"
+            } `,
           })}
           {link.title}
         </Link>

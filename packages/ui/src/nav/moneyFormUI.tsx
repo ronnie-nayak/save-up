@@ -75,11 +75,11 @@ export function MoneyFormUI({ form, onSubmit }: { form: any; onSubmit: any }) {
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
                 <FormLabel className="flex items-center gap-2 text-base">
-                  Income{" "}
+                  Calories Burned{" "}
                   <div className="h-4 w-4 rounded-full bg-green-500"></div>
                 </FormLabel>
                 <FormLabel className="flex items-center gap-2 text-base">
-                  Expense{" "}
+                  Calories Consumed{" "}
                   <div className="h-4 w-4 rounded-full bg-red-500"></div>
                 </FormLabel>
               </div>
@@ -101,12 +101,12 @@ export function MoneyFormUI({ form, onSubmit }: { form: any; onSubmit: any }) {
           name="amount"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Money</FormLabel>
+              <FormLabel>Amount</FormLabel>
               <FormControl>
                 <Input
                   className=""
                   {...field}
-                  placeholder="Enter Money"
+                  placeholder="Enter Amount"
                   type="number"
                   value={field.value}
                   min={0}

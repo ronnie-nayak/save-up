@@ -48,7 +48,7 @@ export function BillItem({ dataItem }: { dataItem: GetBillsType }) {
           {dataItem.dueAt.toDateString()}
         </h5>
       </div>
-      <h3 className="ml-auto">${dataItem.amount}</h3>
+      <h3 className="ml-auto">{dataItem.amount}</h3>
     </motion.div>
   );
 }
@@ -71,7 +71,7 @@ export function BillItemBig({ data }: { data: GetBillsType }) {
           {data.dueAt.toDateString()}
         </h5>
       </div>
-      <h3 className="ml-auto">${data.amount}</h3>
+      <h3 className="ml-auto">{data.amount}</h3>
     </motion.div>
   );
 }
@@ -90,7 +90,7 @@ export function BillsUI({
     <div className="w-full rounded-3xl bg-midnight p-6 sm:w-[18vw]">
       {/* <AspectRatio ratio={10 / 9} className=""> */}
       <div className="mb-2 flex items-center gap-6">
-        <div className="font-bold sm:text-[1vw] ">Coming Bills</div>
+        <div className="font-bold sm:text-[1vw] ">Gym Schedule</div>
         {buttonWorkable ? (
           <BillsButton
             text=""
@@ -118,7 +118,7 @@ export function BillsUI({
         <Separator className="m-3 bg-gray-600" />
         {!data || data.length === 0 ? (
           <div className="p-4 text-center font-bold sm:text-[1vw]">
-            No Bills Yet
+            No Schedule Yet
           </div>
         ) : (
           data

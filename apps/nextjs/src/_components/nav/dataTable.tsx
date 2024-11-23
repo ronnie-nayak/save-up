@@ -148,7 +148,7 @@ export function DataTable() {
   return (
     <div className=" dark m-2 my-2 rounded-3xl bg-midnight p-6 text-left sm:m-10">
       <div className="flex h-14 items-center gap-4">
-        <h1 className="sm:text-[1.5vw] ">Transactions</h1>
+        <h1 className="sm:text-[1.5vw] ">Records</h1>
         <PopupButton formOpen={formOpen} setFormOpen={setFormOpen}>
           <MoneyForm />
         </PopupButton>
@@ -184,9 +184,9 @@ export function DataTable() {
             <SelectValue placeholder="Select Type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="income">income</SelectItem>
-            <SelectItem value="expense">expense</SelectItem>
-            <SelectItem value="savings">savings</SelectItem>
+            <SelectItem value="income">Calories Burned</SelectItem>
+            <SelectItem value="expense">Calories Consumed</SelectItem>
+            <SelectItem value="savings">Calories Goal</SelectItem>
           </SelectContent>
         </Select>
 
@@ -327,7 +327,7 @@ export function DataTable() {
         <AnimatePresence>
           {localData.length === 0 ? (
             <div className="p-4 text-center font-bold sm:text-[1vw]">
-              No Transactions Yet
+              No Data Yet
             </div>
           ) : (
             localData
@@ -366,11 +366,16 @@ export function DataTable() {
                                 : "bg-blue-500"
                           }`}
                         />
-                        {row.type}
+                        {row.type === "income"
+                          ? "Calories Burned"
+                          : row.type === "expense"
+                            ? "Calories Consumed"
+                            : "Calories Goal"}
                       </div>
                     </div>
                     <h2 className="w-2/12">
-                      {row.type === "expense" && "-"}${row.amount}
+                      {row.type === "income" && "-"}
+                      {row.amount}
                     </h2>
                     <h2 className="ml-auto w-3/12 sm:m-0">
                       {row.createdAt.toDateString()}

@@ -22,16 +22,5 @@ export const SidebarOpenState = atom({
 
 export const CategoriesListState = atom({
   key: "CategoriesListState",
-  default: [
-    "Salary",
-    "Food",
-    "Rent",
-    "Shopping",
-    "Entertainment",
-    "Transport",
-    "Utilities",
-    "Healthcare",
-    "Education",
-    "Others",
-  ],
+  default: ["Excercise", "Food", "Groceries", "Others"],
 });

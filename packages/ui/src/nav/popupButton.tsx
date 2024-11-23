@@ -43,15 +43,13 @@ export function PopupButton({
         <DialogTrigger asChild>
           <Button className="flex h-12 gap-2 rounded-3xl bg-purple font-bold">
             <FaPlus className="" />
-            Add Transaction
+            Add Record
           </Button>
         </DialogTrigger>
         <DialogContent className=" light">
           <DialogHeader>
-            <DialogTitle>Add Transaction</DialogTitle>
-            <DialogDescription>
-              Add a new transaction to your account.
-            </DialogDescription>
+            <DialogTitle>Add Record</DialogTitle>
+            <DialogDescription>Add a new workout record.</DialogDescription>
           </DialogHeader>
           {children}
         </DialogContent>
@@ -64,15 +62,13 @@ export function PopupButton({
       <DrawerTrigger asChild>
         <Button className="flex h-12 gap-2 rounded-3xl bg-purple font-bold">
           <FaPlus className="" />
-          Add Transaction
+          Add Record
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add Transaction</DrawerTitle>
-          <DrawerDescription>
-            Add a new transaction to your account.
-          </DrawerDescription>
+          <DrawerTitle>Add Record</DrawerTitle>
+          <DrawerDescription>Add a new workout record.</DrawerDescription>
         </DrawerHeader>
         {children}
         <DrawerFooter className="pt-2">

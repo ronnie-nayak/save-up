@@ -13,7 +13,7 @@ export default function Savings() {
   return (
     <div className="dark m-10 my-4">
       <div className="mb-4 flex h-14 items-center gap-4 rounded-3xl bg-midnight p-10">
-        <h1 className="sm:text-[1.5vw] ">Savings</h1>
+        <h1 className="sm:text-[1.5vw] ">Goals</h1>
         <SavingsButton
           height={12}
           text="Add Savings"

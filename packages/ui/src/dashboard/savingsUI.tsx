@@ -84,7 +84,7 @@ export function SavingsUI({
     <div className="my-4 h-max w-full rounded-3xl bg-midnight p-6 sm:m-0 sm:w-[18vw]">
       {/* <AspectRatio ratio={10 / 9} className=""> */}
       <div className="mb-4 flex items-center gap-6">
-        <div className=" font-bold sm:text-[1vw] ">My Savings</div>
+        <div className=" font-bold sm:text-[1vw] ">My Goals</div>
         {buttonWorkable ? (
           <SavingsButton
             height={8}

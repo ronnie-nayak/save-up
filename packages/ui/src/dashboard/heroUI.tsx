@@ -13,10 +13,10 @@ export function HeroUI({ data }: { data: any }) {
       {/* <AspectRatio ratio={15 / 16}> */}
       <div className="p-4 ">
         <div className="flex items-center justify-between">
-          <div className="font-bold sm:text-[1.5vw]">Account Summary</div>
+          <div className="font-bold sm:text-[1.5vw]">Workout Summary</div>
         </div>
         <div className="mt-3 font-bold text-gray-400">
-          Your total Income this month
+          Percentage of goal reached
         </div>
         {!data ? (
           <div className="p-4 text-center font-bold sm:text-[1vw]">
@@ -24,7 +24,7 @@ export function HeroUI({ data }: { data: any }) {
           </div>
         ) : (
           <h2 className="mt-1 text-[12vw] font-bold sm:text-[2vw]">
-            ${data.income}
+            {data.income}
           </h2>
         )}
         <div className="-mt-5 flex justify-center">
@@ -81,7 +81,7 @@ export function HeroUI({ data }: { data: any }) {
                   {percentage}%
                 </div>
               )}
-              <div className="">Monthly Income Saved</div>
+              <div className="">Goal Progress</div>
             </div>
             <div className="" style={{ width: "50px" }}></div>
           </div>

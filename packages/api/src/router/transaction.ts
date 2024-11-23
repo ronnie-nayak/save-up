@@ -155,7 +155,7 @@ export const transactionsRouter = createTRPCRouter({
         title: input.title,
         category: input.category,
         amount: input.amount,
-        dueAt: new Date(input.dueAt.setMonth(input.dueAt.getMonth() + 1)),
+        dueAt: new Date(input.dueAt.setDate(input.dueAt.getDate() + 7)),
         userId: ctx.session.user.id,
       });
     }),

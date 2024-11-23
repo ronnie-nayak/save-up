@@ -24,13 +24,13 @@ export function HistoryUI({ localData }: { localData: GetMoneyType[] }) {
 
   return (
     <div className="h-max w-full rounded-3xl bg-midnight p-8 sm:w-8/12">
-      <h1 className="sm:text-[1.5vw] ">Add Transaction</h1>
+      <h1 className="sm:text-[1.5vw] ">Add Record</h1>
       <Link
         href="/login"
         className="my-4 flex h-12 w-max items-center gap-2 rounded-3xl bg-purple px-4"
       >
         <FaPlus className="" />
-        Add Transaction
+        Add Record
       </Link>
 
       <motion.section variants={container} initial="hidden" animate="show">
@@ -45,10 +45,10 @@ export function HistoryUI({ localData }: { localData: GetMoneyType[] }) {
               }}
             >
               <div className="h-10 w-10">
-                {row.type === "income" ? (
+                {row.type === "expense" ? (
                   <svg
                     fill="none"
-                    stroke="green"
+                    stroke="red"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
@@ -60,10 +60,10 @@ export function HistoryUI({ localData }: { localData: GetMoneyType[] }) {
                     <path d="M23 6l-9.5 9.5-5-5L1 18" />
                     <path d="M17 6h6v6" />
                   </svg>
-                ) : row.type === "expense" ? (
+                ) : row.type === "income" ? (
                   <svg
                     fill="none"
-                    stroke="red"
+                    stroke="green"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
@@ -99,7 +99,8 @@ export function HistoryUI({ localData }: { localData: GetMoneyType[] }) {
                 {row.createdAt.toDateString()}
               </h2>
               <h2 className="w-3/12 text-right sm:text-[1.25vw]">
-                {row.type === "expense" && "-"}${row.amount}
+                {row.type === "income" && "-"}
+                {row.amount}
               </h2>
             </motion.div>
           ))

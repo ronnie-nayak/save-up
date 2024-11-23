@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { Bar, BarChart, ResponsiveContainer } from "recharts";
 
 export function StatsUI({ data, dataKey }: { data: any[]; dataKey: string }) {
+  const title = dataKey.charAt(0).toUpperCase() + dataKey.slice(1);
   return (
     <div className="my-1 w-full rounded-3xl bg-midnight px-2 sm:my-0 sm:w-[18vw]">
       <AspectRatio
@@ -13,16 +14,20 @@ export function StatsUI({ data, dataKey }: { data: any[]; dataKey: string }) {
       >
         {!data || data.length === 0 ? (
           <div className="p-4 text-center font-bold sm:text-[1vw]">
-            No Transactions Yet
+            No Data Yet
           </div>
         ) : (
           <>
             <div className="text-center sm:text-left">
               <h4 className="text-gray-400">
-                {dataKey.charAt(0).toUpperCase() + dataKey.slice(1)} this month
+                {title === "Income"
+                  ? "Calories burned"
+                  : title === "Expense"
+                    ? "Calories consumed"
+                    : "Calorie goal"}{" "}
               </h4>
               <h2 className="mt-1 sm:text-[1.5vw]">
-                ${data[data.length - 1][dataKey] * 10}
+                {data[data.length - 1][dataKey] * 10}
               </h2>
             </div>
             <div className="bottom-0 h-16 w-32">

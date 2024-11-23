@@ -1,13 +1,13 @@
 import type { IconType } from "react-icons";
 import Link from "next/link";
-import { FaPlus } from "react-icons/fa";
-import { LiaMoneyBillWaveSolid } from "react-icons/lia";
-import { LuWallet } from "react-icons/lu";
-import {
-  MdDashboard,
-  MdOutlineAccountBalanceWallet,
-  MdOutlineSavings,
-} from "react-icons/md";
+
+import { IoIosVideocam } from "react-icons/io";
+import { CiBoxList } from "react-icons/ci";
+import { FaDumbbell, FaPlus } from "react-icons/fa";
+import { GoGoal } from "react-icons/go";
+import { GrSchedule } from "react-icons/gr";
+import { IoAnalytics } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
 
 import { Button, Separator, Slider } from "@acme/ui";
 
@@ -18,9 +18,11 @@ interface linkType {
 
 const links: linkType[] = [
   { title: "Dashboard", icon: MdDashboard },
-  { title: "Transactions", icon: MdOutlineAccountBalanceWallet },
-  { title: "Savings", icon: MdOutlineSavings },
-  { title: "Bills", icon: LiaMoneyBillWaveSolid },
+  { title: "Records", icon: CiBoxList },
+  { title: "Goals", icon: GoGoal },
+  { title: "Schedule", icon: GrSchedule },
+  { title: "Calorie Calc", icon: IoAnalytics },
+  { title: "Exercise", icon: IoIosVideocam },
 ];
 
 export function SidebarUI() {
@@ -29,11 +31,13 @@ export function SidebarUI() {
       <div className="mb-4 flex items-center gap-4">
         <div className="mb-4 flex items-end gap-5">
           <div className="rounded-xl bg-purple p-2 text-white">
-            <LuWallet size={50} />
+            <FaDumbbell size={50} />
           </div>
           <div>
-            <h1 className="text-[7vw] sm:text-[1.75vw] ">save-up</h1>
-            <h4 className="text-[5vw] text-purple sm:text-[0.85vw]">tracker</h4>
+            <h1 className="text-[7vw] sm:text-[1.75vw] ">fit-tech</h1>
+            <h4 className="text-[5vw] text-purple sm:text-[0.85vw]">
+              fitness tracker
+            </h4>
           </div>
         </div>
       </div>
@@ -42,7 +46,7 @@ export function SidebarUI() {
         className="flex h-12 w-max items-center gap-2 rounded-3xl bg-purple px-4 font-bold"
       >
         <FaPlus className="" />
-        Add Transaction
+        Add Record
       </Link>
       <Separator className="my-5 bg-gray-500" />
       {links.map((link: linkType, index: number) => (

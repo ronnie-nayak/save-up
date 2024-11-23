@@ -4,6 +4,7 @@ import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 
 import {
@@ -160,7 +161,7 @@ export function BillsTable() {
         onClick={() => sortingFunction("dueAt")}
       >
         <h2 className="flex items-center gap-1 sm:text-[1vw]">
-          Due Date
+          Date
           {sorted === "dueAt" ? (
             dir === 1 ? (
               <FaSortDown />
@@ -176,7 +177,7 @@ export function BillsTable() {
         <AnimatePresence>
           {localData.length === 0 ? (
             <div className="p-4 text-center font-bold sm:text-[1vw]">
-              No Bills Yet
+              No Schedule Yet
             </div>
           ) : (
             localData
@@ -206,8 +207,8 @@ export function BillsTable() {
                         <div className="loader"></div>
                       ) : (
                         <>
-                          <LiaMoneyBillWaveSolid />
-                          <h3>Pay Bill</h3>
+                          <IoIosCheckmarkCircleOutline />
+                          <h3>Complete</h3>
                         </>
                       )}
                     </div>

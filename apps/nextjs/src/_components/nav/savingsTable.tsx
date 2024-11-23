@@ -151,7 +151,7 @@ export function SavingsTable() {
         <AnimatePresence>
           {localData.length === 0 ? (
             <div className="p-4 text-center font-bold sm:text-[1vw]">
-              No Savings Yet
+              No Goals Yet
             </div>
           ) : (
             localData
@@ -185,9 +185,7 @@ export function SavingsTable() {
                           ) : (
                             <>
                               <FiPlusCircle />
-                              <h3 className="hidden sm:block">
-                                Add to Savings
-                              </h3>
+                              <h3 className="hidden sm:block">Add to Goal</h3>
                             </>
                           )}
                         </div>
@@ -199,7 +197,7 @@ export function SavingsTable() {
                         onSubmit={(e) => contributeToSavingsHandler(row, e)}
                         className="flex flex-col items-start gap-2"
                       >
-                        <h1 className="font-bold">Add to savings</h1>
+                        <h1 className="font-bold">Add to goal</h1>
                         <Input
                           type="number"
                           placeholder="Amount"

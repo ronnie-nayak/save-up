@@ -54,10 +54,8 @@ export function SavingsButton({
         </DialogTrigger>
         <DialogContent className="light min-w-[800px]">
           <DialogHeader>
-            <DialogTitle>Add Savings</DialogTitle>
-            <DialogDescription>
-              Add a new transaction to your account.
-            </DialogDescription>
+            <DialogTitle>Add Goals</DialogTitle>
+            <DialogDescription>Add a new goal.</DialogDescription>
           </DialogHeader>
           {children}
         </DialogContent>
@@ -77,10 +75,8 @@ export function SavingsButton({
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add Transaction</DrawerTitle>
-          <DrawerDescription>
-            Add a new transaction to your account.
-          </DrawerDescription>
+          <DrawerTitle>Add Goals</DrawerTitle>
+          <DrawerDescription>Add a new goal.</DrawerDescription>
         </DrawerHeader>
         {children}
         <DrawerFooter className="pt-2">
