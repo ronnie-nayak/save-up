@@ -5,7 +5,7 @@ import { Groq } from "groq-sdk";
 import { TransactionSchema } from "../../../lib/type";
 
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
+  apiKey: process.env.GROQ_API_KEY || "",
 });
 
 const instructor = Instructor({

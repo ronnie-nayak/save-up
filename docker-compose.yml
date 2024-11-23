@@ -1,6 +1,7 @@
 services:
   nextjs:
     container_name: nextjs
+    # image: ronnienayak/save-up-nextjs
     build:
       context: .
       dockerfile: ./apps/nextjs/Dockerfile
@@ -9,27 +10,25 @@ services:
       - .env
     ports:
       - 3000:3000
-    # networks:
-    #   - app_network
-  #   depends_on:
-  #     - postgres
-  # postgres:
-  #   container_name: postgres
-  #   image: postgres
-  #   restart: always
-  #   ports:
-  #     - 5432:5432
-  #   env_file:
-  #     - .env
-  #   networks:
-  #     - app_network
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-# networks:
-#   app_network:
+    networks:
+      - app_network
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    networks:
+      - app_network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
-# Define a volume, which allows data to persist
-# volumes:
-#   pgdata:
+networks:
+  app_network:
+
+volumes:
+  pgdata:
