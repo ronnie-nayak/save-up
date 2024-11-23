@@ -1,10 +1,10 @@
 services:
   nextjs:
     container_name: nextjs
-    # image: ronnienayak/save-up-nextjs
-    build:
-      context: .
-      dockerfile: ./apps/nextjs/Dockerfile
+    image: ronnienayak/save-up-nextjs
+    # build:
+    #   context: .
+    #   dockerfile: ./apps/nextjs/Dockerfile
     restart: always
     env_file:
       - .env
