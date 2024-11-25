@@ -3,6 +3,7 @@
 import "./styles.css";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [firstDropdown, setFirstDropdown] = useState(false);
@@ -27,10 +28,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               id="myDropdown1"
               className={`dropdown-content ${firstDropdown ? "show" : ""}`}
             >
-              <a href="/homepage/exercise/bicepCurl">Bicep-Curl</a>
-              <a href="/homepage/exercise/pushUps">Push-Ups</a>
-              <a href="/homepage/exercise/squats">Squats</a>
-              <a href="/homepage/exercise/triceps">Triceps</a>
+              <Link href="/homepage/exercise/bicepCurl">Bicep-Curl</Link>
+              <Link href="/homepage/exercise/pushUps">Push-Ups</Link>
+              <Link href="/homepage/exercise/squats">Squats</Link>
+              <Link href="/homepage/exercise/triceps">Triceps</Link>
             </div>
           </li>
           <li>
@@ -41,9 +42,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               id="myDropdown2"
               className={`dropdown-content ${secondDropdown ? "show" : ""}`}
             >
-              <a href="/homepage/exercise/tPose">T Pose</a>
-              <a href="/homepage/exercise/treePose">Tree Pose</a>
-              <a href="/homepage/exercise/warriorPose">Warrior Pose</a>
+              <Link href="/homepage/exercise/tPose">T Pose</Link>
+              <Link href="/homepage/exercise/treePose">Tree Pose</Link>
+              <Link href="/homepage/exercise/warriorPose">Warrior Pose</Link>
             </div>
           </li>
         </ul>

@@ -347,7 +347,7 @@ export function DataTable() {
                       <h3 className="text-sm text-gray-500">{row.category}</h3>
                     </div>
                     <div className="hidden w-3/12 sm:block">
-                      <div className="relative flex w-min items-center justify-center gap-1 rounded-full bg-bermuda p-2 pl-8 text-base">
+                      <div className="relative flex w-max items-center justify-center gap-1 rounded-full bg-bermuda p-2 pl-8 text-base">
                         <button
                           className={`absolute left-4 top-4 h-2 w-2 animate-ping rounded-full ${
                             row.type === "income"
@@ -374,7 +374,7 @@ export function DataTable() {
                       </div>
                     </div>
                     <h2 className="w-2/12">
-                      {row.type === "income" && "-"}
+                      {row.type !== "expense" && "-"}
                       {row.amount}
                     </h2>
                     <h2 className="ml-auto w-3/12 sm:m-0">

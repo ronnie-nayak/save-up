@@ -25,7 +25,7 @@ import {
 } from "@acme/ui";
 
 export default function calories() {
-  const [predCalories, setPredCalories] = useState(0);
+  const [predCalories, setPredCalories] = useState(null);
 
   // age=eval(input("Enter your age: "))
   // weight= eval(input("Enter your weight(in kgs): "))
@@ -108,10 +108,10 @@ export default function calories() {
   return (
     <>
       <h1 className="text-center text-3xl">Calories Burned Predictor</h1>
-      {predCalories > 0 && (
+      {predCalories && (
         <h4 className="m-10 text-center text-3xl">
           The predicted calories burned are:
-          <br /> {predCalories}
+          <br /> {Math.abs(predCalories)} calories
         </h4>
       )}
 

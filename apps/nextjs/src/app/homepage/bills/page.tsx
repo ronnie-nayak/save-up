@@ -13,7 +13,7 @@ export default function Bills() {
   return (
     <div className="m-10 my-4">
       <div className="mb-4 flex h-14 items-center gap-4 rounded-3xl bg-midnight p-10">
-        <h1 className="sm:text-[1.5vw] ">Bills</h1>
+        <h1 className="sm:text-[1.5vw] ">Schedule</h1>
         <BillsButton
           height={12}
           text="Add Bills"

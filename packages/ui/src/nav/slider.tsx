@@ -27,16 +27,16 @@ interface linkType {
 const links: linkType[] = [
   { title: "Dashboard", location: "/homepage", icon: MdDashboard },
   {
-    title: "Transactions",
+    title: "Records",
     location: "/homepage/transactions",
     icon: CiBoxList,
   },
-  { title: "Savings", location: "/homepage/savings", icon: GoGoal },
-  { title: "Bills", location: "/homepage/bills", icon: GrSchedule },
+  { title: "Goals", location: "/homepage/savings", icon: GoGoal },
+  { title: "Schedule", location: "/homepage/bills", icon: GrSchedule },
   { title: "Calorie Calc", location: "/homepage/calorie", icon: IoAnalytics },
   {
     title: "Exercise",
-    location: "/homepage/exercise/bicepCurl",
+    location: "/homepage/exercise",
     icon: IoIosVideocam,
   },
 ];

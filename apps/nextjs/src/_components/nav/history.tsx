@@ -113,7 +113,7 @@ export function History({
                   {row.createdAt.toDateString()}
                 </h2>
                 <h2 className="w-3/12 text-right sm:text-[1.25vw]">
-                  {row.type === "income" && "-"}
+                  {row.type !== "expense" && "-"}
                   {row.amount}
                 </h2>
               </motion.div>
