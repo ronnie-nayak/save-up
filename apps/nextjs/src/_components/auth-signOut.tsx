@@ -12,7 +12,9 @@ export async function AuthSignout() {
             className="flex items-center gap-2 rounded-3xl bg-white p-1 pr-2 font-bold text-black transition hover:bg-purple hover:text-white"
             formAction={async () => {
               "use server";
-              await signOut();
+              await signOut({
+                redirectTo: "/",
+              });
             }}
           >
             <img
