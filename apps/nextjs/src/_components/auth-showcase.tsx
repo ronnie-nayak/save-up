@@ -33,7 +33,7 @@ export async function AuthShowcase() {
                 formAction={async () => {
                   "use server";
                   await signIn("github", {
-                    callbackUrl: "/homepage",
+                    redirectTo: "/",
                   });
                 }}
               >
@@ -47,7 +47,7 @@ export async function AuthShowcase() {
                 formAction={async () => {
                   "use server";
                   await signIn("discord", {
-                    callbackUrl: "/homepage",
+                    redirectTo: "/",
                   });
                 }}
               >
@@ -61,7 +61,7 @@ export async function AuthShowcase() {
                 formAction={async () => {
                   "use server";
                   await signIn("credentials", {
-                    callbackUrl: "/homepage",
+                    redirectTo: "/",
                   });
                 }}
               >
