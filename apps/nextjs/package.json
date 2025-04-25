@@ -14,6 +14,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "openai": "^4.0.0",
     "@acme/api": "workspace:^0.1.0",
     "@acme/atoms": "workspace:^0.1.0",
     "@acme/auth": "workspace:^0.1.0",

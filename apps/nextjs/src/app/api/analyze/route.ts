@@ -10,7 +10,7 @@ const groq = new Groq({
 
 const instructor = Instructor({
   client: groq,
-  mode: "TOOLS",
+  mode: "JSON_SCHEMA",
 });
 
 export async function POST(req: Request) {
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         content: [
           {
             type: "text",
-            text: "Analyze this UPI payment screenshot now extract all transactions details in the format.",
+            text: "Analyze this bank statement and extract all transactions details. I have provided the schema using zod. Please use it and provide output in the given format.",
           },
           {
             type: "image_url",
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
         ],
       },
     ],
-    model: "llama-3.2-90b-vision-preview",
+    model: "meta-llama/llama-4-scout-17b-16e-instruct",
     response_model: {
       schema: TransactionSchema,
       name: "transaction",

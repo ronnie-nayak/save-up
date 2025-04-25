@@ -67,7 +67,7 @@ export const transactionsRouter = createTRPCRouter({
             ...i,
             userId: ctx.session.user.id,
             createdAt: new Date(
-              dateArr[1] + "-" + dateArr[0] + "-" + dateArr[2],
+              dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0],
             ),
           };
         }),
