@@ -14,7 +14,6 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "openai": "^4.0.0",
     "@acme/api": "workspace:^0.1.0",
     "@acme/atoms": "workspace:^0.1.0",
     "@acme/auth": "workspace:^0.1.0",
@@ -39,8 +38,9 @@
     "geist": "^1.2.0",
     "groq-sdk": "^0.8.0",
     "lucide-react": "^0.307.0",
-    "next": "^14.2.25",
+    "next": "^16.0.7",
     "nodemailer": "^6.9.16",
+    "openai": "^4.0.0",
     "radix-ui": "^1.0.1",
     "react": "18.2.0",
     "react-colorful": "^5.6.1",
